@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Notes</title>
+  </head>
+  <body>
+<div id="adobe-dc-view"></div>
+<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+<script type="text/javascript">
+  document.addEventListener("adobe_dc_view_sdk.ready", function(){
+    var adobeDCView = new AdobeDC.View({clientId: "fd39c5d777024a2696dac4b719584c19", divId: "adobe-dc-view"});
+    adobeDCView.previewFile({
+      content:{location: {url: "https://raw.githubusercontent.com/tpn/pdfs/f4b3192e4c075bc886bb37ba8eb9208d2da19554/Algorithms%20for%20Random%203-SAT.pdf"}},
+      metaData:{fileName: "Algorithms%20for%20Random%203-SAT.pdf"}
+    }, {});
+  });
+</script>
+  </body>
+</html>
