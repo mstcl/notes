@@ -316,6 +316,11 @@ h4 {
   margin: 1.6em 0 0.6em 0;
 }
 
+h2:before {
+   content: "➤ "; 
+   opacity: 0.5;
+}
+
 p,
 ul,
 ol,
@@ -329,7 +334,7 @@ ul {
 }
 
 ul li::marker {
-  content: "\2022   ";
+  content: "\2022  ";
 }
 
 li {
@@ -398,7 +403,6 @@ audio {
 code,
 textarea {
   font-family: ui-monospace, SF Mono, Menlo, Monaco, Andale Mono, monospace;
-  font-size: 1em;
   opacity: 0.9;
 }
 
@@ -409,7 +413,6 @@ a code {
 pre,
 textarea {
   /* for code samples */
-  font-size: 0.9em;
   /* color: var(--codetext); */
   line-height: inherit;
   padding: 0.6em 0.9em;
