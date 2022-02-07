@@ -1,33 +1,242 @@
-* { margin: 0; padding: 0; box-sizing: border-box;
-  
-  /* Color scheme */
-  
-  --textcolor: #121212;
-  --bgcolor: #fff;
-  --highlight: #2749c9;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 
+  /* Color scheme */
+
+  --textcolor: #282828;
+  --bgcolor: #f9f5d7;
+  --codecolor: #f9f5d7;
+  --codetext: #3c3836;
+  --highlight: #cc241d;
+  --codecolor: #fbf1c7;
+}
+
+@font-face {
+  font-family: "Cartograph CF Extra";
+  src: url("fonts/CartographCF-ExtraLightItalic.eot");
+  src: local("Cartograph CF Extra Light Italic"),
+    local("CartographCF-ExtraLightItalic"),
+    url("fonts/CartographCF-ExtraLightItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("fonts/CartographCF-ExtraLightItalic.woff2") format("woff2"),
+    url("fonts/CartographCF-ExtraLightItalic.woff") format("woff"),
+    url("fonts/CartographCF-ExtraLightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Cartograph CF Demi";
+  src: url("fonts/CartographCF-DemiBoldItalic.eot");
+  src: local("Cartograph CF Demi Bold Italic"),
+    local("CartographCF-DemiBoldItalic"),
+    url("fonts/CartographCF-DemiBoldItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("fonts/CartographCF-DemiBoldItalic.woff2") format("woff2"),
+    url("fonts/CartographCF-DemiBoldItalic.woff") format("woff"),
+    url("fonts/CartographCF-DemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Cartograph CF";
+  src: url("fonts/CartographCF-BoldItalic.eot");
+  src: local("Cartograph CF Bold Italic"), local("CartographCF-BoldItalic"),
+    url("fonts/CartographCF-BoldItalic.eot?#iefix") format("embedded-opentype"),
+    url("fonts/CartographCF-BoldItalic.woff2") format("woff2"),
+    url("fonts/CartographCF-BoldItalic.woff") format("woff"),
+    url("fonts/CartographCF-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Cartograph CF";
+  src: url("fonts/CartographCF-Thin.eot");
+  src: local("Cartograph CF Thin"), local("CartographCF-Thin"),
+    url("fonts/CartographCF-Thin.eot?#iefix") format("embedded-opentype"),
+    url("fonts/CartographCF-Thin.woff2") format("woff2"),
+    url("fonts/CartographCF-Thin.woff") format("woff"),
+    url("fonts/CartographCF-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cartograph CF";
+  src: url("fonts/CartographCF-Bold.eot");
+  src: local("Cartograph CF Bold"), local("CartographCF-Bold"),
+    url("fonts/CartographCF-Bold.eot?#iefix") format("embedded-opentype"),
+    url("fonts/CartographCF-Bold.woff2") format("woff2"),
+    url("fonts/CartographCF-Bold.woff") format("woff"),
+    url("fonts/CartographCF-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cartograph CF";
+  src: url("fonts/CartographCF-LightItalic.eot");
+  src: local("Cartograph CF Light Italic"), local("CartographCF-LightItalic"),
+    url("fonts/CartographCF-LightItalic.eot?#iefix") format("embedded-opentype"),
+    url("fonts/CartographCF-LightItalic.woff2") format("woff2"),
+    url("fonts/CartographCF-LightItalic.woff") format("woff"),
+    url("fonts/CartographCF-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Cartograph CF Extra";
+  src: url("fonts/CartographCF-ExtraBoldItalic.eot");
+  src: local("Cartograph CF Extra Bold Italic"),
+    local("CartographCF-ExtraBoldItalic"),
+    url("fonts/CartographCF-ExtraBoldItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("fonts/CartographCF-ExtraBoldItalic.woff2") format("woff2"),
+    url("fonts/CartographCF-ExtraBoldItalic.woff") format("woff"),
+    url("fonts/CartographCF-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Cartograph CF Extra";
+  src: url("fonts/CartographCF-ExtraLight.eot");
+  src: local("Cartograph CF Extra Light"), local("CartographCF-ExtraLight"),
+    url("fonts/CartographCF-ExtraLight.eot?#iefix") format("embedded-opentype"),
+    url("fonts/CartographCF-ExtraLight.woff2") format("woff2"),
+    url("fonts/CartographCF-ExtraLight.woff") format("woff"),
+    url("fonts/CartographCF-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cartograph CF";
+  src: url("fonts/CartographCF-Light.eot");
+  src: local("Cartograph CF Light"), local("CartographCF-Light"),
+    url("fonts/CartographCF-Light.eot?#iefix") format("embedded-opentype"),
+    url("fonts/CartographCF-Light.woff2") format("woff2"),
+    url("fonts/CartographCF-Light.woff") format("woff"),
+    url("fonts/CartographCF-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cartograph CF";
+  src: url("fonts/CartographCF-Heavy.eot");
+  src: local("Cartograph CF Heavy"), local("CartographCF-Heavy"),
+    url("fonts/CartographCF-Heavy.eot?#iefix") format("embedded-opentype"),
+    url("fonts/CartographCF-Heavy.woff2") format("woff2"),
+    url("fonts/CartographCF-Heavy.woff") format("woff"),
+    url("fonts/CartographCF-Heavy.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cartograph CF";
+  src: url("fonts/CartographCF-RegularItalic.eot");
+  src: local("Cartograph CF Italic"), local("CartographCF-RegularItalic"),
+    url("fonts/CartographCF-RegularItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("fonts/CartographCF-RegularItalic.woff2") format("woff2"),
+    url("fonts/CartographCF-RegularItalic.woff") format("woff"),
+    url("fonts/CartographCF-RegularItalic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Cartograph CF";
+  src: url("fonts/CartographCF-ThinItalic.eot");
+  src: local("Cartograph CF Thin Italic"), local("CartographCF-ThinItalic"),
+    url("fonts/CartographCF-ThinItalic.eot?#iefix") format("embedded-opentype"),
+    url("fonts/CartographCF-ThinItalic.woff2") format("woff2"),
+    url("fonts/CartographCF-ThinItalic.woff") format("woff"),
+    url("fonts/CartographCF-ThinItalic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Cartograph CF Extra";
+  src: url("fonts/CartographCF-ExtraBold.eot");
+  src: local("Cartograph CF Extra Bold"), local("CartographCF-ExtraBold"),
+    url("fonts/CartographCF-ExtraBold.eot?#iefix") format("embedded-opentype"),
+    url("fonts/CartographCF-ExtraBold.woff2") format("woff2"),
+    url("fonts/CartographCF-ExtraBold.woff") format("woff"),
+    url("fonts/CartographCF-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cartograph CF";
+  src: url("fonts/CartographCF-HeavyItalic.eot");
+  src: local("Cartograph CF Heavy Italic"), local("CartographCF-HeavyItalic"),
+    url("fonts/CartographCF-HeavyItalic.eot?#iefix") format("embedded-opentype"),
+    url("fonts/CartographCF-HeavyItalic.woff2") format("woff2"),
+    url("fonts/CartographCF-HeavyItalic.woff") format("woff"),
+    url("fonts/CartographCF-HeavyItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Cartograph CF";
+  src: url("fonts/CartographCF-Regular.eot");
+  src: local("Cartograph CF"), local("CartographCF-Regular"),
+    url("fonts/CartographCF-Regular.eot?#iefix") format("embedded-opentype"),
+    url("fonts/CartographCF-Regular.woff2") format("woff2"),
+    url("fonts/CartographCF-Regular.woff") format("woff"),
+    url("fonts/CartographCF-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cartograph CF Demi";
+  src: url("fonts/CartographCF-DemiBold.eot");
+  src: local("Cartograph CF Demi Bold"), local("CartographCF-DemiBold"),
+    url("fonts/CartographCF-DemiBold.eot?#iefix") format("embedded-opentype"),
+    url("fonts/CartographCF-DemiBold.woff2") format("woff2"),
+    url("fonts/CartographCF-DemiBold.woff") format("woff"),
+    url("fonts/CartographCF-DemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
 }
 
 @media (prefers-color-scheme: dark) {
   * {
-    --textcolor: #dadada;
-    --bgcolor: #141414;
-    --highlight: #ffc400;
+    --textcolor: #fbf1c7;
+    --bgcolor: #282828;
+    --highlight: #d79921;
+    --codetext: #ebdbb2;
+    --codecolor: #3c3836;
   }
 }
 
 body {
   font-size: 18px;
-  font-family: system-ui, sans-serif;
+  font-family: "Cartograph CF";
+  font-weight: normal;
+  font-style: normal;
   line-height: 1.45;
   color: var(--textcolor);
   background: var(--bgcolor);
   position: relative;
-  max-width: 64em;  /* remove this for a full-width layout */
-  margin: 0 auto;  /* centers the layout */
+  max-width: 64em; /* remove this for a full-width layout */
+  margin: 0 auto; /* centers the layout */
 }
 
-@media only screen and (max-width: 680px) { /* smaller screens */
+@media only screen and (max-width: 680px) {
+  /* smaller screens */
   body {
     font-size: 16px;
   }
@@ -35,7 +244,8 @@ body {
 
 /* ------- Sections ------- */
 
-section, div.post {
+section,
+div.post {
   padding: calc(6em + 5vw) 5vw 8vw 5vw;
   /* !! Everything below is needed !! */
   display: none;
@@ -46,15 +256,18 @@ section, div.post {
   background: var(--bgcolor);
 }
 
-section:target { /* Show section */
+section:target {
+  /* Show section */
   display: block;
 }
 
-section#home { /* Show #home by default */
+section#home {
+  /* Show #home by default */
   display: block;
 }
 
-div.post { /* Show post content by default since it loads a separate page */
+div.post {
+  /* Show post content by default since it loads a separate page */
   display: block;
 }
 
@@ -72,7 +285,7 @@ header h1 {
   font-size: 1em;
   flex: 1;
   white-space: nowrap;
-  padding: 0 20vw .5em 0;
+  padding: 0 20vw 0.5em 0;
 }
 
 nav a:not(:last-of-type) {
@@ -95,15 +308,20 @@ section h1 {
   margin: 0 0 1em 0;
 }
 
-h2, h3, h4 {
+h2,
+h3,
+h4 {
   font-size: 1em;
   font-weight: 600;
-  margin: 1.6em 0 .6em 0;
+  margin: 1.6em 0 0.6em 0;
 }
 
-p, ul, ol, article {
+p,
+ul,
+ol,
+article {
   max-width: 60ch; /* Limit line-length to 60 characters */
-  margin-bottom: .6em;
+  margin-bottom: 0.6em;
 }
 
 ul {
@@ -115,26 +333,28 @@ ul li::marker {
 }
 
 li {
-  margin-bottom: .2em;
+  margin-bottom: 0.2em;
 }
 
-ul, ol {
+ul,
+ol {
   padding-left: 2ch;
 }
 
-b, strong {
+b,
+strong {
   font-weight: 600;
 }
 
 small {
-  font-size: .85em;
+  font-size: 0.85em;
 }
 
 hr {
   height: 1px;
   border: 0;
   background: currentColor;
-  opacity: .1;
+  opacity: 0.1;
   margin: 1.2em 0;
 }
 
@@ -143,63 +363,70 @@ abbr {
 }
 
 abbr[title]:hover {
-  opacity: .7;
+  opacity: 0.7;
   cursor: help;
 }
 
 blockquote {
   padding-left: 2ch;
-  opacity: .7;
-  margin-bottom: .6em;
+  opacity: 0.7;
+  margin-bottom: 0.6em;
   position: relative;
 }
 
 blockquote:before {
   content: "";
-  position:absolute;
+  position: absolute;
   left: 0;
-  top: .3em;
-  bottom: .3em;
+  top: 0.3em;
+  bottom: 0.3em;
   background: currentColor;
   width: 1px;
-  opacity: .2;
+  opacity: 0.2;
 }
 
-img, svg, video, audio {
+img,
+svg,
+video,
+audio {
   display: block;
   max-width: 100%;
   height: auto;
   fill: currentColor;
 }
-  
-code, textarea {
+
+code,
+textarea {
   font-family: ui-monospace, SF Mono, Menlo, Monaco, Andale Mono, monospace;
   font-size: 1em;
-  opacity: .7;
+  opacity: 0.9;
 }
 
 a code {
-  opacity:1;
+  opacity: 1;
 }
 
-pre, textarea { /* for code samples */
-  font-size: .9em;
-  color: inherit;
-  line-height:inherit;
-  padding:.6em .9em;
-  margin: .8em 0 1em 0;
+pre,
+textarea {
+  /* for code samples */
+  font-size: 0.9em;
+  /* color: var(--codetext); */
+  line-height: inherit;
+  padding: 0.6em 0.9em;
+  margin: 0.8em 0 1em 0;
   position: relative;
   display: block;
-  width: 100%;
+  width: 80%;
   white-space: pre-wrap;
   white-space: moz-pre-wrap;
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
-  border:0;
+  border: 0;
   border-radius: 4px;
-  background:rgba(255,255,100,.075);
-  box-shadow: inset 1px 1px 0 rgba(0,0,0,.2), inset -1px -1px 0 rgba(0,0,0,.04) ;
+  background: var(--codecolor) !important;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.2),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.04);
 }
 
 /* Inline footnotes */
@@ -208,16 +435,20 @@ label {
   cursor: pointer;
   vertical-align: super;
   line-height: 1;
-  font-size: .75em;
-  padding-left: .1em;
+  font-size: 0.75em;
+  padding-left: 0.1em;
 }
 
 label:hover {
   color: var(--highlight);
 }
 
-label:before {content:"[";}
-label:after {content:"]";}
+label:before {
+  content: "[";
+}
+label:after {
+  content: "]";
+}
 
 label + input,
 label + input + small {
@@ -226,7 +457,7 @@ label + input + small {
 
 input:checked + small {
   display: block;
-  padding: .8em 0 1em 2.5vw;;
+  padding: 0.8em 0 1em 2.5vw;
 }
 
 /* Figures */
@@ -237,8 +468,8 @@ figure {
 
 figure figcaption {
   margin: 0.8em 0 0 0;
-  font-size: .85em;
-  opacity: .7;
+  font-size: 0.85em;
+  opacity: 0.7;
 }
 
 /* Responsive video embeds */
@@ -250,7 +481,9 @@ figure.video {
   overflow: hidden;
 }
 
-figure.video iframe, figure.video object, figure.video embed {
+figure.video iframe,
+figure.video object,
+figure.video embed {
   position: absolute;
   top: 0;
   left: 0;
@@ -266,34 +499,44 @@ section:target iframe {
 
 /* External links */
 
-a[href*="//"]:after { 
+a[href*="//"]:after
+{
   font-weight: 300;
   content: "\2197"; /* top right arrow: ↗ */
   color: var(--textcolor);
-  opacity: .25;
+  opacity: 0.25;
 }
 
-a[href*="//"]:hover:after {
+a[href*="//"]:hover:after
+{
   color: var(--highlight);
   opacity: 1;
 }
 
 /* File links */
 
-a:before { 
-  font-size: .7em;
-  margin-right: .4em;
+a:before {
+  font-size: 0.7em;
+  margin-right: 0.4em;
 }
 
 /* Add more filetypes here if you want */
 
-a[href$=".pdf"]:before { content: "PDF"; }
-a[href$=".txt"]:before { content: "TXT"; }
-a[href$=".mp3"]:before { content: "MP3"; }
+a[href$=".pdf"]:before {
+  content: "PDF";
+}
+a[href$=".txt"]:before {
+  content: "TXT";
+}
+a[href$=".mp3"]:before {
+  content: "MP3";
+}
 a[href$=".jpeg"]:before,
 a[href$=".jpg"]:before,
 a[href$=".gif"]:before,
-a[href$=".png"]:before { content: "IMG"; }
+a[href$=".png"]:before {
+  content: "IMG";
+}
 
 /* ------- News ------- */
 
@@ -308,43 +551,61 @@ article h2 {
 }
 
 article time {
-  margin-left: .6em;
-  font-size: .8em;
+  margin-left: 0.6em;
+  font-size: 0.8em;
   font-weight: 400;
-  opacity: .7;
+  opacity: 0.7;
 }
 
 /* ------- Images Grid ------- */
 
 .grid {
+  margin: auto;
   display: grid;
-  grid-gap: 5vmin;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  grid-auto-flow: dense;
-  padding: 2em 0;
+  width: auto;
+  height: auto;
+  grid-gap: 1vmin;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 0fr));
+  grid-auto-flow: row dense;
+  padding: 0 0;
+}
+
+.bannerimg {
+  border: unset;
+  filter: unset;
+  width: 240px;
+  height: 60px;
 }
 
 .grid a {
   position: relative;
   border: 0;
+  padding-top: 0px;
 }
 
 .grid a:before {
   content: "";
   display: block;
-  padding-top: 100%;
+  padding-top: 0px;
 }
 
 .grid a img {
-  position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
+  padding: 0px;
 }
 
 .grid a:hover {
-  transform: scale(.975);
+  transform: scale(0.975);
+}
+
+.grid a[href*="//"]:after
+{
+  font-weight: 300;
+  content: "" !important;
+  color: var(--textcolor);
 }
 
 /* ------- Slideshow ------- */
@@ -414,56 +675,71 @@ article time {
   z-index: 4;
 }
 
-.lightbox:target:before { /* Loading spinner */
-  content:"";
+.lightbox:target:before {
+  /* Loading spinner */
+  content: "";
   height: 2em;
   width: 2em;
-  animation: spin .8s infinite linear;
+  animation: spin 0.8s infinite linear;
   border: 1px solid;
   border-right-color: transparent;
   border-radius: 50%;
   display: block;
   position: absolute;
   transform: translateX(-50%);
-  opacity: .25;
+  opacity: 0.25;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.lightbox:target:after { /* × to close */
+.lightbox:target:after {
+  /* × to close */
   content: "\00D7";
   position: fixed;
   font-size: 2em;
   font-weight: 200;
   line-height: 0;
-  top: .75em;
-  right: .5em;
+  top: 0.75em;
+  right: 0.5em;
   z-index: 4;
 }
 
 /* ------- Print ------- */
 
 @media print {
-  
-  nav, .lightbox:target:after { display: none; }
-  
-  article, figure, img {
+  nav,
+  .lightbox:target:after {
+    display: none;
+  }
+
+  article,
+  figure,
+  img {
     page-break-inside: avoid;
     break-inside: avoid;
   }
-  
+
   /* Inline footnotes */
-  label + input + small { display: inline; }
-  label + input + small:before { content: "["; }
-  label + input + small:after { content: "]"; }
-    
+  label + input + small {
+    display: inline;
+  }
+  label + input + small:before {
+    content: "[";
+  }
+  label + input + small:after {
+    content: "]";
+  }
 }
 
 footer {
-  max-width: 64em;  /* remove this for a full-width layout */
+  max-width: 64em; /* remove this for a full-width layout */
   margin: auto;
   height: 40px;
   padding-top: 10px;
