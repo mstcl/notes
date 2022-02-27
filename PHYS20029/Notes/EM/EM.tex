@@ -1,0 +1,3665 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,chapterprefix=false,dvipsnames]{scrbook}
+\KOMAoptions{twoside=false}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Useful packages
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{svg}
+\usepackage{amssymb,amsmath,physics,bm,bbold}
+\usepackage{enumerate}
+
+%--------------------------------------------------------------------
+% Hyper ref
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\colorlet{mylinkcolor}{NavyBlue}
+\colorlet{mycitecolor}{Aquamarine}
+\colorlet{myurlcolor}{Aquamarine}
+
+\hypersetup{
+	linkcolor  = mylinkcolor!, citecolor  = mycitecolor!, urlcolor = myurlcolor!, colorlinks = true, }
+%--------------------------------------------------------------------
+\usepackage[]{natbib}% Bibliography
+\bibliographystyle{chicago}
+
+%=================================
+% pre-defined theorem environments
+\usepackage{amsthm}
+\usepackage{framed}
+\newtheoremstyle{dotless}{}{}{\itshape}{}{\bfseries}{}{ }{}
+\theoremstyle{dotless}
+\newtheorem{prototheorem}{Theorem}[section]
+
+\newenvironment{theorem}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{prototheorem}}
+			{\end{prototheorem}\end{shaded}}
+
+\newtheorem{protolemma}[prototheorem]{Lemma}
+\newenvironment{lemma}
+{\colorlet{shadecolor}{blue!15}\begin{shaded}\begin{protolemma}}
+			{\end{protolemma}\end{shaded}}
+
+\newtheorem{protocorollary}[prototheorem]{Corollary}
+\newenvironment{corollary}
+{\colorlet{shadecolor}{pink!15}\begin{shaded}\begin{protocorollary}}
+			{\end{protocorollary}\end{shaded}}
+
+\theoremstyle{definition}
+\newtheorem{protonotation}{Notation}[section]
+\newenvironment{notation}
+{\colorlet{shadecolor}{green!15}\begin{shaded}\begin{protonotation}}
+			{\end{protonotation}\end{shaded}}
+
+\newtheorem{protoexample}{Example}[section]
+\newenvironment{example}
+{\colorlet{shadecolor}{red!15}\begin{shaded}\begin{protoexample}}
+			{\end{protoexample}\end{shaded}}
+
+\newtheorem{protodefinition}{Definition}[section]
+\newenvironment{definition}
+{\colorlet{shadecolor}{black!15}\begin{shaded}\begin{protodefinition}}
+			{\end{protodefinition}\end{shaded}}
+
+\newtheorem{protoderivation}{Derivation}[section]
+\newenvironment{derivation}
+{\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{protoderivation}}
+			{\end{protoderivation}\end{shaded}}
+%=================================
+% useful commands
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\supp}{supp}
+
+\def\vec#1{{\ensuremath{\bm{{#1}}}}}
+\def\mat#1{\vec{#1}}
+
+%=================================
+% convenient notations
+\newcommand{\XX}{\mathbb{X}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\CC}{\mathbb{C}}
+
+\newcommand{\sL}{\mathcal{L}}
+\newcommand{\sX}{\mathcal{X}}
+\newcommand{\sY}{\mathcal{Y}}
+
+\newcommand{\ind}{\mathbb{1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Typography, change document font
+\usepackage[tt=false, type1=true]{libertine}
+\usepackage[varqu]{zi4}
+\usepackage[libertine]{newtxmath}
+\usepackage[T1]{fontenc}
+
+\usepackage[protrusion=true,expansion=true]{microtype}
+
+% Disable paragraph indentation, and increase gap
+\usepackage{parskip}
+
+\title{Electromagnetic Notes}
+\author{Compiled by Nhat Pham\\ based on lectures from PHYS20029 \\and
+	Griffiths' \textit{Introduction to Electrodynamics} } \date{Last update: \today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}%
+\label{cha:introduction}
+
+\section{Recap of first year Electromagnetism}%
+\label{sec:recap_of_first_year_electromagnetism}%
+
+What we covered in first year:
+
+\begin{itemize}
+	\item \textit{Gauss' Law}: Integral over enclosed
+	      surface containing an electric field gives the total charge over
+	      that surface.
+	      \begin{equation}
+		      \iint\limits_{S}\bm{E}\,\dd{\bm{S}}
+		      = \frac{Q}{\epsilon_{0}}
+	      \end{equation}
+	\item \textit{Ampère's law:} Path of a magnetic
+	      field around a line integral is proportional to the current.
+	      \begin{equation}
+		      \oint\limits_{P}\bm{B}\,\dd{\bm{l}}
+		      = \mu_{0}I
+	      \end{equation}
+	\item \textit{Biot-Savart law:}
+	      Magnetic field arising from a small current containing element
+	      in the wire. Equivalent in magnetism to \textit{Coulomb's law}
+	      in electrostatic.
+	      \begin{equation}
+		      \bm{B}\left(\bm{r}\right) =
+		      \frac{\mu_{0}I}{4\pi}\int\frac{\dd{\bm{l}}\times\left(\bm{r}-\bm{r^\prime}\right)}{\left|\bm{r}-\bm{r^\prime}\right|^3}
+	      \end{equation}
+\end{itemize}
+
+This course will be concerned with deriving and using the
+\textit{differential forms} of these integral equations. We will
+eventually arrive at Maxwell's equations. We will also consider
+two new fields $\bm{D}$ and
+$\bm{H}$.
+
+\textbf{Note:} Be aware of c.g.s system that changes
+the formulae as well as the units
+
+\chapter{Electrostatics}%
+\label{cha:electrostatics}
+
+\section{Electrostatics---what you know so far}%
+\label{sec:electrostatics_what_you_know_so_far}%
+
+\begin{definition}
+	Electronic charge is a property that is associated with the
+	fundamental particles, protons (quarks), electrons etc.\ that
+	occur in nature.
+\end{definition}
+
+The Coulomb charge is the smallest free charge observed
+(fractional charges of quarks are smaller but isolated quarks do
+not appear in nature).
+
+To properly consider the electromagnetic behaviour, we need
+quantum theory in atomic length scales. E.g., the quantum
+description of the hydrogen atom is the application of the
+coulomb potential in Schrödinger's equation. We are only
+learning classical electrodynamics.
+
+\section{Coulomb's Law}%
+\label{sec:coulomb_s_law}
+
+\begin{definition}
+	The force between two charged particles in S.I.\@ units is
+	\begin{equation}
+		\bm{F} =
+		\frac{q_{1}q_{2}}{4\pi\epsilon_{0}r^{2}}\hat{\bm{r}}
+	\end{equation}
+\end{definition}
+
+The total force on a test charge $Q$ is the
+sum of the forces from the other charges in the system. This is
+the \textit{superposition principle}. I.e., the field from one particle
+does not change the effect from any other charges in the system.
+\begin{definition}
+	Superposition of electric forces applies, such that
+	\begin{equation}
+		\bm{F} = \bm{F_{1}} +
+		\bm{F_{2}} + \hdots
+	\end{equation}
+	The electric field $\bm{E}$ at point
+	$r$ is the force per unit charge exerted on a
+	test charge, such that
+	\begin{equation}
+		\label{eq:force_charge_field}
+		\bm{F} = Q_{test}
+		\bm{E}
+	\end{equation}
+	From this, we can deduce that the total electric field is the
+	superposition of electric fields of all charges in the system
+	\begin{equation}
+		\bm{E} = \bm{E_{1}} +
+		\bm{E_{2}} + \hdots
+	\end{equation}
+\end{definition}
+
+Note that superposition in this case is not a logical necessity
+but an experimental fact; if the force is proportional to the
+square of the charges, then this would not work.
+
+We might ask---what is an electric field? We come to it through
+an intermediary step in calculating forces, thus we can define
+it as that. Otherwise, we can treat it as abstract or physical,
+it does not affect how these particles behave.
+
+\section{Total charge}%
+\label{sec:total_charge}
+
+\begin{definition}
+	The total charge in a system of discrete (point charges) is
+	\begin{equation}
+		Q = \sum_i q_{i}
+	\end{equation}
+\end{definition}
+
+For continuous charge distributions, the sum becomes an
+integral, and we consider instead the \textit{charge densities}.
+For each dimension, the charge densities are:
+
+\begin{center}
+	\begin{tabular}{c  c}
+		\textbf{System} & \textbf{Unit charge relation}
+		\\
+		\toprule
+		Line charge     & $\lambda\,\dd{l} = \dd{q}$        \\ Surface
+		charge          & $\sigma\,\dd{a}^\prime = \dd{q}$  \\ Volume
+		charge          & $\rho\,\dd{\tau^\prime} = \dd{q}$
+		\\
+	\end{tabular}
+\end{center}
+
+\begin{definition}
+	The total charge in system of continuous charge with a charge
+	density is
+	\begin{equation}
+		\label{eq:continuous_charge}
+		Q = \int\limits_{\textit{body}}\dd{q}
+	\end{equation}
+\end{definition}
+
+Greek symbols have been used because $V$ is
+used for potentials.
+
+\section{Charge densities and fields}%
+\label{sec:charge_densities_and_fields}%
+
+Knowing the charge densities and the total charge, we can write
+Coulomb's law for electric fields. As an example, with 3D charge
+density, we start with the unit electric field, in differential
+form,
+\begin{equation}
+	\dd{\bm{E}}(\bm{r}) =
+	\frac{1}{4\pi\epsilon_{0}\bm{r}^{2}}\rho\,\dd{\tau}
+\end{equation}
+
+Integrating both sides will give us the resulting electric
+field.
+
+\begin{definition}
+	Coulomb's law for a continuous charge distribution is
+	\begin{equation}
+		\label{eq:coulombs_law_field_continuous}
+		\bm{E}(\bm{r}) =
+		\frac{1}{4\pi\epsilon_{0}}\int\frac{\rho(\bm{r}^\prime)}{r^2}\bm{\hat{r}}\,\dd{\tau}
+	\end{equation}
+\end{definition}
+
+\begin{example}
+	The examples asked us to
+	\begin{enumerate}
+		\item Derive electric field at a vertical distance above a line of
+		      charge.
+		\item Derive electric field at a vertical distance above a circular
+		      loop and thus electric field from a flat circular disk.
+	\end{enumerate}
+
+	Some takeaways:
+
+	If we are asked to find the electric field of a surface or
+	volume:
+	\begin{enumerate}
+		\item Split into smaller dimension, \textit{unit length} for a
+		      surface, \textit{unit surface} for a volume.
+		\item Find the electric field of the smaller dimension shape. \item Express the unit charge in terms of charge density.
+		\item Integrate over the original shape's limits.
+	\end{enumerate}
+\end{example}
+
+\section{Gauss' Law}%
+\label{sec:gauss_law}
+
+\begin{definition}
+	For any volume or surface that encloses a charge
+	$Q$ then
+	\begin{equation}
+		\oint \bm{E} \vdot \dd{\bm{a}} =
+		\frac{1}{\epsilon_{0}}Q
+	\end{equation}
+\end{definition}
+
+If we have high symmetry in the charge distribution, we can
+integrate over a symmetrical surface to find the electric field.
+For more complicated situations, Gauss' law
+\textit{and} the superposition principle if there
+are still underlying symmetries to be exploited.
+
+Charge distributions that are a superposition of any Gaussian
+distributions asks us to use the superposition principle to
+evaluate the integral.
+
+\begin{example}
+	The examples asked us to
+	\begin{enumerate}
+		\item Find the flux through faces of a cube of a charge at the corner
+		      of a cube. We can resize the cube to centre the charge so that
+		      we can use Gauss' law from symmetry
+		\item Find the field of a uniformly charged solid sphere \item Find electric field well inside a long cylinder with charge
+		      density that varies by perpendicular distance from principle
+		      axis.
+		\item Find the electric field from an infinite sheet with surface
+		      charge.
+		\item Find the field of two infinite sheets with surface charge
+		      opposite each other (field on either sides and in the middle)
+	\end{enumerate}
+
+	The common strategy seems to be finding symmetry or finding a
+	smaller part of the original geometry and integrate. Draw some
+	field lines to get the feel for the geometry of the problem.
+
+\end{example}
+
+\section{Drawing fields}%
+\label{sec:drawing_fields}
+
+The field from a positive charge always point outwards and the
+magnitude decreases as $1/r^{2}$. Field lines are
+represented as arrows that give its direction and whose lengths
+give its magnitude. Alternative, we can connect the neighbouring
+arrows and the density of the field lines can represent the
+strength of the field instead of the length.
+
+\begin{figure}
+	\centering
+	\includesvg[width=0.9\columnwidth]{field_lines.svg}
+	\caption{(a) shows vector field plot while (b) shows field lines method.}
+\end{figure}
+
+\textbf{Aside:} Plotting field lines via Python
+utilises
+\verb|matplotlib|.
+
+\section{Differential form of Gauss' Law}%
+\label{sec:differential_form_of_gauss_law}%
+
+We can re-write Gauss' law by applying the divergence theorem.
+
+\begin{theorem}\label{theorem:divergence}
+	The divergence theorem for a vector field $\bm{X}$
+	is
+	\begin{equation}
+		\oint\limits_{S}\bm{X}\vdot
+		\dd{\bm{S}} =
+		\int\limits_{V}\divergence{\bm{X}}\dd{V}
+	\end{equation}
+\end{theorem}
+
+For Gauss' Law we can derive from the enclosed charge density in
+a volume $V$ from
+equation~\ref{eq:continuous_charge} a new identity. Thus we
+discover that for an enclosed charge,
+
+\begin{equation}
+	\frac{Q}{\epsilon_{0}} =
+	\frac{1}{\epsilon_{0}}\int\limits_{\tau}
+	\rho(\bm{r})\dd{\tau}
+\end{equation}
+
+Combine with the divergence theorem
+from~\ref{theorem:divergence}, we find that
+
+\begin{equation}
+	\int\limits_{\tau} \divergence{\bm{E}}
+	\dd{\tau} = \int\limits_{\tau}
+	\frac{\rho(\bm{r})}{\epsilon_{0}} \dd{\tau}
+\end{equation}
+
+\begin{definition}
+	We arrive at the differential form by differentiating both sides
+	with respect to $\tau$
+	\begin{equation}
+		\label{eq:maxwell_gauss_law_differential}
+		\curl{\bm{E}} = \frac{\rho(\bm{r})}{\epsilon_{0}}
+	\end{equation}
+	This is the first of Maxwell's equation.
+\end{definition}
+
+\section{The curl of the electric field}%
+\label{sec:the_curl_of_e_}%
+
+Consider the electric field for a static charge
+$q$, in spherical coordinates, the length
+differential is
+
+\begin{equation}
+	\dd{\bm{l}} =
+	\dd{r}\hat{\bm{r}} +
+	r\dd{\theta}\hat{\bm{\theta}} + r
+	\sin{\theta}\dd{\phi}\hat{\bm{\phi}}
+\end{equation}
+
+Since our system is a singular charge with spherical symmetry,
+the angular differential terms disappear. Thus, we are left with
+
+\begin{equation}
+	\bm{E} \vdot \dd{\bm{l}} =
+	\frac{q}{4\pi\epsilon_{0}r^2}\dd{r}
+\end{equation}
+
+Integrating both sides leaves us with
+
+\begin{equation}
+	\int_a^b \bm{E} \vdot \dd{\bm{l}}
+	=
+	\frac{q}{4\pi\epsilon_{0}}\int_a^b \frac{1}{r^2}
+	\dd{r}
+	=
+	\frac{q}{4\pi\epsilon_{0}}\left(\frac{1}{r_{a}} -
+	\frac{1}{r_{b}}\right)
+\end{equation}
+
+For a closed loop, the integral evaluates to 0.
+
+\begin{corollary}
+	\begin{equation}
+		\oint \bm{E}\vdot\dd{\bm{l}}
+		=
+		0
+	\end{equation}
+	In other words, $\bm{E}$ is a conservative field.
+	Using Stoke's theorem, we can conclude that
+	\begin{equation}
+		\label{eq:curl_of_e}
+		\curl{\bm{E}} = 0
+	\end{equation}
+\end{corollary}
+
+\textbf{Note:} This result only applies for
+electrostatic fields and not when there are time varying
+magnetic fields.
+
+\section{Electrostatic potential}%
+\label{sec:electrostatic_potential}%
+
+From~\ref{sec:the_curl_of_e_} we find that for an electrostatic
+field, it is conservative. The following applies to any
+conservative field
+
+\begin{definition}
+	The electrostatic potential as a function of a position vector
+	is the negative of the integral of the electrostatic field along
+	some path from a starting point to another point. Since it is
+	conservative, it is path-independent, hence the difference in
+	potential at two points is the integral evaluated from one point
+	to the other.
+	\begin{equation}
+		\label{eq:potential_vector_field_int} V(\bm{b}) -
+		V(\bm{a}) = -
+		\int_a^b\bm{E}\vdot\dd{\bm{l}}
+	\end{equation}
+	As a result, we have the following identity for the electric
+	potential:
+	\begin{equation}
+		\label{eq:potential_vector_field}
+		\bm{E} = -\gradient{V}
+	\end{equation}
+\end{definition}
+
+\begin{example}
+	Find the potential inside and outside a uniformly charged
+	spherical shell of radius $R$. Very similar
+	steps to~\ref{dv:charge_from_average}.
+
+	Inside, it is uniform and depends on the radius of the sphere,
+	while outside, it depends on the position of our test charge.
+
+	We get to
+	\begin{equation}
+		V(z) = \frac{2\pi R\sigma}{2\epsilon_{0}z}\left[\sqrt{{(R+z)}^2} - \sqrt{{(R-z)}^2} \right]
+	\end{equation}
+	and must consider that the second square root term is
+	$z - R$ for test charge outside and
+	$R - z$ for test charge inside.
+
+	Thus, we have
+	\begin{equation}
+		V(r) = \begin{cases}
+			\frac{1}{4\pi\epsilon_{0}}\frac{q}{r}, & r \geq R \\
+			\frac{1}{4\pi\epsilon_{0}}\frac{q}{R}, & r \leq R \\
+		\end{cases}
+	\end{equation}
+\end{example}
+
+\section{Notes on the Scalar potential}%
+\label{sec:notes_on_the_scalar_potential}%
+
+\begin{itemize}
+	\item Potential is different from potential energy.
+	\item Finding potentials is easier than vector fields.
+	\item Finding vector fields using the
+	      relation~\ref{eq:potential_vector_field}. \item There is not an absolute definition of potential---we only
+	      observe potential \textit{differences}. Thus, `zero'
+	      potential is arbitrarily defined, usually at infinity. This is
+	      for convenience rather than mathematical necessity. \item Potentials also follow the superposition principle. \end{itemize}
+
+\section{Poisson's equation}%
+\label{sec:poisson_s_equation}
+
+Substitute~\ref{eq:potential_vector_field} into the curl of electric
+field, and we get Poisson's equation.
+
+\begin{definition}
+	Poisson's equation is
+	\begin{equation}
+		\label{eq:poissons}
+		\laplacian{V} = -\frac{\rho(\bm{r})}{\epsilon_{0}}
+	\end{equation}
+\end{definition}
+
+\section{Laplace's equation I}%
+\label{sec:laplace_s_equation}
+
+\begin{definition}
+	In the absence of any charges, $\rho(\bm{r}) = 0$. Thus,
+	Laplace's equation is
+	\begin{equation}
+		\laplacian{V}=0
+	\end{equation}
+\end{definition}
+
+\section{Point charge}%
+\label{sec:point_charge}
+
+A point charge has spherical symmetry. If we choose our zero
+potential at infinity and evaluate the integral then we can
+evaluate the integral to find the electrostatic potential.
+
+\begin{definition}
+	The electrostatic potential of a point charge is
+	\begin{equation}
+		V(\bm{r}) =
+		\frac{1}{4\pi\epsilon_{0}}\frac{q}{r}
+	\end{equation}
+\end{definition}
+
+Note that point charges do not actually exist, they are there
+for easier calculations.
+
+\section{Electrostatic potential for a continuous distribution}%
+\label{sec:electrostatic_potential_for_a_continuous_distribution}%
+
+For a continuous charge distribution, we can use the
+superposition principle and sum over all point charges.
+
+\begin{definition}
+	The electrostatic potential for a continuous distribution is
+	\begin{equation}
+		\label{eq:potential_continuous}
+		V(\bm{r}) =
+		\frac{1}{4\pi\epsilon_{0}}\iiint\limits_V\frac{\rho(\bm{r}^\prime)}{r^{\prime\prime}}\dd{\tau^\prime}
+	\end{equation}
+	For surface and line charge densities, it is the same form,
+	except we are integrating over a surface or a path.
+\end{definition}
+
+\section{Summary of equations}%
+\label{sec:summary_of_equations}
+
+Relating $V$ and $\rho$:
+Equation~\ref{eq:poissons} and
+equation~\ref{eq:potential_continuous}.
+
+Relating $\rho$ and $\bm{E}$:
+Equation~\ref{eq:coulombs_law_field_continuous},
+equation~\ref{eq:curl_of_e} and
+equation~\ref{eq:maxwell_gauss_law_differential}.
+
+Relating $\bm{E}$ and $V$:
+Equation~\ref{eq:potential_vector_field} and
+equation~\ref{eq:potential_vector_field_int}.
+
+\section{Boundary conditions for the electric field}%
+\label{sec:boundary_conditions_for_the_electric_field}
+
+For a thin box passing through a surface charge, as we pass from
+below to above the surface, there is a discontinuous change in
+the electric field if the box is infinitesimally thin. This
+result is from first year. Since we only care about normal
+components, because for tangential components to the surface
+(i.e.\ sides of the box), this forms a closed loop and the
+integral is thus 0. We find that the normal component has a
+discontinuity, so that
+
+\begin{equation}
+	\label{eq:thin_box_sheet}
+	\bm{E}^\perp_{\mathrm{above}} -
+	\bm{E}^\perp_{\mathrm{below}} =
+	\frac{\sigma}{\epsilon_{0}}\hat{\bm{n}}
+\end{equation}
+
+We can integrate this to find the potential above and below. As
+the integral path length tends to zero, the integral tends to
+zero, so that the potential above is equal to the potential
+below.
+
+\begin{equation}
+	V_{\mathrm{above}} = V_{\mathrm{below}}
+\end{equation}
+
+We can also arrange~\ref{eq:thin_box_sheet} to get
+
+\begin{definition}
+	The boundary conditions we have for the electrostatic field due
+	to surface charges
+	\begin{equation}
+		\label{eq:boundary_conditions}
+		\pdv{V_{\mathrm{above}}}{n} - \pdv{V_{\mathrm{below}}}{n} =
+		-\frac{\sigma}{\epsilon_{0}}
+	\end{equation}
+\end{definition}
+
+Where the partial derivatives represent the normal derivative
+$
+	\gradient{\hat{n}}$.
+
+\section{Work done to move a charge}%
+\label{sec:work_done_to_move_a_charge}%
+
+\begin{definition}
+	The work needed to move a charge in an electric field is
+	\begin{equation}
+		\label{eq:work_potential_charge}
+		W = -Q \int_a^b \bm{E} \vdot
+		\dd{ \bm{l}  } = Q\left[V( \bm{b}  ) - V(
+			\bm{a})\right] = Q \Delta V
+	\end{equation}
+\end{definition}
+
+\section{The energy of a distribution of point charges}%
+\label{sec:the_energy_of_a_distribution_of_point_charges}%
+
+To move one charge to the other, separated by a distance of
+infinity, to a finite distance $r$, the work
+done is
+
+\begin{equation}
+	W_2 = \frac{1}{4\pi\epsilon_{0}}\frac{q_2q_1}{r_{12}}
+\end{equation}
+
+The superposition principle is used to find the total work done
+in moving two or more charges together. It is the sum of the
+work done to bring each individual pair together.
+
+\begin{equation}
+	W = \sum_{i=2}^N W_i
+\end{equation}
+
+To avoid double counting the pairs, we halve the final sum,
+which yields
+\begin{equation}
+	W = \frac{1}{8\pi\epsilon_{0}} \sum_{i=1}^N
+	\sum_{j \neq i}^N \frac{q_i q_j}{r_{ij}}
+\end{equation}
+
+We can rearrange this equation further
+using~\ref{eq:work_potential_charge}.
+
+\begin{definition}
+	The work done in moving all these charges from infinity to a
+	finite distance is
+
+	\begin{equation}
+		W = \frac{1}{2} \sum_{i=1}^N q_i V(
+		\bm{r}_i  )
+	\end{equation}
+\end{definition}
+
+\section{The energy of a continuous charge distribution}%
+\label{sec:the_energy_of_a_continuous_charge_distribution}%
+
+Once again, we can integrate to convert from discrete charges to
+continuous charges. We can substitute
+in~\ref{eq:maxwell_gauss_law_differential} then integrate by parts to get a
+nicer expression.
+
+\begin{derivation}
+	\begin{equation}
+		\begin{aligned}
+			W & = \frac{\epsilon_{0}}{2}\int\left(\divergence{\bm{E}}\right)V \dd{\tau} \\
+			  & = \frac{\epsilon_{0}}{2}\left[-\int\bm{E}\vdot\gradient{V}
+				\dd{\tau} + \oint V \bm{E}
+			\dd{ \bm{a} }\right]                                                        \\
+			  & = \frac{\epsilon_{0}}{2}\left[-\int\bm{E}^2\dd{\tau}+\oint V
+				\bm{E}\dd{\bm{a}}\right]
+		\end{aligned}
+	\end{equation}
+\end{derivation}
+
+This is the \textit{correct} equation, but in theory if
+you integrate over bigger volumes (as long as it encloses the
+charge), the contribution from the volume will overtake the
+contribution from the surface. The first term is the
+contribution from the volume, while the second is the surface.
+Since outside our standard sphere (let's say we integrate over
+all space), $\rho = 0$, our result for
+$W$ must be the same. But the volume
+integral grows as $E^2$ is positive, so the
+surface integral must decrease. In fact, it decreases by
+$1/r$. Thus, if we integrate over all space,
+we are left with the first term only.
+
+\begin{definition}
+	The work done on continuous charge distribution is
+	\begin{equation}
+		\label{eq:work_continuous}
+		W = \frac{\epsilon_{0}}{2}\int\limits_{\mathrm{all\ space}} E^2
+		\dd{\tau}
+	\end{equation}
+\end{definition}
+
+This gives us a different idea to think about energy in
+electrostatics. If we have a series of charges (discrete or
+continuous). Rather than thinking in terms of the work done by
+bringing these charges together, we can think of the work as the
+integral of the electric field over all space. One could say the
+electric field `stores' energy.
+
+It is \textbf{important} to understand that the energy of
+the electric field does not obey the superposition principle. If
+we have two charges and bring them together, the total energy is
+not the energy in one field plus the energy in the other. This
+is because it is not a linear relationship.
+
+\begin{example}
+	Find the electrostatic energy of a uniformly charged spherical
+	shell of radius $R$ and total charge
+	$q$.
+
+	Note that we can use either use
+	\begin{equation}
+		W = \frac{1}{2} \int \sigma V
+		\dd{a}
+	\end{equation}
+	or
+	\begin{equation}
+		W = \frac{1}{2} \int E^2 \dd{\tau}
+	\end{equation}
+	to get to the same result.
+\end{example}
+
+\section{The properties of conductors}%
+\label{sec:the_properties_of_conductors}%
+
+\begin{definition}
+	Inside a conductor, there are several important properties to
+	remember
+	\begin{itemize}
+		\item $\bm{E} = 0$ inside a conductor. If there is a deficit
+		      of charge, then it will move until equilibrium is reached.
+		\item $\rho = 0$ inside a conductor. We can have charges
+		      inside a conductor, but they must cancel.
+		\item Charges in a conductor are \textbf{mobile}. This means
+		      they can move freely.
+		\item Any net charge resides on the \textbf{surface}.
+		\item A surface of a conductor is an \textbf{equipotential},
+		      otherwise charges would move freely until potential equilibrium
+		      is reached.
+		\item $\bm{E}$ is perpendicular to the surface at the
+		      surface. Tangential components would mean charges can move along
+		      the surface, this is not the case for an equipotential.
+	\end{itemize}
+\end{definition}
+
+\section{Induced charges}%
+\label{sec:induced_charges}
+
+If a positively charged particle is brought closed to a
+conductor, its field will attract negative charges towards it.
+These negative charges are closer to the positive particle and
+thus creates a net attraction. The charges in the conductor move
+around the surface to cancel the field in the conductor so that
+at equilibrium there is no $\bm{E}$ field in the
+conductor.
+
+The result is a redistribution of charge on the surface of the
+conductor.
+
+\begin{example}
+	An uncharged spherical conductor has a cavity of arbitrary shape
+	with a charge $+q$ placed somewhere in it.
+	What is the electric field outside of the conductor?
+
+	Outside the conductor, using Gauss' Law, for a spherical
+	conductor, it is
+	\begin{equation}
+		\frac{1}{4\pi\epsilon_{0}}\frac{q}{r^2}
+		\hat{ \bm{r}  }
+	\end{equation}
+
+	Does a strangely shaped cavity affect the distribution of the
+	charge distributed on the surface? The arrangement of negative
+	charges in the inside surface of the cvity that is attracted to
+	the cavity cancels out the asymmetry that is produced by the
+	shape of the cavity. The net effect is that the shape of the
+	cavity does not matter. We can simply argue that we have a
+	uniform surface charge. See~\ref{sec:uniqueness_theorems} for
+	relevant theorems.
+\end{example}
+\section{Surface charge and the force on a conductor}%
+\label{sec:surface_charge_and_the_force_on_a_conductor}%
+
+If we have a \textit{static} field on a conductor, then
+the boundary conditions for the charge at the surface follow the
+result from~\ref{sec:boundary_conditions_for_the_electric_field}. We have a discontinuity in
+the field, and immediately outside the conductor, it is given
+by~\ref{eq:thin_box_sheet}.
+
+We can rearrange for the charge density and express it in terms
+of the potential
+\begin{equation}
+	\sigma = -\epsilon_{0} \pdv{V}{n}
+\end{equation}
+
+Using the expression for force in~\ref{eq:force_charge_field}, we
+can express the force \textit{per unit area} as
+
+\begin{equation}
+	\label{eq:force_per_area_conductor}
+	\bm{f} = \sigma \bm{E_{\mathrm{avg}}}
+\end{equation}
+
+Because there is a discontinuity, we take the
+\textbf{average} of the electric field above and below
+(or inside and outside).
+
+For a conductor, this is half of~\ref{eq:force_per_area_conductor} since
+the field is 0 inside and outside, it is given
+by~\ref{eq:thin_box_sheet}.
+
+\begin{definition}
+	The force per unit area for a static field on a conductor is
+	\begin{equation}
+		\bm{f} = \frac{1}{2\epsilon_{0}}\sigma^2
+		\hat{ \bm{n} }
+	\end{equation}
+	or as a pressure, it is
+	\begin{equation}
+		P = \frac{\epsilon_{0}}{2}E^2
+	\end{equation}
+\end{definition}
+
+\section{Capacitors}%
+\label{sec:capacitors}
+
+A capacitor is a device with two conductors separated in space.
+
+Suppose there is a charge $+Q$ and
+$-Q$ on each conductor respectively. Each
+conductor is an equipotential, thus we can consider the
+\textit{potential difference} between them as the integral of the
+electric field from the negative to the positive conductor.
+
+Since electric field is proportional to the
+charge~\ref{eq:force_charge_field}, or more general
+as~\ref{eq:coulombs_law_field_continuous} we can substitute this into the
+integral, so the potential difference is proportional to the
+charge
+
+We call this constant of proportionality the
+\textit{capacitance}.
+
+\begin{definition}
+	The relation between the potential difference and charge is
+	\begin{equation}
+		\label{eq:capacitance_charge_pd}
+		C = \frac{Q}{V}
+	\end{equation}
+\end{definition}
+
+\begin{example}
+	Find the capacitance of a parallel plate capacitor made up of
+	two metal sheets of area $A$ separated by a
+	distance $d$.
+
+	Recall that for a linear system like this,
+	\begin{equation}
+		E = \frac{V}{d}
+	\end{equation}
+	After some algebra, we are left with
+	\begin{equation}
+		C = \frac{\epsilon_{0}A}{d}
+	\end{equation}
+\end{example}
+
+\begin{example}
+	Find the capacitance of two concentric spherical metallic shells
+	with radii $a$ and $b$,
+	where $a < b$.
+
+	We can use Gauss' Law to determine the electric field for
+	various radii. It is non-zero for $a \leq r \leq b$. As
+	usual, we can determine the potential through integration.
+
+	Then we go one step further and establish the capacitance using
+	the non-zero potential between the two shells. This turns out to
+	be
+	\begin{equation}
+		C = \frac{4\pi\epsilon_{0}ab}{(b-a)}
+	\end{equation}
+\end{example}
+\section{Energy stored in a capacitor}%
+\label{sec:energy_stored_in_a_capacitor}%
+
+We can ask: how much work is needed to ``charge'' a capacitor?
+This is equivalent to moving charges from the positive plate to
+the negative plate.
+
+We need to work \textit{harder} as we transfer more
+charge from one plate to the other.
+
+If a plate already as charge $q$ on it, with
+potential difference between plates $V = q/C$,
+then from~\ref{eq:work_potential_charge}, the work needed to add a
+charge of $\dd{q}$ is
+
+\begin{equation}
+	\dd{W} = V \dd{q} =
+	\frac{q}{C}\dd{q}
+\end{equation}
+
+Integrate this equation to get the \textit{total work done} or
+\textit{total energy stored}. Further, we can use our derived
+expressions to rearrange.
+
+\begin{definition}
+	The energy stored in a capacitor or work done to charge a
+	capacitor is
+	\begin{equation}
+		\label{eq:energy_in_capacitor} W =
+		\frac{1}{2} CV^2
+	\end{equation}
+\end{definition}
+
+If we now connect our capacitors to some wires then the
+capacitor will discharge because of the potential difference
+between the two plates. Thus, the capacitor is said to be
+storing energy. In fact, if the space between the plates is air
+then it would require really big capacitors for a substantial
+amount of energy. Dielectrics would be a better material.
+
+\chapter{Potentials}%
+\label{cha:potentials}
+
+\section{Introduction to potentials}%
+\label{sec:introduction_to_potentials}
+
+To find the electric field or potential from charge densities
+(as shown in~\ref{sec:summary_of_equations}) is quite difficult as not
+all of them have simple analytic solutions.
+
+For conductors, we also do not know where the charges are in
+advance, since the electric field inside is 0.
+
+In most cases, it is better to start from Poisson's equation
+in~\ref{sec:poisson_s_equation} in regions with charge, and
+Laplace's equation in~\ref{sec:laplace_s_equation} in regions with
+no charge.
+
+\section{Laplace's equation II}%
+\label{sec:laplace_s_equation_ii}
+
+\subsection{3D Laplacian}%
+\label{sub:3d_laplacian}
+
+If we look at the 3D Laplace's equation in full:
+\begin{equation}
+	\label{eq:3D_laplace_s_equation_in_full}
+	\pdv[2]{V}{x} + \pdv[2]{V}{y} +
+	\pdv[2]{V}{z} = 0
+\end{equation}
+
+We see that we have some expressions of requirements. Normally,
+the second derivative will tell us whether there's a maximum or
+minimum (positive or negative value). Because this is equal to
+0, we cannot have a minimum for all three directions, otherwise,
+it would not be equal to 0.
+
+Relevantly, we have Earnshaw's theorem, which maintains that a
+collection of point charges cannot be maintained in a stable
+stationary equilibrium (impossible to trap a particle in a 3D
+electric field). If we can trap a particle, then it would mean
+all points must be a minimum. To follow Laplace's equation, we
+can only have unstable points (no local maxima or minima)
+
+\subsection{1D Laplacian}%
+\label{sub:1d_laplacian}
+
+In 1D, it is a relatively straightforward, the first derivate is
+just a constant, and the function itself is a linear function.
+
+If we take any point on that straight line, and look at two
+neighbouring points, then the potential is just the average
+potential of the two surround points.
+
+\subsection{2D Laplacian}%
+\label{sub:2d_laplacian}
+
+In 2D, like in 3D, it's not possible to write a general
+solution, since it is not an ODE.\@ However, a useful numerical
+method yields one result such that the value of
+$V$ at some point $(x,y)$ is
+the average of values around $(x,y)$. If it is a
+circle, then the average value is at the centre.
+
+The average value of a function, in any dimension is given by
+\begin{equation}
+	\label{eq:average_value_of_a_function}
+	\bar{f} = {\int_A 1}^{-1}\int_A f
+\end{equation}
+
+Thus, for a circle, the average potential is
+\begin{equation}
+	\label{eq:2d_laplacian_numerical}
+	V_{\mathrm{avg}} = V(x,y) =
+	\frac{1}{2\pi R}\oint\limits_{\mathrm{circle}} V
+	\dd{l}
+\end{equation}
+
+By making this circle infinitesimally small, we get a valid
+result for the potential. We can setup a spreadsheet to perform
+this calculation.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\linewidth]{./2d_laplacian.svg}
+	\caption{Suppose we want to find the potential for the box shaded
+		blue, if we know the potential of its non-diagonal
+		neighbours, then we can average those to find the blue box. We can do this
+		via a relaxation method. If we iteratively find the potential of
+		its neighbours given some boundary conditions, then we can determine the potential in the centre.}%
+	\label{fig:2d_laplacian}%
+\end{figure}
+
+\section{Laplace's equation III}%
+\label{sec:laplace_s_equation_iii}%
+
+We now focus on the 3D Laplace's equation. We found in the
+previous Section~\ref{sec:laplace_s_equation_ii} that the potential at
+some point is just the average of the potential surrounding
+points.
+
+We can justify this by considering the surrounding points as a
+sphere with a point charge $q$ outside, and
+find the average potential over the whole sphere. Let's place
+our external point charge along the
+$z$-axis.
+
+From our previous derivations, we can simply write the down the
+result. From the origin, our potential due to
+$q$ is
+\begin{equation}
+	V = \frac{1}{4\pi\epsilon_{0}}\frac{q}{z}
+\end{equation}
+
+Let's go along with the `average' method and try to get to the
+same answer.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\linewidth]{./3d_laplacian.svg}
+	\caption{A 3D Laplace's equation set up with a point charge outside a
+		sphere we are considering the potential at the surface shaded
+		orange on the sphere.}%
+	\label{fig:3d_laplacian}%
+\end{figure}
+
+\begin{derivation}%
+	\label{dv:charge_from_average}%
+	Immediately, we expect the potential at a point
+	$r_0$ on the surface to be (imagine
+	$q$ is at the centre of some other sphere).
+	\begin{equation}
+		V = \frac{1}{4\pi\epsilon_{0}}\frac{q}{r_0}
+	\end{equation}
+
+	We can determine $r_0$ from the cosine rule.
+	\begin{equation}
+		r_0^2 = z^2 + R^2 - 2zR\cos{\theta}
+	\end{equation}
+	From~\ref{eq:average_value_of_a_function}, we can add the third dimension to
+	this to represent our surface integral as
+	\begin{equation}
+		V_{\mathrm{avg}} =
+		\frac{1}{4\pi R^2}\oiint\limits_{\mathrm{sphere}} V
+		\dd{a}
+	\end{equation}
+
+	Remember, this is the average potential of the surface of a
+	sphere of radius $R$ away from the origin.
+
+	Do some substitution in spherical coordinates (varying
+	$(\theta,
+		\phi)$ while keeping $r = r_0$),
+	bearing in mind the Jacobian and we will get that the average
+	potential is
+	\begin{equation}
+		V_{\mathrm{avg}} =
+		\frac{1}{4\pi R^2}\frac{q}{4\pi\epsilon_{0}}
+		\int_0^{2\pi}\int_0^{\pi} {\left[ z^2 + R^2 - 2zR\cos{\theta} \right]}^{-\frac{1}{2}} R^2
+		\sin{\theta}\dd{\theta}
+		\dd{\phi}
+	\end{equation}
+
+	We can integrate with respect to $\phi$ first
+	as there are no $\phi$-dependent terms
+	\begin{equation}
+		V_{\mathrm{avg}} =
+		\frac{2\pi}{4\pi}\frac{q}{4\pi\epsilon_{0}}
+		\int_0^{\pi} {\left[ z^2 + R^2 - 2zR\cos{\theta} \right]}^{-\frac{1}{2}}
+		\sin{\theta}\dd{\theta}
+	\end{equation}
+
+	Then we use inverse chain rule and factorise the terms inside
+	the square roots when evaluating to get to
+	\begin{equation}
+		V_{\mathrm{avg}} =
+		\frac{1}{2zR}\frac{q}{4\pi\epsilon_{0}}
+		\sqrt{ z^2 + R^2 - 2zR\cos{\theta} }\biggm \rvert^{\pi}_{0} =
+		\frac{1}{2zR}\frac{q}{4\pi\epsilon_{0}}
+		\left[ (z + R) - (z - R) \right]
+	\end{equation}
+
+	Finally, we have a nice expression
+	\begin{equation}
+		V_{\mathrm{avg}} =
+		\frac{1}{4\pi\epsilon_{0}}\frac{q}{z}
+	\end{equation}
+
+	What we just calculated is the potential at the centre of the
+	sphere as the average of the sphere of an arbitrary radius
+	$R$ due to a point charge
+	$q$ outside $R$. We can
+	get this same result if we calculate directly from the external
+	charge itself.
+\end{derivation}
+
+\section{Uniqueness theorems}%
+\label{sec:uniqueness_theorems}
+
+Here are the theorems without proofs.
+
+\begin{definition}
+	\textbf{First Uniqueness Theorem:}
+	The solution to Laplace's equation in some volume
+	$\tau$ is uniquely determined if
+	$V$ is specified on the boundary surface S.
+\end{definition}
+\begin{definition}
+	\textbf{Second Uniqueness Theorem:} In a volume $\tau$
+	surrounded by conductors and containing a specified charge
+	density, $\rho$, the electric field is uniquely
+	determined if the \textit{total charge} is given.
+\end{definition}
+
+Let's consider examples to demonstrate the theorems.
+
+\begin{example}
+	Consider a surface $S$ which encloses some
+	volume with a defined potential $V$ on that
+	surface. The first uniqueness theorem tells us that there is a
+	unique solution to Laplace's equation.
+\end{example}
+
+\begin{example}
+	Now, consider 4 charges arranged in a way shown in
+	Figure~\ref{fig:second_uniqueness_theorem}. Now we connect them. What
+	happens? From the second uniqueness theorem, we can say that the
+	volume enclosed by the conductors (wires) has a determined total
+	charge (of 0), so we know there is a unique solution for the
+	electric field.
+\end{example}
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\linewidth]{./second_uniqueness_theorem.svg}
+	\caption{An example to demonstrate the second uniqueness theorem.}%
+	\label{fig:second_uniqueness_theorem}%
+\end{figure}
+
+\section{Finding the potential---the method of images}%
+\label{sec:finding_the_potential}%
+
+Let's consider the classic example: ``What is the potential from
+a positive charge $+q$ sitting at a distance
+$d$ above a flat and infinite grounded
+conductor''?
+
+We have the following boundary conditions:
+\begin{itemize}
+	\item $V = 0$ when $z = 0$ (level of the
+	      grounded conductor)
+	\item $V \rightarrow 0$ a long way from the
+	      charge
+\end{itemize}
+
+We can use a trick to solve this problem without solving
+Laplace's equation. By symmetry, if we remove the conductor and
+replace it with a negative charge $-q$ at
+$-d$. At $z = 0$ (like a
+mirror image), the potential is still 0. From the first
+uniqueness theorem, we still have the same boundary potential
+(an invisible conductor), and thus the solution for the
+potential above the plane will be the same in both cases.
+
+The solution is therefore
+\begin{equation}
+	\label{eq:charge_on_infinite_sheet_mirror}
+	V(x,y,z) = \frac{1}{4\pi\epsilon_{0}}\left[\frac{+q}{\sqrt{r^2 +
+	{(z-d)}^2}} + \frac{-q}{\sqrt{r^2 + {(z+d)}^2}} \right],\, z
+	\geq 0
+\end{equation}
+
+where $r^2 = x^2 + y^2$. This means by using a mirror
+image of our charge, we can determined the potential strictly
+above the plane.
+
+What about the surface charge, $\sigma(r)$? Recall
+in Section~\ref{sec:boundary_conditions_for_the_electric_field}, the surface charge
+distribution is related by the
+Equation~\ref{eq:boundary_conditions}, except we only care about
+what's above the sheet. The direction normal to the surface is
+$\hat{k}$, thus
+\begin{equation}
+	\sigma = -\pdv{V}{z}\biggr \rvert_{z=0}
+\end{equation}
+
+We then evaluate the partial derivative in
+Equation~\ref{eq:charge_on_infinite_sheet_mirror}, which gives us
+\begin{equation}
+	\sigma(R) =
+	-\frac{qd}{2\pi{(r^2+d^2)}^{\frac{3}{2}}}
+\end{equation}
+
+From this we can find out the \textit{total} induced
+charge $Q$. Using the
+relation~\ref{eq:continuous_charge}, we integrate in spherical
+coordinates (in the
+$x$-$y$ plane, this
+means keeping $theta$ constant) to find
+\begin{equation}
+	Q = \int_0^{2\pi} \int^\infty_0 -
+	\frac{qd}{2\pi{(r^2+d^2)}^{\frac{3}{2}}}
+	r\dd{r}\dd{\phi} =
+	-\frac{qd}{2\pi\sqrt{r^2+d^2}}\biggr \rvert_0^\infty = -q
+\end{equation}
+
+How about the forces and energy in the system? First the force
+between the two charges is
+\begin{equation}
+	\bm{F} =
+	\frac{1}{4\pi\epsilon_{0}}\frac{q^2}{{{(2d)}^2}}
+	\hat{ \bm{z}  }
+\end{equation}
+
+Multiply by $2d$ to get the energy. But this
+is actually not correct. We have to halve the volume in the
+actual system because we are only considering
+$z \geq 0$, thus
+\begin{equation}
+	W = -\frac{1}{4\pi\epsilon_{0}}\frac{q^2}{4d}
+\end{equation}
+
+We can also get to this result by finding the work needed to
+bring the charge in from infinity.
+\begin{equation}
+	W = -\int_\infty^d \bm{F}
+	\dd{ \bm{l}  } = -\frac{1}{4\pi\epsilon_{0}} \int_\infty^d
+	\frac{q^2}{4z^2} \dd{z}
+\end{equation}
+
+\section{Finding potentials---separation of variables}%
+\label{sec:finding_potentials_separation_of_variables}
+
+\textbf{Note:} There will not be any examinable
+questions in solving PDEs. But we must be comfortable with
+techniques such as separation of variables. We use this to solve
+Laplace's equation. Furthermore, we must be able to do this in
+spherical and cylindrical coordinate systems.
+
+\section{Multipole expansions---potentials at large distances}%
+\label{sec:multipole_expansions_potentials_at_large_distances}
+
+If we go far enough away from any charge distribution with a
+total net charge $Q$, the potential will
+always tend to that of a single point charge, i.e.
+\begin{equation}
+	V_{\mathrm{net\,charge\,Q}}{\left(r\right)}_{r
+	\rightarrow \infty} = \frac{Q}{4\pi\epsilon_{0}} \rightarrow 0
+\end{equation}
+
+But how do we expect the potential to look like at large
+$\bm{r}$? For a distribution of charges we can
+image a hierarchy of structures, starting from a single point
+charge.
+
+\begin{itemize}
+	\item \textbf{Monopole:}  Potential tends to
+	      $1/r$.
+	\item \textbf{Dipole:}  Potential tends to
+	      $1/{r}^2$.
+	\item \textbf{Quadrupole:}  Potential tends to
+	      $1/{r}^3$.
+	\item \textbf{Octopole:}  Potential tends to
+	      $1/{r}^4$.
+\end{itemize}
+
+\textbf{Note:} We can't reduce a dipole to a monopole,
+a quadrupole to a dipole, octopole to a quadruple, etc. However,
+we can imagine representing the potential of any charge
+distribution as an expansion (sum or superposition) of these
+multipoles.
+
+Clearly, if we have what appears as a single charge at large
+distances, the field looks like a point charge, if we have
+separation of net charge then it will look like the dipole at
+large distance. If our charge distribution cannot be reduced to
+a monopole or dipole distribution then the next likely is
+quadrupolar, etc.
+
+\subsection{Multipole expansion (Not examinable)}%
+\label{sub:multipole_expansion_not_examinable_}
+
+The multipole expansion of the field from a charge distribution
+is
+\begin{equation}
+	V\left(\bm{r}\right) =
+	\frac{1}{4\pi\epsilon_{0}}\sum_{n=r_0}^{\infty}\frac{1}{r^{n+1}}\int\limits_{V}{\left(r^\prime\right)}^n
+	P_n\left(\cos{\alpha}\right)\rho\left(\bm{r}^\prime\right)
+	\dd{\tau^\prime}
+\end{equation}
+
+$\alpha$ is the angle between
+$\bm{r}$ and $\bm{r}^\prime$ and
+$P_n$ are the Legendre polynomials. The
+further we go away, the more we can use only the first terms in
+the series.
+
+\section{The dipole potential}%
+\label{sec:the_dipole_potential}
+
+For two separated charges we can write the potential at some
+point \textbf{P} at $\bm{r}$ as
+\begin{equation}
+	V\left(\bm{r}\right) =
+	\frac{1}{4\pi\epsilon_{0}}\left(\frac{q}{r_{+}} - \frac{q}{r_{-}}\right)
+\end{equation}
+where $r_{+}$ and $r_{-}$ are
+the distances from the charge to the point
+\textbf{P}, see Figure~\ref{fig:dipole_distances}.
+But these two are not centred at the origin of the system. The
+distance can be calculated from cosine rule.
+\begin{equation}
+	r^2_{\pm} = r^2\left(1 \mp\frac{d}{r}\cos{\theta} + \frac{d^2}{4r^2}\right)
+\end{equation}
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./dipole_distances.svg}
+	\caption{The distances in a dipole system}%
+	\label{fig:dipole_distances}
+\end{figure}
+
+At large $r$ the third term is negligible,
+reducing this to
+\begin{equation}
+	\frac{1}{r_{\pm}}
+	\simeq
+	\frac{1}{r}{\left(1 \mp \frac{d}{r} \cos{\theta}\right)}^{-\frac{1}{2}}
+\end{equation}
+
+Using the binomial expansion, we have
+\begin{equation}
+	\frac{1}{r_\pm}
+	\simeq
+	\frac{1}{r}\left(1 \pm \frac{d}{2r} \cos{\theta}\right)
+\end{equation}
+
+If we write this expansion for $r_+$ and
+$r_-$ separately, and subtract one from the
+other.
+\begin{equation}
+	\frac{1}{r_+} - \frac{1}{r_-}
+	\simeq
+	\frac{d}{r^2}\cos{\theta}
+\end{equation}
+
+The potential of a dipole measured from its centre for large
+$r$ is
+\begin{equation}
+	V \left(\bm{r}\right)\simeq
+	\frac{1}{4\pi\epsilon_{0}}\frac{q d \cos{\theta}}{r^2}
+\end{equation}
+where $\theta$ is the relative orientation of the
+dipole to the position vector of \textbf{P}.
+
+Since this seems to imply that we have to work in spherical or
+polar coordinates, we can avoid this by using the dipole moment,
+measured as a vector $\bm{d}$ from one end to the
+other.
+\begin{equation}
+	\label{eq:dipole_moment_def}
+	\bm{p} = q \bm{d}
+\end{equation}
+
+\begin{definition}
+	At large $r$, the potential of a dipole
+	measured from its centre, using the dipole moment is
+	\begin{equation}
+		\label{eq:potential_of_dipole}
+		V \left(\bm{r}\right) =
+		\frac{1}{4\pi\epsilon_{0}}\frac{ \bm{p}\vdot \hat{ \bm{r}  }  }{r^2}
+	\end{equation}
+\end{definition}
+\textbf{Note:} This is only the approximate potential
+of the physical dipole we described. If we get too close to the
+separated charges, this equation no longer applies. We would
+have to use multipole expansion to get a better approximation.
+
+When we solve problems, it is sensible to align
+$\bm{p}$ with an axis to simply the mathematics
+needed to carry out the calculation.
+
+\section{The electric field from a dipole}%
+\label{sec:the_electric_field_from_a_dipole}
+
+The electric field is the gradient of the potential. We have
+calculated the potential in Equation~\ref{eq:potential_of_dipole}.
+We need to work out the gradient in spherical coordinates.
+
+\begin{definition}
+	The electric field of a dipole, aligned along the
+	$z$-axis is
+	\begin{equation}
+		\label{eq:electric_field_dipole_z}
+		\bm{E}_{\mathrm{dipole}}\left(r,\theta\right)
+		=
+		\frac{p}{4\pi\epsilon_{0}r^3}\left(2\cos\theta \hat{ \bm{r}  } + \sin\theta \hat{ \bm{\theta}  }\right)
+	\end{equation}
+
+	The coordinate-free version, which does not depend on the
+	orientation of the system, is
+	\begin{equation}
+		\bm{E}_{\mathrm{dipole}}\left(r\right)
+		=
+		\frac{p}{4\pi\epsilon_{0}r^3}\left(3\left(\bm{p}\vdot\hat{\bm{r}  }\right)\hat{\bm{r}} - \bm{p}\right)
+	\end{equation}
+\end{definition}
+
+See Figure~\ref{fig:derive_E_of_dipole} for a derivation.
+
+We can see that if the dipole is aligned with the
+$z$-axis, the terms from other axis
+disappears and is what we expect.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=1\columnwidth]{./derive_E_of_dipole.svg}
+	\caption{Handwritten derivation of the electric field of a dipole}%
+	\label{fig:derive_E_of_dipole}
+\end{figure}
+
+\chapter{Fields in Matter}%
+\label{cha:fields_in_matter}
+
+\section{Introduction to fields in matter}%
+\label{sec:introduction_to_fields_in_matter}
+
+We might ask: how does an electric field interact with different
+materials?
+
+\begin{itemize}
+	\item A proper theory requires us to embrace quantum mechanics, we
+	      will not do this but stick to the nineteenth-century
+	      interpretation.
+	\item Broadly, we have \textbf{conductors} (charges can move freely) and
+	      \textbf{insulators} (charges can move but only in small displacements since they are fixed to atoms).
+	\item Insulators are often called dielectrics but other types exist,
+	      such as paraelectric, ferroelectric, piezoelectric.
+	\item There are materials between these extremes: semiconductors.
+	      These need to be treated with quantum theory but the action of
+	      fields in them is very important in devices.
+\end{itemize}
+
+\section{Polarised atom}%
+\label{sec:polarised_atom}
+
+Assume that we understand an atom as neutral with a positive
+nucleus and surrounding electrons, what happens if an electric
+field $\bm{E}$ is placed across it?
+
+The field will try to move the nucleus in one direction and the
+electrons in the opposite direction. I.e., the centre of the
+charge distributions separate and they create their own dipole
+field.
+
+This means if we apply an external field on an atom, we will
+induce a dipole $\bm{p}$ in the atom. In other
+words, the atom becomes polarised.
+
+\begin{definition}
+	A polarised atom has the dipole moment
+	\begin{equation}
+		\bm{p}_{\mathrm{atom}}
+		=
+		\alpha \bm{E}
+	\end{equation}
+	where the constant of proportionality $\alpha$ is
+	the atomic polarisability, given by
+	\begin{equation}
+		\alpha
+		=
+		4\pi\epsilon_{0}a^3 =
+		3\epsilon_{0}v_{\mathrm{atom}}
+	\end{equation}
+\end{definition}
+
+\textbf{Note:} we have assumed here that there is
+\textit{linear response}. This is fine for `small' fields but as
+the field gets large enough it would eventually pull the atom
+apart and ionise the atom.
+
+\begin{example}
+	Assume a simple model for an atom with a positive charge
+	$q+$ for the nucleus and a sphere of charge
+	$-q$ and radius $a$ to
+	represent the electrons. Calculate the atomic polarisability of
+	this atom.
+
+	The net effect of this induces a dipole in the atom. We need to
+	find the field on our displaced nucleus from the electron cloud
+	due to the displacement. We can deduce that if the nucleus is
+	displaced by $d$, then the sphere with
+	radius $d$ will enclose a charge of
+	$Q_{\mathrm{enc}}$ given by
+	\begin{equation}
+		Q_{\mathrm{enc}} = \left(\frac{4\pi d^3}{3} \div \frac{4\pi a^3}{3}\right) q =
+		{\left(\frac{d}{a}\right)}^3 q
+	\end{equation}
+
+	Then, from Gauss' Law, we can calculate the electric field. We
+	can then express $q d \hat{\bm{r}} = \bm{p}$ in terms of
+	$\bm{E}$, whose proportional relationship gives
+	us the atomic polarisability $\alpha =
+		4\pi\epsilon_{0} a^3 = 3 \epsilon_{0}
+		V_{\mathrm{atom}}$.
+\end{example}
+
+\section{Polarising molecules and crystals}%
+\label{sec:polarising_molecules_and_crystals}
+
+For atoms, polarisation is simple. However, for molecules, the
+situation is more complicated.
+
+We have chemical bonding (fundamentally electromagnetic
+interactions on the atomic scale treated using quantum theory).
+
+In this case we may find that the polarisation of the molecule
+does not necessarily align with the direction of the field.
+I.e., the relation between $\bm{E}$ and
+$\bm{p}$ is a tensor relationship.
+\begin{equation}
+	\begin{pmatrix}
+		p_{x} \\
+		p_{y} \\
+		p_{z}
+	\end{pmatrix} =
+	\begin{pmatrix}
+		a_{xx} & a_{xy} & a_{xz} \\
+		a_{yx} & a_{yy} & a_{yz} \\
+		a_{zx} & a_{zy} & a_{zz}
+	\end{pmatrix}
+	\begin{pmatrix}
+		E_{x} \\
+		E_{y} \\
+		E_{z}
+	\end{pmatrix}
+\end{equation}
+
+Tensor relationships are common for real materials, especially
+for molecules and crystals with low symmetry. When we have two
+vector quantities that are related and it's not the magnitude
+that changes, but also the direction, we need a tensor
+relationship.
+
+\section{Linear polarisation}%
+\label{sec:linear_polarisation}
+
+What happens when we place a material (many atoms) in an
+electric field?
+
+The simplest idea is to imagine that they all get polarised in
+the field independently.
+
+If a dipole is induced on each atom, the effect is that we have
+a lot of dipoles aligned in the field. The material, as a whole,
+becomes polarised. This combined effect is usually described as
+a polarisation per \textit{unit volume}
+$\bm{P}$.
+
+If the material is made of molecules that already have a dipole
+moment (water molecules), the net effect is the same, the
+dipoles still align and we can still describe it in the same
+way.
+
+\textbf{Note:} There is always thermal energy in our
+material. The dipoles, induced or not, are always wriggling
+around. Inevitably, to understand $\bm{P}$ at a
+fundamental level, we need to use statistical physics arguments.
+
+\section{The field from a polarised object}%
+\label{sec:the_field_from_a_polarised_object}
+
+To find the field from the whole object we need to `sum' up the
+effect of all these dipoles (the principle of superposition)
+\begin{equation}
+	V_{\mathrm{dipole}}\left(\bm{r}\right) =
+	\frac{1}{4\pi\epsilon_{0}}\frac{\bm{p}\vdot\hat{\bm{r}}}{r^2}
+\end{equation}
+
+Let's try to derive an expression for the field from the
+potential.
+
+\begin{derivation}
+
+	\textbf{Note:} A dipole moment from a volume
+	in our material may be written as $\bm{p} =
+		\bm{P}\dd{\tau^\prime}$ if we
+	assume a continuous distribution. Then to get a whole material,
+	we can integrate.
+	\begin{equation}
+		V\left(\bm{r}\right) = \frac{1}{4\pi\epsilon_{0}}
+		\int\limits_{V}
+		\frac{\bm{P}\left(\bm{r}^\prime\right) \vdot
+			\hat{\bm{r}}}{r^2}\dd{\tau^\prime}
+	\end{equation}
+
+	But we notice that
+	\begin{equation}
+		\gradient^\prime\left(\frac{1}{r}\right)
+		=
+		\frac{\hat{\bm{r}}}{r^2}
+	\end{equation}
+
+	So we can write this as
+	\begin{equation}
+		V\left(\bm{r}\right) = \frac{1}{4\pi\epsilon_{0}}
+		\int\limits_{V}
+		\bm{P}\left(\bm{r}^\prime\right)\vdot
+		\gradient^\prime\left(\frac{1}{r}\right)\dd{\tau^\prime}
+	\end{equation}
+
+	If we integrate by parts, and then apply the divergence theorem,
+	we can rewrite this integral as a surface integral.
+	\begin{equation}
+		\begin{aligned}
+			V & = \frac{1}{4\pi\epsilon_{0}}\left[\int\limits_V\gradient^\prime
+				\vdot\left(\frac{\bm{P}}{r}\right)\dd{\tau^\prime} -
+				\int\limits_V\frac{1}{r}
+			\left(\gradient^\prime\vdot\bm{P}\right)\dd{\tau^\prime} \right]       \\
+			  & = \frac{1}{4\pi\epsilon_{0}}\left[\oint\limits_S\frac{1}{r} \bm{P}
+				\vdot\dd{\bm{a}^\prime} - \int\limits_V
+				\frac{1}{r}\left(\gradient^\prime\vdot\bm{P} \right)\dd{\tau^\prime}\right]
+		\end{aligned}
+	\end{equation}
+\end{derivation}
+
+\begin{definition}
+	The electric field from a polarised object is
+	\begin{equation}
+		V\left(r\right) = \frac{1}{4\pi\epsilon_{0}}
+		\left[\oint\limits_S\frac{\sigma_b}{r}\dd{a^\prime} +
+			\int\limits_V\frac{\rho_b}{r}\dd{\tau^\prime}\right]
+	\end{equation}
+	where $\sigma_b\equiv\bm{P}\vdot
+		\hat{\bm{n}}$ is the `bound' surface charge and
+	$\rho_b\equiv - \divergence{\bm{P}}$ is the `bound' charge density.
+\end{definition}
+
+If we imagine an object that has aligned dipoles, then there
+will be surface charges, opposite sides will have opposite
+charges, thus we have an electric field.
+
+\textbf{Note:} Bigger dipoles mean
+$\rho\left(r\right)$ is not constant, so
+$\divergence{\bm{P}}\neq0$.
+
+\section{The electric field displacement D}%
+\label{sec:the_electric_field_displacement_d}
+
+Consider the charge density within a material as due to the
+bound charges, $\rho_b$, that we described in
+Section~\ref{sec:the_field_from_a_polarised_object}, and that due to anything else
+(like free electrons), $\rho_f$.
+
+Now, Gauss' law applied to both charge densities (the total
+charge density) $\rho = \rho_b + \rho_f$ gives
+\begin{equation}
+	\epsilon_{0}\divergence{\bm{E}}
+	=
+	\rho
+	=
+	\rho_b + \rho_f
+	=
+	-\divergence{\bm{P}} + \rho_f
+\end{equation}
+where $\bm{E}$ is the \textit{total electric field}
+from both dipoles and free charges.
+
+If we rearrange the left-most and right-most side, we get
+\begin{equation}
+	\divergence{\left(\epsilon_{0}\bm{E} + \bm{P}\right)}
+	=
+	\rho_f
+\end{equation}
+
+Let us define a new quantity $\bm{D}$.
+\begin{definition}
+	The displacement field $\bm{D}$ is
+	\begin{equation}
+		\bm{D} =
+		\epsilon_{0}\bm{E} +
+		\bm{P}
+	\end{equation}
+\end{definition}
+
+Thus, as a result, we have derived the Gauss' law, in
+differential and integral forms, for the $\bm{D}$
+field.
+
+\begin{definition}
+	Gauss' law for the $\bm{D}$ field in both forms
+	are
+	\begin{equation}
+		\divergence{\bm{D}} = \rho_f
+	\end{equation}
+	and
+	\begin{equation}
+		\oint\bm{D}\vdot\dd{\bm{a}}
+		=
+		Q_{\mathrm{free}}
+	\end{equation}
+
+	\textbf{Note:} We cannot assume that
+	$\curl{\bm{D}} = 0$. So we cannot assume
+	$\bm{D}$ is determined exclusively by the free
+	charge. Normally, for high symmetry, the curl might be zero. As
+	a consequence, there is also no scalar potential for
+	$\bm{D}$.
+\end{definition}
+
+\begin{example}
+	A long straight wire, with line charge $\lambda$,
+	is surrounded by rubber insulation out to a radius
+	$a$. Find the electric displacement.
+
+	We write out the divergence relationship between
+	$\bm{D}$ and $\rho_f$. Then we use
+	Gauss' Law, and consider a smaller cylinder of radius
+	$s$ and length $L$ inside
+	our insulated wire as our Gaussian surface, ignoring the fields
+	coming from the ends.
+
+	Then, the field is simply $\bm{D}2\pi s L = \lambda L$, the rearrange
+	for $\bm{D}$, keeping in mind it is a vector
+	pointing radially away from the axis of the cylinder.
+
+	Outside the rubber, our field is given by
+	$\bm{D} = \epsilon_{0}
+		\bm{E} + \bm{P}$, but $\bm{P} = 0$ outside the
+	rubber. For regions inside the rubber, we cannot determine
+	$\bm{D}$ as we don't know $\bm{P}$.
+\end{example}
+
+\section{Boundary conditions for the displacement field}%
+\label{sec:boundary_conditions_for_the_displacement_field}
+
+\begin{definition}
+	We establish the boundary conditions for the field
+	$\bm{D}$ as follows
+	\begin{equation}
+		\label{eq:d_perp}
+		D^\perp_{\mathrm{above}} - D^\perp_{\mathrm{below}} = \sigma_f
+	\end{equation}
+	and
+	\begin{equation}
+		\label{eq:d_parallel}
+		\bm{D}^\parallel_{\mathrm{above}} -
+		\bm{D}^\parallel_{\mathrm{below}}
+		=
+		\bm{P}^\parallel_{\mathrm{above}} -
+		\bm{P}^\parallel_{\mathrm{below}}
+	\end{equation}
+	Note the discontinuity in the field above and below a surface
+	and that there is also a discontinuity in the parallel field,
+	unlike the electric field.
+\end{definition}
+
+\begin{derivation}
+	Derive the boundary conditions for $\bm{D}$.
+
+	Consider a sheet with a box that bisects the surface, where the
+	top half is above the surface, and the bottom half below the
+	surface. If we make our Gaussian surface close to the box of
+	charge, then we can use Gauss' Law for our displacement vector.
+	We deduce that $D_{\mathrm{above}} = \frac{\sigma}{2}$ and
+	$D_{\mathrm{below}} = -\frac{\sigma}{2}$. We can rearrange to get
+	Equation~\ref{eq:d_perp}.
+
+	To get the expressions for the parallel faces, we consider the
+	side parallel vectors tending to zero as the box gets thinner
+	and thus, our line integral around the box is just for the
+	parallel faces above and below. Write out the equation for
+	$\bm{D}$, and taking the curl of both sides, then
+	we can use Stoke's theorem to get
+	equation~\ref{eq:d_parallel}.
+\end{derivation}
+\section{Linear dielectrics}%
+\label{sec:linear_dielectrics}
+
+If we did not know abut atoms, we could still make the
+observation that the net polarisation is proportional to the
+field.
+\begin{equation}
+	\bm{P}
+	=
+	\epsilon_{0}\chi_e\bm{E}
+\end{equation}
+where $\chi_e$ is known as the electric
+susceptibility and is an example of \textit{linear response}.
+Hence, we call materials with this behaviour
+\textit{linear dielectrics}.
+
+This is not always the case (like in ferroelectrics), but it is
+truer for most materials under \textit{small} fields.
+
+\textbf{Note:} In some low symmetry crystals,
+$\bm{P}$ and $\bm{E}$ may not lie
+in the same direction and we need to define a susceptibility
+tensor to establish the relationship between the two fields even
+if the relationship is linear.
+
+\begin{definition}
+	If we do this, we can generate some relationship
+	\begin{equation}
+		\label{eq:d_e_field_relation}
+		\bm{D} = \epsilon_{0}
+		\bm{E} + \bm{P}
+		=
+		\epsilon_{0}\bm{E}	+
+		\epsilon_{0}\chi_e\bm{E}
+		=
+		\epsilon_{0}\left(1 + \chi_e\right)
+		\bm{E}
+		=
+		\epsilon\bm{E}
+	\end{equation}
+	where $\epsilon = \left(1 + \chi_e\right)$ is the \textit{permittivity} of
+	the material.
+
+	The \textit{relative permittivity} is
+	\begin{equation}
+		\epsilon_r
+		=
+		1 + \chi_e = \frac{\epsilon}{\epsilon_{0}}
+	\end{equation}
+\end{definition}
+
+\begin{example}
+	Examples from videos
+	\begin{enumerate}
+		\item A metal sphere of radius $a$ carries a
+		      charge $Q$ and is surrounded by a linear
+		      dielectric of permittivity $\epsilon$ out to a
+		      radius $b$. Find the potential at the centre
+		      of the sphere assuming the potential is zero at infinity.
+		      \begin{itemize}
+			      \item To find the potential, we need to know the electric field. We
+			            use a Gaussian surface $r > a$ and Gauss' law for
+			            the $\bm{D}$ field. Our field inside the
+			            dielectric uses the permittivity $\epsilon$ instead
+			            of $\epsilon_{0}$.
+			      \item Write out the potential for each region from the field derived
+			            for each region as integrals so that it is in effect the
+			            integral of the field from infinity to 0.
+		      \end{itemize}
+		\item A parallel plate capacitor is filled with a dielectric with a
+		      dielectric constant $\epsilon_{r}$. What is the change
+		      in capacitance?
+
+		      \begin{itemize}
+			      \item We know that $E = V/d$, we can derive that the
+			            capacitance is $C = A\epsilon_{0}/d$
+			      \item If our gap is filled with a dielectric instead, we can use the
+			            $\bm{D}$ field, giving the relationship
+			            $\bm{D} =
+				            \epsilon_{0}\epsilon_{r}
+				            \bm{E} = \sigma$.
+			      \item From $C = Q/V$, we can rewrite using
+			            $V$ derived from the relationship for
+			            $\bm{E}$ above.
+		      \end{itemize}
+	\end{enumerate}
+\end{example}
+
+\section{Comments on the differences between E and D}%
+\label{sec:comments_on_the_differences_between_e_and_d}
+
+Why do we choose to use $\bm{D}$ rather than
+$\bm{E}$?
+\begin{itemize}
+	\item If we wish to use $\bm{E}$ in the presence of a
+	      dielectric we would need to determine the bound surface and bulk
+	      charge distributions. By defining $\bm{D}$ we
+	      only need to consider the free charges in the system---albeit at
+	      the expense of not knowing details about what is happening in
+	      the dielectric (in effect we talk about an average macroscopic
+	      field in the dielectric).
+	\item As we have the relationship $\divergence{\bm{D}} = \rho_{\mathrm{free}}$ and
+	      $\oiint\bm{D}\dd{\bm{a}} =
+		      Q_{\mathrm{free}}$ we can use similar techniques to finding
+	      $\bm{D}$ as we did for $\bm{E}$
+	      (using Gaussian surfaces etc.).
+	\item However, we cannot write
+	      \begin{equation}
+		      \bm{D}\left(r\right)
+		      =
+		      \frac{1}{4\pi}
+		      \int\frac{\hat{\bm{r}}^{\prime\prime}}{r^{\prime\prime 2}}
+		      \rho_{\mathrm{free}}\left(\bm{r^\prime}\right)
+		      \dd{\tau^\prime}
+	      \end{equation}
+	      in other words, there is no Coulomb's law equivalent for the
+	      free charge.
+	\item For example, in the case of the electric field we always have
+	      $\curl{\bm{E}} = 0$, from which it follows
+	      $\bm{E}$ is a conservative field meaning we can
+	      express it as the gradient of a scalar field
+	      $-\gradient{V}$. However, for the
+	      $\bm{D}$ field we have $\curl{\bm{D}} =
+		      \epsilon_{0}\left(\curl{\bm{E}}\right) +
+		      \curl{\bm{P}} =
+		      \curl{\bm{P}}$.
+	      It is not always the case that $\curl{\bm{P}} = 0$. For
+	      example when there is some permanent polarisation as for example
+	      in an electret.
+\end{itemize}
+
+As a general rule, if our system has high symmetry we may still
+apply Gauss law as previously. But, if for example the spherical
+symmetry is broken by a permanent alignment of dipoles such that
+$\curl{\bm{P}}\neq 0$ we cannot just assume
+$\bm{D}$ is determined solely by the free charge.
+
+\section{Energy in dielectrics}%
+\label{sec:energy_in_dielectrics}
+
+The energy needed to charge a capacitor is
+\begin{equation}
+	W = \frac{1}{2} CV^2
+\end{equation}
+With a dielectric, we have
+\begin{equation}
+	C = \epsilon_r C_{\mathrm{vac}}
+\end{equation}
+The work necessary to charge a capacitor increases because the
+bound charges cancelled off part of the field, so we have to
+move more free charges to achieve the same potential. In other
+words, by adding a dielectric in between the capacitor we
+increase the energy that can be stored for the same amount of
+potential difference.
+
+If we can make $\epsilon_r$ very high and use high
+voltages (so there is no breakdown in the material) we can make
+a `supercapacitor'.
+
+It may also be shown that
+\begin{equation}
+	\label{eq:work_done_dielectric}
+	W = \frac{1}{2}\int\bm{D}\vdot
+	\bm{E}\dd{\tau}
+\end{equation}
+
+Remember that in free space, work is given
+by~\ref{eq:work_continuous}.
+
+We could ask why we can't use the free space definition and
+imagine we bring all the charges together one by one. This would
+be OK but it doesn't take into account any of the energy needed
+in stretching the atoms in the dielectric in order to polarise
+them.
+
+If we imagine we started with an unpolarised dielectric and then
+bring in the free charges to their final positions then the
+dielectric will respond by the charges displacing to form the
+induced dipoles. This extra energy is then taken into account in
+the work done. This quantity is encapsulated in the
+$\frac{1}{2}\int\bm{D}
+	\vdot\bm{E}\dd{\tau}$. It is larger than just doing the
+calculation using the free space equation.
+
+\begin{example}
+	A sphere of radius $R$ is filled with
+	material of dielectric constant $\epsilon_r$ and
+	uniform embedded free charge $\rho_{\mathrm{free}}$. What is the
+	energy of the configuration?
+
+	Which version of the integration of work should we
+	use,~\ref{eq:work_done_dielectric} or~\ref{eq:work_continuous}? We find
+	the $\bm{D}$ field using its Gauss' law, and then
+	try both equations.
+
+	We work out the total free charge from the geometry, apply
+	Gauss' law for a spherical shell as the Gaussian surface, and
+	with the $\bm{D}$ field, we can work out
+	$\bm{E}$ using~\ref{eq:d_e_field_relation}. With both
+	these fields, we can find their dot product and integrate this
+	over the entire volumetric sphere to get the work done.
+
+	We find that work done using the $\bm{E}$ field
+	only is smaller than the other equation. This is because they
+	are defining slightly different things. The first considers a
+	dielectric sphere with separated surface and volume bound
+	charges, fixed them in space and find the energy of the electric
+	field. We let the system relax and find the electric field at
+	some point in the system.
+
+	The second equation involves starting off with a dielectric and
+	then we introduce the free charge slowly. As we introduce the
+	free charge, this gives us a separation in terms of bound
+	charges on the dielectric itself \textit{and} also
+	the energy in stretching the molecules out to form the dipoles.
+
+	Here, we have extra energy when we include the
+	$\bm{D}$ field, this is not captured if we just
+	take the charge distributions as they were.
+\end{example}
+
+\section{Forces on dielectric}%
+\label{sec:forces_on_dielectric}
+
+As with conductors a dielectric is drawn into an electric field.
+This is best understood by considering a simple parallel plate
+capacitor into which a dielectric field is partially inserted.
+See Figure~\ref{fig:dielectric_in_capacitor}.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./dielectric_in_cap.svg}
+	\caption{A partially inserted dielectric in a capacitor.}%
+	\label{fig:dielectric_in_capacitor}
+\end{figure}
+
+In our ideal system there would be no force as the field is
+perfectly perpendicular to the plates. In reality, it is the
+small fringing field that allows force to be exerted.
+
+In air, the capacitance is given by
+\begin{equation}
+	C = \frac{\epsilon_{0}A}{d}
+\end{equation}
+while with a dielectric, it is
+\begin{equation}
+	C = \frac{\epsilon_{0}\epsilon_r A}{d}
+\end{equation}
+
+This fringing field at the edges gives rise to the forces which
+exerts a force on the dielectric.
+
+In order to pull the dielectric slab out, we need to exert a
+force $F_m$ on the dielectric, so we do the
+total amount of work
+\begin{equation}
+	\dd{W}
+	=
+	F_m \dd{x}
+\end{equation}
+
+Then, the electrical force on the dielectric is
+$F = -F_m$. Thus, the external force due to the
+electric field on the slab is
+\begin{equation}
+	F = -\frac{\dd{W}}{\dd{x}}
+\end{equation}
+
+Since the energy stored in the capacitor is
+$E = CV^2/2$, a partially filed capacitor would have
+a partial area (total capacitance depends on the total
+dielectric in the capacitors), and thus total energy
+\begin{equation}
+	C = \frac{\epsilon_{0} w}{d}\left(\epsilon_r l - \chi_e x\right)
+\end{equation}
+
+We can understand this result. The proportion of the capacitor
+that is still in air is given by the area
+$A_a = xw$, and the proportion that is dielectric
+is given by the area $A_d = \left(l - x\right)w$, thus, we sum up
+the capacitance for each region. We recall that
+$\chi_e = 1 - \epsilon_r$.
+
+For a capacitor that is already charged up
+$W = Q^2/2C$, then
+\begin{equation}
+	F = -\dv{W}{x} =
+	\frac{1}{2}\frac{Q^2}{C^2}\dv{C}{x}\frac{1}{2}V^2\dv{C}{x}
+\end{equation}
+\textbf{Note:} we are keeping $Q$
+as a constant here. If we keep $V$ constant,
+there would be work from the battery used in changing
+$Q$. In this derivation,
+$V$ changes. The derivative of
+$C$ w.r.t. $x$ is
+\begin{equation}
+	\dv{C}{x} =
+	-\frac{\epsilon_{0} \chi_e w}{d}
+\end{equation}
+
+\begin{definition}
+	The force on a dielectric due to an external electric field is
+	\begin{equation}
+		F =  -\frac{\epsilon_{0} \chi_e w}{d}V^2
+	\end{equation}
+\end{definition}
+
+We can also get the same result if we take
+$V$ to be constant (maintained by the
+battery), and $Q$ will change as the
+dielectric moves.
+
+\chapter{Magnetostatics}%
+\label{cha:magnetostatics}
+
+\section{Introduction to magnetostatics}%
+\label{sec:introduction_to_magnetostatics}
+
+So far, we have only considered fixed charges. When charge
+starts to move, it is subject to an electrostatic force. We have
+also magically conjured up charge distributions to solve
+problems without considering how the charges may have arrived in
+the first place.
+
+The way in which moving charges create time varying fields
+cannot be considered until we get to Maxwell's equation. The
+consequences of Maxwell's equations will be considered in later
+courses.
+
+In this section we will restrict ourselves to the case of
+electrical currents (mostly conductors) that as you know will
+give rise to magnetic fields. Moreover, we will for the most
+part restrict ourselves to steady currents, that will give rise
+to static magnetic fields---i.e. \textit{magnetostatics}.
+
+We can imagine a situation where a battery sends a current
+through a very long wire set apart by a distance. Suppose the
+parallel parts are very long so we can ignore the ends. Current
+flows up one wire and flows down the other wire in the other
+direction.
+
+We see empirically that the wire tends to push each other apart.
+We may conclude there are electrostatic charges that are
+repulsing each other. But if we bring a test charge, there is no
+effect on the test charge.
+
+We can also alter the wire so that both currents are now facing
+the same direction. Now, the wires are attracted to each other.
+
+We conclude then, that moving charges generate magnetic fields.
+Magnetic fields can be detected by using a compass needle. The
+direction of the magnetic field lines is determined by the
+right-hand screw rule.
+
+The magnetic field is always perpendicular to the direction of
+current flow. We also find that the force exerted is
+perpendicular to both the magnetic field vector and the
+direction of the current.
+
+\section{The Lorentz force law}%
+\label{sec:the_lorentz_force_law}
+
+\begin{definition}
+
+	The force produced by a charge $Q$ moving
+	with velocity $\bm{v}$ in a magnetic field
+	$\bm{B}$ is expressed as
+	\begin{equation}
+		\bm{F_{\mathrm{mag}}}
+		=
+		Q\left(\bm{v}\cross\bm{B}\right)
+	\end{equation}
+
+	In the presence of an electric field $\bm{E}$,
+	the total charge becomes
+	\begin{equation}
+		\bm{F_{\mathrm{total}}}
+		=
+		Q\left(\bm{E} + \bm{v}\cross\bm{B}\right)
+	\end{equation}
+\end{definition}
+
+\textbf{Note:} The use of the cross product removes
+the need for remembering the right and left-hand rules. If we
+remember the Lorentz Law, the direction of the force is given by
+the cross-product convention.
+
+The Lorentz force law is a result of careful observation. It is
+a fundamental axiom of the theory.
+
+\begin{example}
+	Examples from video lectures
+	\begin{enumerate}
+		\item Consider the case of a particle moving in a magnetic field. Let
+		      $\bm{B}$ act downwards into the page. Consider a
+		      particle of charge $Q$ moving at a velocity
+		      $\vec{v}$. We can find out the Lorentz force on
+		      the particle. The force is always constant in magnitude and its
+		      direction is given by the cross product $\bm{b}\cross\bm{B}$.
+		      This gives us circular motion. We can equate equation for
+		      circular motion with the Lorentz force to find the radius. We
+		      find that the radius is $R = p/QB$. The direction
+		      of the curve is indicative of the charge and the radius of
+		      curvature tells the strength of the momentum. The path it takes
+		      is a helical shape.
+		\item Cycloid motion in $\bm{E}$ and
+		      $\bm{B}$ field. What happens to a particle which
+		      is moving in the $y-z$ plane under the
+		      influence of both electrostatic and magnetic fields? Again, we
+		      can use the Lorentz force law. We find that as the particle gets
+		      deflected due to the $\bm{B}$ field, the
+		      $\bm{E}$ field resists this motion. It appears to
+		      oscillate in direction.
+
+		      Here, we are being careful by writing out the cross product of
+		      $\bm{v}\cross\bm{B}$ in full, equate this to Newton's second
+		      law, and compare coefficients of each component separately. What
+		      we get are differential equations that link the motion of the
+		      particle, but they are coupled. To solve this, we would have to
+		      decouple them, we can do this by isolating
+		      $y$. The general solution with boundary
+		      conditions is
+		      \begin{equation}
+			      y\left(t\right) = \frac{E}{\omega B}
+			      \left(\omega t - \sin\omega t \right)
+		      \end{equation}
+		      \begin{equation}
+			      z\left(t\right) = \frac{E}{\omega B}
+			      \left(1 - \cos{\omega t}\right)
+		      \end{equation}
+		      Since $R\equiv E/B\omega$,
+		      \begin{equation}
+			      {\left(y - R \omega t\right)}^2 + {\left(z - R \right)}^2 = R^2
+		      \end{equation}
+		      This is a circle of radius $R$ with a centre
+		      at $\left(0, R\omega t, R \right)$. The centre moves with a velocity
+		      $u = \omega R = E/B$. This means the particle is moving as if
+		      it is a spot on the rim of the wheel rolling on the
+		      $x$-axis. This is cycloid motion.
+
+		      The most important thing is breaking down the motion by
+		      understanding how the electric field slows down the motion and
+		      deflection of the magnetic field, and this motion repeats.
+	\end{enumerate}
+\end{example}
+
+\section{The work done by magnetic fields}%
+\label{sec:the_work_done_by_magnetic_fields}
+
+What is the work done on a charge when a magnetic force acts
+upon it?
+\begin{equation}
+	\dd{W_{\mathrm{mag}}}
+	=
+	\bm{F}_{\mathrm{mag}}\vdot
+	\dd{\bm{l}}
+	=
+	Q\left(\bm{v}\cross\bm{B}\right)\vdot\bm{v}
+	\dd{t} = 0
+\end{equation}
+
+Since $\bm{v}\cross\bm{B}$ is by definition perpendicular to
+$\bm{v}$ and $\bm{B}$ unless they
+are co-linear, or zero, in which case there is no force. Hence,
+the dot product is zero.
+
+The consequence is that \textbf{magnetic forces do no work}.
+
+This is not uncommon. In a gyroscope, gravity acts to change the
+direction of the angular momentum vector but does not work.
+Similarly, central forces do no work.
+
+\begin{example}
+	Show that the magnetic force do no work.
+
+	We consider a loop of wire carrying a current sitting in an area
+	where there's a magnetic field, which points into the page. At
+	the bottom, there is a mass with weight $m\bm{g}$
+	What current do we need to balance the weight?
+
+	We consider the force along the wire given by
+	Equation~\ref{eq:force_along_wire}. The force on the vertical
+	sections cancel and we get only the horizontal section width
+	$a$. Thus, the magnitude of the force is
+	$F = IBa$. Balancing the force gives us
+	$I = mg/Ba$. If we increase the current, we expect
+	the mass to be lifted a height $h$.
+
+	With this, we can write that the work done by the magnetic field
+	is $W = IBah$. But this clearly contradicts our
+	claim. What truly happens when the wire rises? As the wire
+	rises, the charges carrying the current gain a vertical velocity
+	$\bm{u}$, in addition to its horizontal velocity
+	$\bm{w}$. Thus, the Lorentz force from this is
+	pointing slightly backwards as the drift direction is slightly
+	diagonal.
+
+	If we split this force into two components,
+	$qwB$ vertically and $quB$
+	horizontally. This horizontal force is acting to slow the
+	carriers down. Without assistance, the charge carriers will slow
+	down if the wires rise, and thus our current will decrease.
+	Thus, in actuality, we have to put some work in to maintain the
+	current as the wire rises. The work we need to put in comes from
+	whatever is driving the current $W_\mathrm{battery} = \lambda a B \int u \vdot w dt = IBah$.
+
+	In conclusion, for this movement to take place, the battery,
+	\textit{not} the magnetic field, does work.
+\end{example}
+
+\section{Currents and line current density}%
+\label{sec:currents}
+
+We usually consider a current in a wire and define it as the
+amount of charge \textit{passing per unit time}  at a point in the
+wire.
+
+We can see how this will be proportional to the velocity
+$\bm{v}$ of the charge carriers in the wire and
+charge $q$.
+
+\textbf{Note:} We now understand current to be the
+movement of negatively charged electrons in our wires. The
+electrons move in the opposite way to the conventional
+definition of current. In the development of the theory of
+magnetism the current was assumed to be the movement of positive
+charges and this has remained.
+
+We all accept and have a conceptual idea of a wire. In practice,
+unless we say otherwise, we understand a wire as the object that
+guides the charge carriers but with no physical size of its own.
+
+Along a wire, the current at a particular point P may be thought
+of as a line charge $\lambda$ per unit length
+moving along a wire with velocity $\bm{v}$.
+\begin{equation}
+	\bm{I} = \lambda\bm{v}
+\end{equation}
+
+The Lorentz force on a segment of wire is
+\begin{equation}
+	\bm{F} = \int
+	\left(\bm{v}\cross\bm{B}\right)\dd{q}
+	=
+	\int\left(\bm{v}\cross\bm{B}\right)\lambda\dd{l}
+	=
+	\int\left(\bm{I}\cross\bm{B}\right)\dd{l}
+\end{equation}
+
+Because the current is constrained to flow along the wire we can
+write
+\begin{equation}
+	\bm{I}\dd{l} = I
+	\dd{\bm{l}}
+\end{equation}
+
+\begin{definition}
+	The force along a wire with a current is
+	\begin{equation}
+		\label{eq:force_along_wire}
+		\bm{F} = \int I \left(\dd{\bm{l}}\cross\bm{B}\right)
+	\end{equation}
+\end{definition}
+
+\begin{example}
+	Example video lectures: A uniform current is flowing through a
+	cylinder of area $A$. We get
+	$J = I/\pi a^2$. Now, if our current is non-uniform, for
+	example $J = ks$, what is the current? We would
+	need to integrate for the answer.
+	\begin{equation}
+		\dd{I} = J\dd{a_\perp} = J s
+		\dd{s} \dd{\phi} = ks\vdot
+		s\dd{s}\dd{\phi}
+	\end{equation}
+
+	The answer is $I = 2\pi ka^3 / 3$.
+\end{example}
+
+\section{Surface and Volume current densities}%
+\label{sec:surface_and_volume_current_densities}
+
+\subsection{Surface current density}%
+\label{sub:surface_current_density}
+
+Currents may not necessarily be thought of as flowing through
+very thin wires. They may be considered as flowing over a
+surface or through the bulk of a material (very thick cable).
+Furthermore, the current may not flow uniformly over the surface
+on in the bulk.
+\begin{equation}
+	\bm{K}\equiv\dv{\bm{I}}{l_\perp}
+\end{equation}
+where $\dd{l}$ is perpendicular to the current
+flow, this is the current per unit length flowing through the
+surface.
+
+Alternatively
+\begin{equation}
+	\bm{K}
+	=
+	\sigma\bm{v}
+\end{equation}
+where $\sigma$ is the `moving' surface charge
+density. The number of carriers move through the surface, but
+$\sigma$ doesn't change. Thus, for a surface,
+\begin{equation}
+	\bm{F} = \int\left(\bm{v}\cross\bm{B}\right)\sigma
+	\dd{a}
+	=
+	\left(\bm{K}\cross\bm{B}\right)\dd{a}
+\end{equation}
+
+\subsection{Volume current density}%
+\label{sub:volume_current_density}
+
+Similarly, we may define a volume current density
+\begin{equation}
+	J \equiv\dv{\bm{I}}{a_\perp}
+\end{equation}
+where $\dd{a_\perp}$ is a surface area perpendicular to
+the current flow at the point in the surface. Then we have
+\begin{equation}
+	\bm{J}
+	=
+	\rho\bm{v}
+\end{equation}
+where $\rho$ is the mobile charge density.
+Similarly,
+\begin{equation}
+	\bm{F} = \int
+	\left(\bm{J}\cross\bm{B}\right)\dd{\tau}
+\end{equation}
+
+\section{The continuity equation}%
+\label{sec:the_continuity_equation}
+
+From the definition of volume current density
+in~\ref{sec:surface_and_volume_current_densities} we can write
+\begin{equation}
+	I = \int\limits_{S}\bm{J}\vdot
+	\dd{\bm{a}}
+\end{equation}
+
+Now, from the divergence theorem we have
+\begin{equation}
+	\oint\limits_{S}\bm{J}\vdot
+	d\dd{\bm{a}} =
+	\iiint\limits_{V}\divergence{bm{J}}\dd{\tau}
+\end{equation}
+
+The left-hand term corresponds to the charge per unit time
+leaving the enclosed surface and the right-hand term is the
+corresponding charge leaving the volume per unit time. Now, as
+charge is conserved this must represent the change in the charge
+density in the volume per unit time, the minus sign represents
+the charge density decreasing as the charge flows out.
+\begin{equation}
+	\iiint\limits_V\left(\divergence{\bm{J}}\right)\dd{\tau}
+	=
+	-\dv{}{t}\iiint\limits_V\rho
+	\dd{\tau}
+	=
+	-\iiint_V \left(\dv{\rho}{t}\right)\dd{\tau}
+\end{equation}
+
+If we equate the kernels of the two integrals, then we get the
+continuity equation.
+\begin{definition}
+	The continuity equation is
+	\begin{equation}
+		\divergence{J} = -\pdv{\rho}{t}
+	\end{equation}
+
+	If $\rho$ is constant, then we have a steady
+	state condition.
+\end{definition}
+
+For electrostatics, we must have no change in
+$\rho$---electrostatic problems are steady
+state problems.
+
+\section{The Biot-Savart Law}%
+\label{sec:the_biot_savart_law}
+
+Magnetostatics refers to the regime where magnetic fields do not
+vary with time. Consequently, the currents producing these
+fields must be steady. Hence, we have
+\begin{equation}
+	\pdv{\rho}{t} = 0\hspace{1em}
+	\mathrm{and}\hspace{1em}\pdv{\bm{J}}{t}
+	= 0
+\end{equation}
+
+We don't ask how we get to this steady state but consider what
+happens when we are there.
+
+\textbf{Note:} by these definitions a moving point
+charge does not give a steady current---we need a charge
+distribution.
+
+If we have steady currents then from the continuity equation and
+$\pdv{\rho}{t} = 0$
+\begin{equation}
+	\divergence{J} = 0
+\end{equation}
+
+\begin{definition}
+	Putting this all together, we have the equivalent of the
+	integral form of Coulombs law the Biot-Savart Law.
+	\begin{equation}
+		\label{eq:the_biot_savart_law}
+		\bm{B}\left(\bm{r}\right)
+		=
+		\frac{\mu_0}{4\pi}\int\frac{\bm{I}\cross\bm{r^{\prime\prime}}	}{r^{\prime\prime 2}}
+		\dd{l^\prime}
+		=
+		\frac{\mu_0 I}{4\pi}\int\frac{\dd{\bm{l}}\cross \bm{r^{\prime\prime}}}{r^{\prime\prime 2}}
+	\end{equation}
+
+	Where $\mu_0$ is the permeability of free space.
+\end{definition}
+
+The superposition principle also applies to
+$\bm{B}$. It is measured in tesla
+($T$).
+
+\begin{example}
+	Examples from the video lectures:
+	\begin{enumerate}
+		\item Find the magnetic field at a distance $s$
+		      from a long straight wire that carries a steady current
+		      $I$.
+
+		      Let the point $P$ be at a distance
+		      $s$ from the `centre' of the wire, and let a
+		      segment $\dd{l^\prime}$ on a wire be at a distance
+		      $\bm{r^{\prime\prime}}$. Let also the length of the wire be
+		      $2 L$.
+
+		      The cross product in the kernel of the Biot-Savart can be
+		      written as
+		      \begin{equation}
+			      \dd{\bm{l^\prime}}\cross\bm{\hat{r}^{\prime\prime}}
+			      =
+			      \dd{l^\prime}\vdot\absolutevalue{\bm{\hat{r}^{\prime\prime}}}
+			      \sin{\alpha}
+		      \end{equation}
+		      Where $\alpha$ is the angle between
+		      $r^{\prime\prime}$ and the axis of the wire. With some
+		      trigonometry and algebra, we can rewrite $\sin\alpha$
+		      and $r^{\prime\prime 2}$. This comes to
+		      \begin{equation}
+			      \bm{B}\left(\bm{r}\right)
+			      =
+			      \frac{\mu_0 I s}{4\pi}\int^L_{-L}\frac{\dd{l}}{{s^2 + l^2}^{\frac{3}{2}}}
+		      \end{equation}
+		      This evaluates to
+		      \begin{equation}
+			      \bm{B}\left(\bm{r}\right)
+			      =
+			      \frac{\mu_0 I}{2\pi s}\vdot\frac{L}{\sqrt{s^2+L^2}}
+		      \end{equation}
+		      Let $L \rightarrow \infty$ to get
+		      \begin{equation}
+			      \bm{B}\left(\bm{r}\right)
+			      =
+			      \frac{\mu_0 I}{2\pi s}\bm{\hat{r}}
+		      \end{equation}
+
+		\item Find the magnetic field a distance $z$ above
+		      a circular wire of radius $R$ that carries a
+		      current $I$.
+
+		      This is similar to the previous setup, however, we work in
+		      polar/cylindrical system instead due to the geometry of the
+		      circular wire. Like how we derived the magnetic field of the
+		      circular ring, components in the direction that changes as you
+		      move along the circle will cancel.
+
+		      We then apply the Biot-Savart law and integrate around the
+		      circle. The result is
+		      \begin{equation}
+			      B_z = \frac{\mu_0 I R^2}{2 {\left(R^2 + Z^2 \right)}^{\frac{3}{2}}}
+		      \end{equation}
+
+	\end{enumerate}
+
+\end{example}
+
+\section{The divergence and curl of B}%
+\label{sec:the_divergence_and_curl_of_b}
+
+With the result for $\bm{B}$ for a long straight
+wire, we can write
+\begin{equation}
+	\oint\bm{B}\dd{\bm{l}}
+	=
+	\oint\frac{\mu_0 I}{2\pi s}\dd{l} =
+	\frac{\mu_0 I}{2\pi}\oint\dd{l} = \mu_0 I
+\end{equation}
+where we have taken a circular path of radius
+$s$ (the result holds true for any closed
+path enclosing the wire). We can add any number of wires within
+the loop so that we have Ampère's law:
+\begin{equation}
+	\label{eq:amperes_law}
+	\oint\bm{B}\vdot\dd{\bm{l}}
+	=
+	\mu_0 I_\mathrm{enc}.
+\end{equation}
+
+In terms of the current density $\bm{J}$ we may
+express the enclosed current as
+\begin{equation}
+	I_{\mathrm{enc}} =
+	\iint\bm{J}\vdot\dd{\bm{a}}
+\end{equation}
+where the integral is over the area enclosed by the loop. We may
+apply Stokes' theorem to get
+\begin{equation}
+	\mu_{0}\iint\bm{J}\vdot\dd{\bm{a}}
+	=
+	\iint\left(\curl{\bm{B}}\right)\vdot\dd{\bm{a}}
+\end{equation}
+from which we find
+\begin{definition}
+	The curl of the magnetic field is given by Ampère's law in
+	differential form
+	\begin{equation}
+		\label{eq:amperes_law_differential}
+		\curl{\bm{B}}
+		=
+		\mu_{0}\bm{J}
+	\end{equation}
+\end{definition}
+
+The curl of the magnetic is not zero, and thus it is not a
+conservative field, but magnetic forces do no work.
+
+This proof is only for a long straight wire. However, this is
+indeed the general result. We can quote another result that may
+be obtained from the Biot-Savart law.
+\begin{definition}
+	The divergence of the magnetic field is
+	\begin{equation}
+		\label{eq:magnetic_field_divergence}
+		\divergence{B} = 0
+	\end{equation}
+	the physical meaning of this is that there are no magnetic
+	monopoles.
+\end{definition}
+
+\begin{example}
+	Use Ampère's law to find the magnetic field in a very long
+	solenoid, that has $n$ turns per unit length
+	on a cylinder of radius $R$, that carries a
+	steady current $I$.
+
+	Consider a long solenoid as described, the field outside is
+	zero. Thus, we are interested in what's inside. We expect there
+	is a net magnetic field going through the coil.
+
+	By drawing some Ampèrian loops, we can see how the magnetic
+	field is with respect to the number of loops when we apply
+	Ampère's law.
+
+	The result is a field that is uniform inside the solenoid
+	\begin{equation}
+		B_{\mathrm{inside}} = \mu_0 n I \bm{k}.
+	\end{equation}
+\end{example}
+
+\section{Maxwell's equation for electrostatics and magnetostatics}%
+\label{sec:maxwell_s_equation_for_electrostatics_and_magnetostatics}
+
+\begin{definition}
+	This is a summary of all differential forms
+	\begin{equation}
+		\label{eq:maxwells_equation}
+		\begin{aligned}
+			 & \divergence{\bm{E}} = \frac{\rho}{\epsilon_{0}} \\
+			 & \curl{\bm{E}} = 0                               \\
+			 & \divergence{\bm{B}} = 0                         \\
+			 & \curl{\bm{B}} = \mu_0\bm{J}
+		\end{aligned}
+	\end{equation}
+
+	Along with the Lorentz force law, these constitute the most
+	concise formulation of electrostatics and magnetostatics.
+	\begin{equation}
+		\bm{F}
+		=
+		q\left(\bm{E} + \bm{v}\cross\bm{B}\right)
+	\end{equation}
+\end{definition}
+
+\section{The magnetic vector potential}%
+\label{sec:the_magnetic_vector_potential}
+
+In Section~\ref{sec:maxwell_s_equation_for_electrostatics_and_magnetostatics} we established the complete
+description of electrostatic and magnetostatic fields
+($\bm{E}$ and $\bm{B}$) and their
+associated charge and current densities.
+
+In our treatment of electrostatics we made extensive use of the
+electrostatic potential, $V$, a scalar
+field, and its relation to the $\bm{E}$ field
+through $\bm{E} = -\gradient{V}$.
+
+As $\curl{\bm{B}} = \mu_0\bm{J}$ we know that $\bm{B}$
+cannot be a conservative field and hence we cannot define a
+scalar potential as we did for the case of the
+$\bm{E}$ field.
+
+It is possible to define a magnetostatic scalar potential but it
+may only be used under restricted circumstances when away from
+currents and for paths not looping a current. We will not
+consider it here.
+
+However, we do have the condition $\divergence{B} = 0$ unlike
+the electrostatic case.
+
+What if we consider the magnetic field as the curl of a vector
+function?
+\begin{equation}
+	\label{eq:magnetic_vector_potential_curl}
+	\bm{B} = \curl{\bm{A}}
+\end{equation}
+
+Hence, we have
+\begin{equation}
+	\curl{B} = \curl{\left(\curl{\bm{A}}\right)} =
+	\gradient{\left(\divergence{\bm{A}}\right)} - \laplacian{\bm{A}}
+	= \mu_0\bm{J}
+\end{equation}
+
+When we defined the electrostatic potential,
+$V$, we explained that we could add any
+constant to it and the electric field would not change as the
+gradient of a constant is zero.
+
+In the case of $\bm{A}$, the equivalent statement
+is that we can add any function to $A$
+provide its curl is zero (it is the gradient of a scalar). We
+can use this to eliminate the $\gradient{\left(\divergence{\bm{A}}\right)}$ above by
+setting
+\begin{equation}
+	\label{eq:magnetic_vector_potential_divergence}
+	\divergence{\bm{A}} = 0.
+\end{equation}
+
+\textbf{Note:} this is a convenience in the same way
+we set $V = 0$ at infinity in most cases, but
+this does not mean it is a necessity.
+
+We can use this because we specify that $\bm{B} = \curl{\bm{A}}$,
+but this doesn't say anything about the
+\textit{divergence}. We are at a liberty to pick whatever
+and zero is the simplest choice. As long as we can say that
+$\divergence{\bm{A}}$ goes to zero at infinity, it is always
+possible to make the vector potential \textit{divergenceless}.
+
+Once we do this, we may write that
+\begin{definition}
+	The Laplacian an of the magnetic vector potential is
+	\begin{equation}
+		\label{eq:magnetic_vector_potential_laplacian}
+		-\laplacian{\bm{A}} = \mu_0\bm{J}
+	\end{equation}
+\end{definition}
+
+This is just Poisson's equation for each component of
+$\bm{A}$.
+
+Hence, in analogy to the charge density in Poisson's equation
+for $V$, we can write
+\begin{definition}
+	The magnetic vector potential in integral form is written as
+	\begin{equation}
+		\label{eq:magnetic_vector_potential_integral}
+		\bm{A}\left(\bm{r}\right)
+		=
+		\frac{\mu_0}{4\pi}\int\frac{\bm{J}\left(\bm{r^\prime}\right) }{r^{\prime\prime}}
+		\dd{\tau^\prime}
+	\end{equation}
+	Similar relationships hold for line and surface current
+	densities, i.e.,
+	\begin{equation}
+		\bm{A}\left(\bm{r}\right)
+		=
+		\frac{\mu_0}{4\pi}\int\frac{\bm{I}\left(\bm{r^\prime}\right) }{r^{\prime\prime}}
+		\dd{l^\prime}
+	\end{equation}
+	and
+	\begin{equation}
+		\bm{A}\left(\bm{r}\right)
+		=
+		\frac{\mu_0}{4\pi}\int\frac{\bm{K}\left(\bm{r^\prime}\right) }{r^{\prime\prime}}\dd{a^\prime}
+	\end{equation}
+\end{definition}
+
+\textbf{Note:} $\bm{A}$ is the magnetic
+vector potential at position $\bm{r}$ from the
+origin, $\bm{r^\prime}$ is the position of the current
+element $\bm{J}\dd{\tau^\prime}$ and $r^{\prime\prime}$ is
+the distance from the current element to the point
+$\bm{r^\prime}$.
+
+In magnetostatics, $\bm{A}$ is not useful as
+$V$, the potential difference that allows
+you to find the work done in moving charges from point to point
+(magnetic fields do no work).
+
+We still have to deal with the three components of the
+$\bm{A}$ field so the calculations are fiddly.
+Nevertheless, the calculation of the $\bm{A}$
+potential using these integrals is still often easier than using
+the Biot-Savart Law (no cross-product to deal with), and
+$\bm{B}$  may always be found from
+$\bm{B} = \curl{\bm{A}}$ at the end of the calculation.
+
+\section{Summary of the important relations between B, A and J}%
+\label{sec:summary_of_the_important_relations_between_b_a_and_j}
+
+Relating $\bm{J}$ and $\bm{A}$:
+Equation~\ref{eq:magnetic_vector_potential_laplacian} and~\ref{eq:magnetic_vector_potential_integral}.
+
+Relation $\bm{A}$ and $\bm{B}$:
+Equation~\ref{eq:magnetic_vector_potential_curl} and~\ref{eq:magnetic_vector_potential_divergence}.
+
+Relation $\bm{J}$ and $\bm{B}$:
+Equation~\ref{eq:the_biot_savart_law} and~\ref{eq:amperes_law_differential}
+and~\ref{eq:magnetic_field_divergence}.
+
+\section{Boundary conditions for the magnetic field}%
+\label{sec:boundary_conditions_for_the_magnetic_field}
+
+The boundary conditions for $\bm{B}$ and
+$\bm{A}$ are summarised below. They may be found
+by consideration of Ampèrian loops and surfaces as we did for
+the $\bm{E}$ field. We will not go into details
+here.
+\begin{definition}
+	The boundary conditions for $\bm{B}$ are
+	\begin{equation}
+		\bm{B}_{\mathrm{above}} -
+		\bm{B}_{\mathrm{below}}
+		=
+		\mu_{0}\left(\bm{K}\cross\hat{\bm{n}}\right)
+	\end{equation}
+
+	The boundary conditions for $\bm{A}$ are
+	\begin{equation}
+		\bm{A}_{\mathrm{above}}
+		=
+		\bm{A}_{\mathrm{below}}
+	\end{equation}
+	We also have the relation
+	\begin{equation}
+		\pdv{\bm{A}_{\mathrm{above}}}{n} -
+		\pdv{\bm{A}_{\mathrm{below}}}{n}
+		=
+		\mu_{0}\bm{K}
+	\end{equation}
+\end{definition}
+\textbf{Note:} $\bm{\hat{n}}$ is the normal
+to the surface and $\bm{K}$ is the surface
+current density, not the volume current density that is
+required.
+
+\section{Magnetic multipole expansion}%
+\label{sec:magnetic_multipole_expansion}
+
+As might be expected, the magnetic vector potential for a system
+of currents may be expressed in terms of a multipole expansion.
+
+\begin{definition}
+	The magnetic multipole expansion in terms of
+	$\bm{A}$ is
+	\begin{equation}
+		\bm{A}\left(\bm{r}\right)
+		=
+		\frac{\mu_{0}I}{4\pi}\oint\frac{1}{r^{\prime\prime}}\dd{\bm{l^\prime}}
+		=
+		\frac{\mu_{0}I}{4\pi}\sum_{n=0}^\infty\frac{1}{r^{n+1}}
+		\oint{\left(r^\prime\right)}^n
+		P_n\left(\cos{\alpha}\right)\dd{\bm{l^\prime}}.
+	\end{equation}
+\end{definition}
+
+The first term in the expansion (the $1/r$
+term), as in the case of electrostatics, is the monopole term.
+As you might expect this turns out to always be zero (remember,
+there are no magnetic monopoles). Hence, the second term
+$1/r^2$ is the first non-zero term in the series
+and corresponds to a magnetic dipole. In a system of currents
+(with none going to infinity), we would expect all current
+distributions to have this form.
+
+\section{The magnetic dipole}%
+\label{sec:the_magnetic_dipole}
+
+The second term of the multipole expansion is the
+\textit{magnetic dipole}, it is
+\begin{equation}
+	\bm{A}_{\mathrm{dipole}}
+	=
+	\frac{\mu_{0}I}{4\pi r^2}\oint\left(\bm{\hat{r}}\vdot\bm{r^\prime}\right)\dd{\bm{l^\prime}}
+	=
+	-\frac{\mu_{0}I}{4\pi r^2}\bm{\hat{r}}\cross\int\dd{\bm{a^\prime}}.
+\end{equation}
+
+\begin{definition}
+	We may write that the $\bm{A}$ field of the
+	dipole as
+	\begin{equation}
+		\label{eq:magnetic_vector_potential_dipole}
+		\bm{A}_{\mathrm{r}}
+		=
+		\frac{\mu_{0}}{4\pi}\frac{\bm{m}\cross\bm{\hat{r}}}{r^2}
+	\end{equation}
+	where $\bm{m}$ is the magnetic dipole
+	\begin{equation}
+		\bm{m} = I \int\dd{\bm{a}}.
+	\end{equation}
+	This corresponds to a small loop of area $\bm{a}$
+	carrying a current $I$ for which the
+	direction of $\bm{a}$ is given by the usual right
+	hand rule.
+\end{definition}
+
+Now, let's assume that the moment $m$ is
+aligned along the $z$-axis so we can write
+\begin{equation}
+	\bm{A}_{\mathrm{dipole}}\left(\bm{r}\right)
+	=
+	\frac{\mu_{0}}{4\pi}\frac{m\sin{\theta}}{r^2}\bm{\hat{\phi}}.
+\end{equation}
+
+Working backwards, we see that
+\begin{equation}
+	\bm{B}_{\mathrm{dipole}}
+	=
+	\frac{\mu_{0}m}{4\pi r^3}\left(2\cos{\theta}\bm{\hat{r}}+\sin{\theta}\bm{\hat{\theta}}\right).
+\end{equation}
+
+This should be compared with the result from
+equation~\ref{eq:electric_field_dipole_z}, where we notice the constant
+$\rho/\epsilon_{0}$ is replaced by $\mu_{0}m$.
+
+We can think of a magnetic dipole simply as a magnet, and we can
+draw the field lines from that analogy.
+
+If we dissect a bar magnet to its core elements, we find that
+the origin of the magnetic field is from small current loops in
+the atoms. So while electric dipoles comes from the separation
+of two charges, the magnetic dipole originates from a tiny
+current loop.
+
+For both the magnetic and electric dipoles, we may lift the
+restriction that the dipole axis is along the
+$z$ direction, in which case, we can write
+\begin{definition}
+	The general magnetic dipole has a magnetic field expressed in
+	coordinate-free form as
+	\begin{equation}
+		\bm{B}_{\mathrm{dipole}}
+		=
+		\frac{\mu_{0}m}{4\pi r^3}\left[3\left(\bm{m}\vdot\bm{\hat{r}}\right)\bm{\hat{r} - \bm{m}}\right].
+	\end{equation}
+\end{definition}
+
+You should note that these results only apply when
+$\bm{r}$ is large compared to the physical
+dipole. You should also note the electric and magnetic dipoles
+are quite distinct. One is caused by a separation of charge, the
+other as a small current loop. Therefore, the fields are quite
+different \textit{close} to the dipoles.
+
+\section{Summary of magnetism}%
+\label{sec:summary_of_magnetism}%
+
+This concludes our discussion of magnetostatics. The discussion
+has been brief than that of electrostatics. This is largely
+because many of the ideas and concepts could be rolled over to
+analysis.
+
+\begin{definition}
+	However, there are key and notable differences between the two:
+	\begin{itemize}
+		\item There are no magnetic monopoles.
+		\item Magnetic fields do no work.
+		\item Magnetic fields are not conservative so we cannot define a
+		      universal scalar potential.
+		\item We can define a magnetic vector potential $\bm{A}$
+		      that can be applied usefully to solve problems in
+		      magnetostatics.
+		\item We have arbitrarily chosen $\divergence{\bm{A}} = 0$ to simplify
+		      the form of $\bm{A}$ for our calculations. This is
+		      not the only possible choice and for future reference, this is
+		      known as the \textit{Coulomb gauge}.
+	\end{itemize}
+\end{definition}
+
+\chapter{Magnetic Fields in Matter}%
+\label{cha:magnetic_fields_in_matter}
+
+\section{Introduction to magnetic fields in matter}%
+\label{sec:introduction_to_magnetic_fields_in_matter}
+
+We are probably more familiar with magnetic materials than the
+electrostatic materials that we studied in
+Section~\ref{cha:fields_in_matter}. For example, we have played
+with permanent magnets, compasses, and know that the earth has a
+magnetic field.
+
+However, as we have seen in Section~\ref{cha:magnetostatics},
+there is no such thing as a magnetic monopole and all magnetic
+fields are produced by circulating currents. We might therefore
+ask ourselves where the currents are, especially ones that
+produce the magnetic field in a bar magnet.
+
+The only answer to this question is that we need to understand
+that atoms consist of nuclei around which currents (electrons)
+flow in closed orbits and also that electrons have intrinsic
+spin both of which can give rise to moments. At its simplest,
+you might think of these orbits in terms of the Bohr atom (like
+planets going around the sun). A full understanding necessitates
+a full quantum physics treatment. However, the result is the
+same---electrons have both spin and orbit the nucleus to produce
+magnetic dipoles.
+
+In atoms with odd numbers of electrons the electron spin may
+give rise to small magnet moments that ordinarily would be in
+random orientations due to thermal motion and hence the material
+does not show an overall magnetic moment. However, in an
+external magnetic field, these dipoles will tend to align in the
+field (in an analogous way to electric dipoles in dielectrics)
+to produce an overall moment such that the material appears
+magnetised.
+
+\begin{definition}
+	The behaviour of these dipoles in materials is fundamental to
+	their magnetic properties and three basic kinds of magnetic
+	material are found (there are more than these three):
+	\begin{itemize}
+		\item \textbf{Paramagnets:} in which the dipoles due to spin tend to
+		      line up in the external field.
+		\item \textbf{Diamagnets:} in which the dipoles due to electron
+		      orbits tend to line up opposite to the external field.
+		\item \textbf{Ferromagnets:} in which the dipoles are aligned and
+		      remain aligned even in the absence of an external field.
+	\end{itemize}
+\end{definition}
+
+Analogues to these arise for insulators in electric fields but
+are less common.
+
+\section{Torques and forces on magnetic dipoles---origins of
+  paramagnetism}%
+\label{sec:torques_and_forces_on_magnetic_dipoles_origins_of_paramagnetism}
+
+In the remainder of this section, we will discuss magnetic
+materials in terms of idealised, classic current loops. This is
+sufficient to understand what is happening. A proper treatment
+with quantised systems reflects the characteristics we will find
+here.
+
+If we assume that the atoms in materials are magnetic dipoles
+then the first thing we need to understand is how a magnetic
+dipole moves in an external magnetic field.
+
+The easiest to consider is a simple square loop carrying current
+$I$. See Figure~\ref{fig:torque_magnetic}.
+The torque $\bm{\Gamma}$ is
+\begin{equation}
+	\begin{aligned}
+		\bm{\Gamma} & = aF\sin{\theta}\bm{i }                          \\
+		F           & = IbB                                            \\
+		\bm{\Gamma} & = IabB\sin{\theta}\bm{i} = mB\sin{\theta}\bm{i}.
+	\end{aligned}
+\end{equation}
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./torque_magnetic.svg}
+	\caption{The left shows the loop represented in all
+		axes, the right shows a side view and the angles relative to the
+		$z$ and $x$ axes.}%
+	\label{fig:torque_magnetic}
+\end{figure}
+
+Note that $m = I\vdot ab$ is the magnetic moment of the
+loop. The force comes from the Lorentz force due to the current
+and the presence of a magnetic field (along the
+$z$-axis.)
+
+We can write this as
+\begin{equation}
+	\label{eq:magnetic_torque}
+	\bm{\Gamma} =
+	\bm{m}\cross\bm{B}.
+\end{equation}
+
+So the torque tries to align the moment parallel to the applied
+field $\bm{B}$. This is the origin of the
+\textit{paramagnetic} response of the electron spins in a
+material. This would apply only for atoms/molecules with
+`unpaired' electrons (as paired electrons have opposite moments
+that cancel). In a uniform field, the net force is zero so there
+is no linear movement of the dipole (only rotation).
+
+If $\bm{B}$ is non-uniform there will be a force
+exerted on the loop as well. For an infinitesimally small
+dipole, this would be
+\begin{definition}
+	The force exerted on a infinitesimally small dipole is
+	\begin{equation}
+		\bm{F} = \gradient(\bm{m}\vdot\bm{B})
+	\end{equation}
+\end{definition}
+
+\textbf{Aside:} the parallels between electric and
+magnetic dipoles should be apparent. However, we should remember
+that these fields are for regions well away from the sources
+(separated charges or magnetic loops). As you approach a finite
+size source the differences in the \textit{local}
+field will become apparent.
+
+We still speak of of \textit{north} and
+\textit{south} poles of a magnet or the earth but we
+know these don't exist (no magnetic monopoles). This model,
+known as the \textit{Gilbert model} can sometimes be useful
+for solving problems, especially if you know the results for
+electrostatics (i.e.\ substitute positive and negative charges
+for north and south poles) but does not work when we are close
+to the dipole, in which case it is always better to work with
+closed current loops.
+
+\section{Diamagnetism}%
+\label{sec:diamagnetism}
+
+In Section~\ref{sec:torques_and_forces_on_magnetic_dipoles_origins_of_paramagnetism} we assumed the dipoles
+originated from the intrinsic \textit{spin} of the
+electrons in the atoms. However, the electrons also orbit the
+nucleus which in turn also generates a current loop with an
+associated moment. Again, this motion should be treated quantum
+mechanically but the Bohr picture is easiest to visualise (and
+the broad result is similar). Hence, we imagine the orbiting
+electron to be a point negative charge. We also consider this
+orbital motion to give rise to a steady current loop, that is we
+further assume that rather than being a point charge it is a
+continuously distributed charge in the orbit!
+
+If we consider the orbit has a radius $R$,
+then this current would be
+\begin{equation}
+	I = -\frac{e}{T} = -\frac{ev}{2\pi R}
+\end{equation}
+where $T$ is the orbital period and
+$v$ the orbital speed. See
+Figure~\ref{fig:diamagnetic}.
+
+This will give rise to a magnetic moment $I\vdot A$
+\begin{equation}
+	\bm{m} = -\frac{1}{2} e v R
+	\bm{\hat{z}}.
+\end{equation}
+
+In a field $\bm{B}$ this will be subject to a
+torque as before, but it is more difficult to align the dipole
+of the atomic orbit than the spin so paramagnetism from the
+orbital contributions is weak.
+
+However, what happens to $\bm{v}$ in a magnetic
+field? Keeping to a classical (Bohr atom) picture there is an
+additional force on the electron due to the Lorentz force.
+
+For no magnetic field we have the central force equals the force
+from the electric field
+\begin{equation}
+	\frac{1}{4\pi\epsilon_{0}}\frac{e^2}{R^2}
+	=
+	m_{e}\frac{v^2}{R}.
+\end{equation}
+
+But if we now add $\bm{B}$ in the
+$\bm{\hat{z}}$ direction, we get a contribution to the
+centripetal acceleration in the form of the Lorentz force, so
+that
+\begin{equation}
+	\frac{1}{4\pi\epsilon_{0}}\frac{e^2}{R^2} +
+	ev^{\prime}B
+	=
+	m e \frac{v^{\prime 2}}{R}.
+\end{equation}
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./diamagnetic.svg}
+	\caption{The electron orbit around a positive nucleus and the magnetic
+		moment induced in the presence of an external magnetic field
+		along the $\bm{\hat{z}}$ direction.}%
+	\label{fig:diamagnetic}
+\end{figure}
+
+Rearranging this expression, we get
+\begin{equation}
+	\begin{aligned}
+		ev^\prime B & = \frac{m_e}{R}\left(v^{\prime 2} - v^2\right)\left(v^{\prime}+v\right) \\
+		            & = \frac{m_e}{R}\Delta{v}\left(v^{\prime} + v\right).
+	\end{aligned}
+\end{equation}
+
+If $\Delta{v}$ is small, then
+$v^\prime + v \simeq v^\prime$, and this gives
+\begin{equation}
+	\Delta{v}\simeq\frac{eRB}{2m_e}.
+\end{equation}
+
+\begin{definition}
+	The change in velocity indicates that the electron ``speeds up''
+	and the dipole moment from the orbiting electron increases as
+	\begin{equation}
+		\Delta{\bm{m}}
+		=
+		-\frac{1}{2}e\left(\Delta{v}\right)R\bm{\hat{z}}
+		=
+		-\frac{e^{2}R^{2}}{4m_e}\bm{B}.
+	\end{equation}
+\end{definition}
+
+So the moment $\bm{m}$ changes in the opposite
+direction to $\bm{B}$. As usual, the
+atom/molecule orbital moments are typically randomly oriented.
+However, the net effect of the field is the orbital moments tend
+to increase a little in the direction antiparallel to the field
+(i.e.\ opposite to paramagnetism). The effect is known as
+diamagnetism and it is much weaker than the paramagnetic effects
+from unpaired electrons. Hence, it is commonly observed in
+atoms/molecules with even numbers of atoms.
+
+This is really a simplistic description of what is a more
+complicated quantum effect, but the gist of the argument is
+correct.
+
+\section{Magnetisation}%
+\label{sec:magnetisation}
+
+From this point onwards, we will not look at the
+atomic/molecular origins of the magnetisation of a material but
+we will assume that we can describe it through a macroscopic
+magnetisation vector $\bm{M}$. This would apply
+where $\bm{M}$ would be aligned parallel to the
+applied field (paramagnetism) or anti-parallel to the field
+(diamagnetism). Apart from this difference in sign, the
+treatment is the same. We can even use a permanent magnetisation
+to describe ferromagnetism.
+\begin{definition}
+	We define the magnetisation vector $\bm{M}$ as
+	\begin{equation}
+		\label{eq:magnetisation_vector}
+		\bm{M} =
+		\lim\limits_{\Delta{\tau}\to 0}\frac{\sum\bm{m}_n}{\Delta{\tau}}
+	\end{equation}
+\end{definition}
+
+\section{Bound currents}%
+\label{sec:bound_currents}
+
+In this section we will discuss \textit{bound currents} in
+magnetised materials. These play a similar role to the bound
+charge densities that we introduced in our discussion of
+dielectrics.
+
+\begin{derivation}
+
+	Recall our equation for microscopic dipoles in
+	Equation~\ref{eq:magnetic_vector_potential_dipole}, and note that
+	$\bm{m}=\bm{M}\dd{\tau}$ is a small volume element as defined in
+	Section~\ref{sec:magnetisation}, we extend this to all space by
+	integrating
+	\begin{equation}
+		\bm{A}\left(\bm{r}\right)
+		=
+		\frac{\mu_{0}}{4\pi}\int\limits_{\mathrm{V}}\frac{\bm{M}\left(\bm{r^\prime}\right)\cross\bm{\hat{r}^{\prime\prime}}}{r^{\prime\prime 2}}
+		\dd{\tau^\prime}
+	\end{equation}
+
+	As we did for dielectrics, we manipulate this further by writing
+	\begin{equation}
+		\gradient^\prime\left(\frac{1}{r^{\prime\prime}}\right)
+		=
+		\frac{\bm{\hat{r}^{\prime\prime}}}{r^{\prime\prime 2}}
+	\end{equation}
+
+	We can now expand the kernel using the product rule
+	(rearranged):
+	\begin{equation}
+		\bm{A}\left(\bm{r}\right)
+		=
+		\frac{\mu_{0}}{4\pi}\left\{\iiint\frac{1}{r^{\prime\prime}}\left[\gradient^\prime\cross\bm{M\left(\bm{r}^{\prime}\right)}\right]\dd{\tau^\prime}
+		-
+		\iiint\gradient^\prime\cross\left[\frac{\bm{M\left(\bm{r}^{\prime}\right)}}{r^{\prime\prime}}\right]\dd{\tau^\prime}\right\}
+	\end{equation}
+
+	With Stoke's Law, we can rewrite the second term into
+	\begin{equation}
+		-\oint\frac{1}{r^{\prime\prime}}\left[\bm{M}\left(\bm{r^\prime}\cross\dd{\bm{a^\prime}}\right)\right].
+	\end{equation}
+
+	The first term looks like the potential of a volume current in
+	terms of the magnetisation vector.
+	\begin{equation}
+		\bm{J}_b = \curl{\bm{M}}
+	\end{equation}
+
+	And the second looks the potential of a surface current
+	\begin{equation}
+		\bm{K}_b =
+		\bm{M}\cross\bm{\hat{n}}
+	\end{equation}
+
+	By defining these two terms, we can write
+	\begin{equation}
+		\bm{A}\left(\bm{r}\right)
+		=
+		\frac{\mu_{0}}{4\pi}\left\{
+		\int\limits_{V}\frac{\bm{J}_b\left(\bm{r^\prime}\right)}{r^{\prime\prime}}\dd{\tau^\prime}
+		+
+		\oint\frac{\bm{K}_b\left(\bm{r^\prime}\right)}{r^{\prime\prime}}\dd{\bm{a}^\prime}
+		\right\}
+	\end{equation}
+	In other words, we have reduced the potential to that of a
+	contribution coming from the \textit{volume bound} currents
+	flowing through the material plus a contribution from the
+	\textit{surface bound} currents on the boundary.
+\end{derivation}
+
+What we effectively did was sum up the contributions from every
+individual dipole in the material and converted this into two
+integrals, the first being a volume which expresses the vector
+potential coming from the bulk of the material (the volume bound
+currents), the second being a contribution from the surface
+bound currents, which is magnetisation crossed with the normal
+vector to the surface.
+
+This treatment is analogous to the approach we used for the
+bound surface and volume charge densities in dielectrics so we
+can compare the expressions for both here.
+
+\begin{center}
+	\begin{tabular}{c  c}
+		\textbf{Volume}                 & \textbf{Surface}                     \\
+		\toprule
+		$\rho_b = -\divergence{\bm{P}}$ & $\sigma_b = \bm{P}\vdot\bm{\hat{n}}$ \\
+		$\bm{J}_b = \curl{\bm{M}}$      & $\bm{K}_b =
+		\bm{M}\cross\bm{\hat{n}}$                                              \\
+	\end{tabular}
+\end{center}
+
+For the volume terms, instead of having a divergence---a source,
+we now have the curl. We can think of these as internal
+\textit{currents} in the material.
+
+\section{Visualisation of the bound currents}%
+\label{sec:visualisation_of_the_bound_currents}
+
+Note that as in the case of dielectrics the actual fields in a
+material will vary a lot from point to point due to
+fluctuations, so what we are describing here is really the
+macroscopic mean field. See Figure~\ref{fig:visualising_magnetic_surface_volume_bound_currents}.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./visualising_magnetic_surface_volume_bound_currents.svg}
+	\caption{The left diagram shows how the surface bound currents can be
+		understood. The currents in the `centre' of a group of square
+		loops cancel out, and what we have is a net effect at the surface of the material.
+		The right diagram shows how if one square loop has a different
+		magnetic dipole moment, and this creates tiny currents in every element due to
+		incomplete cancellation, and we get a net effect seen as the volume bound currents.}%
+	\label{fig:visualising_magnetic_surface_volume_bound_currents}
+\end{figure}
+
+\section{The auxiliary field H}%
+\label{sec:the_auxiliary_field_h}
+
+Just as we did for the electric field, we can now imagine a
+\textit{new} field in which we only need to
+calculate the effects of the free currents (i.e.\ those not
+coming from the magnetisation).
+
+This is analogous to the introduction of the
+$\bm{D}$ field in the case of dielectrics where
+we eliminated the need to determine the bound charges.
+
+So, as we did with the charge densities and
+$\bm{E}$, we write in analogy.
+\begin{equation}
+	\bm{J} = \bm{J}_b +
+	\bm{J}_{\mathrm{free}}
+\end{equation}
+
+Our free current might flow through the wires embedded in the
+magnetised substance, or through the material itself if it is a
+conductor. The two currents are quite different, the free
+current is there because we hooked up a wire to a battery---it
+involves a transport of charge, while the bound current is there
+because of \textit{magnetisation}---it results from many
+aligned atomic dipoles.
+
+From Ampère's Law~\ref{eq:amperes_law_differential}, we can write
+\begin{equation}
+	\frac{1}{\mu_{0}}\left(\curl{\bm{B}}\right)
+	=
+	\bm{J}
+	=
+	\bm{J}_b +
+	\bm{J}_{\mathrm{free}}
+	=
+	\left(\curl{\bm{M}}\right) +
+	\bm{J}_{\mathrm{free}}.
+\end{equation}
+
+Collect the curls to get
+\begin{equation}
+	\curl{\left(\frac{1}{\mu_{0}}\bm{B} - \bm{M}\right)}
+	=
+	\bm{J}_{\mathrm{free}}.
+\end{equation}
+
+We define the quantity in the curl to be the auxiliary field
+$\bm{H}$.
+
+\begin{definition}
+	The field $\bm{H}$ is given as
+	\begin{equation}
+		\label{eq:auxiliary_field_h}
+		\bm{H}
+		\equiv
+		\frac{1}{\mu_{0}}\bm{B} -
+		\bm{M}.
+	\end{equation}
+
+	Its differential form, derived from Ampère's Law, reads
+	\begin{equation}
+		\label{eq:auxiliary_field_differential}
+		\curl{\bm{H}} =
+		\bm{J}_{\mathrm{free}}
+	\end{equation}
+	\begin{equation}
+		\label{eq:auxiliary_field_integral}
+		\oint\bm{H}\vdot\dd{\bm{l}}
+		=
+		I_{\mathrm{free}}
+	\end{equation}
+\end{definition}
+
+The application and use of $\bm{H}$ in
+magnetostatics is analogous to $\bm{D}$ in
+electrostatics. In the same way as $\bm{D}$
+allowed us to use Gauss' Law with just the free charges, we find
+that we can use Ampère's Law with the free currents to calculate
+$\bm{H}$.
+
+\textbf{Note:} as discussed in the case of
+$\bm{D}$, we can use the free currents to
+calculate $\bm{H}$ using Ampère's Law in cases of
+high symmetry but it would be false to assume we can do this in
+\textit{all} cases.
+
+The curl does not uniquely define the vector field---we would
+also need to know the divergence. From our
+definition~\ref{eq:auxiliary_field_h}, we see that the divergence
+of $\bm{H}$ is
+\begin{equation}
+	\label{eq:auxiliary_field_divergence}
+	\divergence{\bm{H}}
+	=
+	-\divergence{\bm{M}}
+\end{equation}
+
+Provided that $-\divergence{\bm{M}} = 0$, which is usually the case
+of high symmetry, we can use Ampère's Law. Otherwise, we need to
+work directly with the magnetisation.
+
+\section{Boundary conditions for the auxiliary field}%
+\label{sec:boundary_conditions_for_the_auxiliary_field}
+
+Without proof, we can write the boundary conditions for
+$\bm{H}$ and $\bm{B}$ as follows
+
+\begin{definition}
+	The boundary conditions for $\bm{H}$ and
+	$\bm{B}$ are
+	\begin{equation}
+		H^\perp_{\mathrm{above}} - H^\perp_{\mathrm{above}} =
+		-\left(M^\perp_{\mathrm{above}} - M^\perp_{\mathrm{above}}\right)
+	\end{equation}
+	\begin{equation}
+		H^\parallel_{\mathrm{above}} - H^\parallel_{\mathrm{above}} =
+		\bm{K}_{\mathrm{free}}\cross\bm{\hat{n}}
+	\end{equation}
+	\begin{equation}
+		B^\perp_{\mathrm{above}} - B^\perp_{\mathrm{above}} = 0
+	\end{equation}
+	\begin{equation}
+		B^\parallel_{\mathrm{above}} - B^\parallel_{\mathrm{above}} =
+		\mu_{0}\left(\bm{K}_{\mathrm{free}}\cross\bm{\hat{n}}\right)
+	\end{equation}
+\end{definition}
+
+\section{Linear magnetic materials}%
+\label{sec:linear_magnetic_materials}
+
+For paramagnetic and diamagnetic materials the magnetisation
+disappears when the applied field is removed. As for
+dielectrics, we may then consider the simplest case of
+\textit{linear} induced magnetisation from the external
+field, i.e.\ $M\propto\bm{B}$. However, the convention is
+to take $\bm{M}\propto\bm{H}$ and to write
+\begin{equation}
+	\bm{M} =
+	\chi_{m}\bm{H}
+\end{equation}
+where $\chi_m$ is the magnetic susceptibility, a
+dimensionless quantity typically around \num{10e-4}
+to \num{10e-6} for most materials. Materials that
+obey this equation are known as linear magnetic materials or
+media.
+
+For a linear media, we can expand
+Equation~\ref{eq:auxiliary_field_h} into
+\begin{equation}
+	\frac{\bm{B}}{\mu_{0}}
+	=
+	\bm{H} + \bm{M}
+	=
+	\bm{H} + \chi_m\bm{H}
+\end{equation}
+
+\begin{definition}
+	For a linear medium, we can define the following:
+
+	We define $\mu$ as the permeability of the
+	material, and $\mu_r$ as the relative
+	permeability.
+	\begin{equation}
+		\bm{B}
+		=
+		\mu_{0}\left(1+\chi_m\bm{H}\right)
+		=
+		\mu\bm{H}
+		\hspace{1em}\mathrm{with}\hspace{1em}
+		\mu\equiv\mu_{0}\left(1 + \chi_m\right)
+	\end{equation}
+\end{definition}
+
+\section{Ferromagnetism}%
+\label{sec:ferromagnetism}
+
+We have mentioned ferromagnetism several times already. We know
+it is very important technologically, but in the end it is
+difficult to discuss it in terms of a simple macroscopic
+magnetisation. It turns out that a material in which all the
+dipoles are aligned with each other does not really occur.
+Instead, it will tend to divide into `domains' that have
+different orientations of the magnetisation (while leaving the
+overall permanent magnetisation).
+
+The formation of domains is the most energetically favourable
+configuration and it is their behaviour that gives rise to
+common properties of permanent magnets such as hysteresis.
+
+\section{Summary of magnetism in matter}%
+\label{sec:summary_of_magnetism_in_matter}
+
+We take note of the following qualitative points:
+
+\begin{definition}
+	\begin{itemize}
+		Magnetism in matter concerns the following:
+		\item The magnetic response of materials is due to alignment of the
+		      spin and orbital moments of electrons in atoms and molecules.
+		\item Paramagnetism originates from the alignment in the field of the
+		      spin angular momentum from unpaired electrons.
+		\item Diamagnetism is weaker and originates from the alignment,
+		      antiparallel to the field, of the orbital moments of the
+		      electrons.
+		\item We describe the magnetisation (polarisation) of the material in
+		      terms of the magnetisation vector $\bm{M}$, the
+		      dipole moment per unit volume.
+		\item We can describe the effect of the magnetisation in terms of
+		      bound surface and volume current densities
+		      ($\bm{K}_b$ and $\bm{J}_b$).
+		\item We introduce the $\bm{H}$ field as a device to
+		      solve problems without the need to calculate the bound current
+		      densities.
+		\item In linear magnets we introduce the magnetic susceptibility
+		      $\chi_m$ and the relative permeability
+		      $\mu_r$ to describe the relationship between
+		      $\bm{B}$ and $\bm{H}$.
+	\end{itemize}
+\end{definition}
+
+%\bibliography{bibfile}
+\end{document}
+
+% vim: fen fdm=syntax

@@ -1,0 +1,3283 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,chapterprefix=false,dvipsnames]{scrbook}
+\KOMAoptions{twoside=false}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Useful packages
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{svg}
+\usepackage{siunitx}
+\usepackage{amssymb,amsmath,physics,bm,bbold}
+\usepackage{enumerate}
+
+%--------------------------------------------------------------------
+% Hyper ref
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\colorlet{mylinkcolor}{NavyBlue}
+\colorlet{mycitecolor}{Aquamarine}
+\colorlet{myurlcolor}{Aquamarine}
+
+\hypersetup{
+	linkcolor  = mylinkcolor!,
+	citecolor  = mycitecolor!,
+	urlcolor   = myurlcolor!,
+	colorlinks = true,
+}
+%--------------------------------------------------------------------
+% Bibliography
+\usepackage[]{natbib}
+\bibliographystyle{chicago}
+
+%=================================
+% pre-defined theorem environments
+\usepackage{amsthm}
+\usepackage{framed}
+\newtheoremstyle{dotless}{}{}{\itshape}{}{\bfseries}{}{ }{}
+\theoremstyle{dotless}
+\newtheorem{prototheorem}{Theorem}[section]
+
+\newenvironment{theorem}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{prototheorem}}
+			{\end{prototheorem}\end{shaded}}
+
+\newtheorem{protolemma}[prototheorem]{Lemma}
+\newenvironment{lemma}
+{\colorlet{shadecolor}{blue!15}\begin{shaded}\begin{protolemma}}
+			{\end{protolemma}\end{shaded}}
+
+\newtheorem{protocorollary}[prototheorem]{Corollary}
+\newenvironment{corollary}
+{\colorlet{shadecolor}{pink!15}\begin{shaded}\begin{protocorollary}}
+			{\end{protocorollary}\end{shaded}}
+
+\theoremstyle{definition}
+\newtheorem{protonotation}{Notation}[section]
+\newenvironment{notation}
+{\colorlet{shadecolor}{green!15}\begin{shaded}\begin{protonotation}}
+			{\end{protonotation}\end{shaded}}
+
+\newtheorem{protoderivation}{Derivation}[section]
+\newenvironment{derivation}
+{\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{protoderivation}}
+			{\end{protoderivation}\end{shaded}}
+
+\newtheorem{protoexample}{Example}[section]
+\newenvironment{example}
+{\colorlet{shadecolor}{red!15}\begin{shaded}\begin{protoexample}}
+			{\end{protoexample}\end{shaded}}
+
+\newtheorem{protodefinition}{Definition}[section]
+\newenvironment{definition}
+{\colorlet{shadecolor}{black!15}\begin{shaded}\begin{protodefinition}}
+			{\end{protodefinition}\end{shaded}}
+
+%=================================
+% useful commands
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\supp}{supp}
+
+\def\vec#1{{\ensuremath{\bm{{#1}}}}}
+\def\mat#1{\vec{#1}}
+
+%=================================
+% convenient notations
+\newcommand{\XX}{\mathbb{X}}
+\newcommand{\Hamiltonian}{\mathcal{H}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\CC}{\mathbb{C}}
+
+\newcommand{\sL}{\mathcal{L}}
+\newcommand{\sX}{\mathcal{X}}
+\newcommand{\sY}{\mathcal{Y}}
+
+\newcommand{\ind}{\mathbb{1}}
+
+\def\dbar{{\mathchar'26\mkern-10mu \mathrm{d}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Typography, change document font
+\usepackage[tt=false, type1=true]{libertine}
+\usepackage[varqu]{zi4}
+\usepackage[libertine]{newtxmath}
+\usepackage[T1]{fontenc}
+
+\usepackage[protrusion=true,expansion=true]{microtype}
+
+% Disable paragraph indentation, and increase gap
+\usepackage{parskip}
+
+\title{Thermal Physics Notes}
+\author{Compiled by Nhat Pham\\ based on lectures from PHYS20027 \\and
+	Blundells' \textit{Concepts in Thermal Physics} }
+\date{Last update: \today}
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\chapter{Lecture 1 (Week 13)}%
+\label{cha:lecture_1}
+
+\section{Definitions}%
+\label{sec:definitions}
+
+\subsection{Thermodynamic limit}%
+\label{sub:thermodynamic_limit}
+
+Thermodynamics apply to system that is \textit{in equilibrium}
+and also within the thermodynamic limit
+
+\begin{definition}
+	The thermodynamic limit is when we study a large number of
+	particles or a small number of particles for a long time. When
+	we take this limit, we can describe the system without knowing
+	all individual, \textit{microscopic}  properties of all the
+	particles. Instead, we can completely describe the system using
+	\textit{macroscopic} properties.
+\end{definition}
+
+Macroscopic properties can be variables such as pressure, time,
+volume, etc.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{thermo_limit.svg}
+	\caption{Force per particle versus time as we reach the thermodynamic
+		limit.}%
+	\label{fig:thermo_limit}%
+\end{figure}
+
+\subsection{Thermodynamic system}%
+\label{sub:thermodynamic_system}
+
+\begin{definition}
+	A thermodynamic system is a body which has well defined
+	interactions with its surrounds and can be considered separately
+	from them.
+\end{definition}
+
+Example of a thermodynamic system: gas in an enclosure, where
+interactions with surrounding might be through heat or transfer
+through walls.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{thermo_system.svg}
+	\caption{A thermodynamic system}%
+	\label{fig:thermo_system}
+\end{figure}
+
+\subsection{Thermal equilibrium}%
+\label{sub:thermal_equilibrium}
+
+\begin{definition}
+	A system is in thermal equilibrium when its macroscopic
+	observables have ceased to change with time. Two systems are in
+	thermal equilibrium if no heat flows between them when they are
+	connected by a path permeable to heat.
+\end{definition}
+
+There are also metastable states, where variables my change
+slowly with time, so the system is \textit{not} in
+thermal equilibrium.
+
+\subsection{Extensive and intensive variables}%
+\label{sub:extensive_and_intensive_variables}
+
+\begin{itemize}
+	\item \textbf{Extensive} variables scales with the size of the
+	      system. Examples are the number of particles, volume, entropy,
+	      magnetic moment. They are mostly upper case.
+	\item \textbf{Intensive} variables are independent of the size of
+	      the system. Examples are number density, temperature,
+	      magnetisation, pressure, entropy density. They are mostly lower
+	      case.
+\end{itemize}
+
+\section{Functions and equations of state}%
+\label{sec:functions_of_state}
+
+\begin{definition}
+	A state function assumes a unique value for each equilibrium
+	state of the system. The value does not depend on how they
+	system got to the state---it is path independent.
+\end{definition}
+
+Mathematically, functions of state have the following
+properties.
+\begin{itemize}
+	\item Depend on $(x,y)$ but not the path taken to
+	      $(x,y)$.
+	\item Have exact differentials, the number of variables does not
+	      matter. See~\ref{def:exact_differentials}.
+\end{itemize}
+
+\begin{derivation}%
+	\label{def:exact_differentials}
+	Recall the Taylor expansion of a function
+	$f(x)$:
+	\begin{equation}
+		f(x + \delta x) = f(x) + f^\prime\delta x +
+		\frac{1}{2!}f^{\prime\prime}{(\delta x)}^2 + \hdots
+	\end{equation}
+
+	In the limit $\delta x \rightarrow \dd{x}$ we can ignore higher order
+	terms because they are sufficiently small. We are left with the
+	first derivative, and rewrite it so that:
+
+	\begin{equation}
+		f(x + \dd{x}) - f(x) =
+		\dv{f}{x}\dd{x} =
+		\dd{f}
+	\end{equation}
+
+	We can use this result and expand it to 2 dimensions. We then
+	arrive at the \textit{exact differential} of $f(x,y)$:
+
+	\begin{equation}
+		\dd{f}
+		=
+		f(x + \dd{x}, y + \dd{y}) -
+		f(x,y) = \pdv{f}{x}\dd{x} +
+		\pdv{f}{y}\dd{y}
+	\end{equation}
+
+	The condition for a function to have an exact differential is
+	that its mixed partial derivatives are equal. In other words:
+	\begin{equation}
+		\pdv{f}{x}{y}
+		=
+		\pdv{f}{y}{x}
+	\end{equation}
+\end{derivation}
+
+On the other hand, functions that are path-dependent are
+\textit{non-state functions}. In thermodynamics, heat and work are
+non-state functions. Their derivatives are inexact. The notation
+for this is: \[
+	\dbar W ,\,
+	\dbar Q
+\] In the thermodynamic limit
+and thermodynamic equilibrium, the variables are dependent on
+each other and are constrained by an equation of state. For
+example $f(x,y,z) = 0$. The ideal gas equation is an
+equation of state.
+\begin{equation}
+	\label{eq:ideal_gas}
+	pV - nRT = 0
+\end{equation}
+This allows us to relate thermodynamic variables to each other.
+For example: \[
+	\pdv[2]{m}{T} =
+	\frac{1}{T}\pdv{C}{B}
+\] We can find out the value
+of one side by knowing the other one.
+
+\chapter{Lecture 2 (Week 13)}%
+\label{cha:lecture_2}
+
+A TL;DR overview of the laws of thermodynamics:
+\begin{itemize}
+	\item \textbf{Zeroth Law:} If two systems are separately in
+	      equilibrium with a third system, then they are in equilibrium
+	      with each other.
+	\item \textbf{First Law:} Energy is conserved. Heat and work are
+	      both forms of energy.
+	\item \textbf{Second Law:} Heat cannot be converted to work with
+	      100\% efficiency. Entropy of the universe cannot decrease (this
+	      gives a definite direction of time).
+	\item \textbf{Third Law:} You cannot cool anything to absolute zero
+	      (0 Kelvins)
+\end{itemize}
+
+These are statements of empirical facts, not deeper theory that
+sits below these laws.
+
+\section{The First Law}%
+\label{sec:the_first_law}
+
+\textbf{Heat} is the energy in transfer between one
+system and another or one system and the surroundings.
+\begin{itemize}
+	\item $\dbar Q$ is the heat supplied
+	      \textbf{to} the system.
+\end{itemize}
+
+\textbf{Work} is the change in energy of a system
+affected by changing its parameters.
+\begin{itemize}
+	\item $\dbar W$ is
+	      the work done \textbf{on} the system.
+\end{itemize}
+
+\textbf{Internal energy} is the sum of all the components of
+energy in a system.
+
+\begin{definition}
+	The conservation of energy of both heat ($Q$)
+	and work ($H$):
+	\begin{equation}
+		\label{eq:first_law}
+		\Delta U = \Delta Q + \Delta W
+	\end{equation}
+	In differential form:
+	\begin{equation}
+		\dd{U}
+		=
+		\dbar W + \dbar Q
+	\end{equation}
+\end{definition}
+
+\subsection{Work done compressing a gas}%
+\label{sub:work_done_compressing_a_gas}
+
+Suppose a piston can be moved into a chamber with a gas. If it
+moves fast, we generate sound waves, if there is friction, then
+energy will be dissipated as heat. These losses will not end up
+in the gas so the change is \textbf{irreversible}.
+
+To have \textbf{reversible} changes, we must have a
+frictionless piston and we must move it slowly.
+
+\begin{definition}
+	The reversible work done to compress a gas is expressed by
+	\begin{equation}
+		\label{eq:work_pdV}
+		\dbar W
+		=
+		-pA \times \frac{\dd{V}}{A}
+		=
+		-p\dd{V}
+	\end{equation}
+	The sign is negative because if we are doing work
+	\textbf{on} the gas, then $\dd{V}$ is
+	negative because the volume is decreasing. For irreversible
+	changes,
+	\begin{equation}
+		\dbar W
+		\geq
+		-p\dd{V}
+	\end{equation}
+\end{definition}
+
+\subsection{Work done in other systems}%
+\label{sub:work_done_in_other_systems}
+
+\begin{itemize}
+	\item Stretching a string: $\dbar W = \vec{F}\vdot\dd{\vec{l}}$
+	\item Expanding a surface: $\dbar W = \gamma\dd{A}$
+	\item Magnetic material: $\dbar W = \vec{B}\vdot\dd{\vec{m}}$ or
+	      $\vec{m}\vdot\dd{\vec{B}}$
+\end{itemize}
+
+\section{Constraints}%
+\label{sec:constraints}
+
+\begin{itemize}
+	\item \textbf{Adiabatic} Thermally isolated system---there is no
+	      heat flow in or out.\, $\dbar Q = 0$ or
+	      $\dd{S} = 0$
+	\item \textbf{Isothermal:} Temperature is fixed by an external
+	      reservoir.\, $\dd{T} = 0$
+	\item \textbf{Isobaric:} Pressure is fixed.\,
+	      $\dd{p} = 0$
+	\item \textbf{Isochoric:} Volume is fixed.\, $\dd{V} = 0$
+\end{itemize}
+
+Paths are correspondingly called \textit{adiabat, isotherm, isobar,} and
+\textit{isochar}.
+
+\section{Heat capacities}%
+\label{sec:heat_capacities}
+
+A way to quantify the response of the system to external
+changes. Two heat capacities we study are
+\[
+	C_{V} = {\left(\pdv{Q}{T}\right)}_V,
+	C_{p} = {\left(\pdv{Q}{T}\right)}_p,
+\]
+
+The equation of state for a general gas (not necessarily ideal)
+is $f(p,T,V) = 0$. We only have 2 independent variables
+that we can write our internal energy as a function of any two
+of those. For example, $U(p,V)$ or
+$U(V,T)$.
+
+Let's qualitatively arrive at the expressions of
+$C_{V}$ and $C_{p}$.
+
+For $C_{V}$, suppose a box with fixed walls.
+Heat supplied into the system will increase the temperature of
+the gas inside.
+
+For $C_{p}$, suppose a box with a piston. The
+gas is allowed to expand and move the piston to keep the
+pressure constant. If we put heat into the system, the gas
+expands, doing work on the system. Thus, not all of the heat
+supplied increased the temperature of the system. We expect then
+that $C_{p} \geq
+	C_{V}$.
+
+\begin{derivation}
+	Assume $U = U(V,T)$ and $f(p,V,T) = 0$. The
+	exact differential of $U$ is
+	\begin{equation}
+		\label{eq:exact_diff_U}
+		\dd{U}
+		=
+		{\left(\pdv{U}{V}\right)}_T\dd{V} +
+		{\left(\pdv{U}{T}\right)}_V\dd{T}
+	\end{equation}
+	From the equation of the first law,~\ref{eq:first_law},
+	substitute\, $\dbar W$
+	with~\ref{eq:work_pdV}, set $dV = 0$ for
+	constant volume, and divide by $\dd{T}$,
+	\begin{equation}
+		{\left(\pdv{U}{T}\right)}_V
+		=\,
+		{\left(\pdv{Q}{T}\right)}_V
+		=
+		C_{V}
+	\end{equation}
+	Then for $C_{p}$, equate~\ref{eq:exact_diff_U}
+	with~\ref{eq:first_law} then divide by
+	$\dd{T}$ and set $\dd{p} = 0$:
+	\begin{equation}
+		\label{eq:cp_in_terms_of_cv}
+		C_{p} =
+			{\left(\pdv{Q}{T}\right)}_{p} = {\left(\pdv{V}{T}\right)}_{p}\left(p+{\left(\pdv{U}{V}\right)}_T\right) +
+		C_{V}
+	\end{equation}
+	For a general gas, we can normally stop here.
+\end{derivation}
+
+With the general expression, we can evaluate this for different
+gasses. The most simple is monotonic ideal gas.
+
+\begin{example}
+	For an ideal gas that is monotonic, $U = \frac{3}{2}nRT$ and
+	thus is only a function of temperature. We can cancel any
+	partial derivatives of $U$ where
+	$T$ is kept constant.
+	\begin{equation}
+		C_{V} = \frac{3}{2}nR
+	\end{equation}
+	\begin{equation}
+		C_{p} = {\left(\pdv{V}{T}\right)}_{p}p + \frac{3}{2}nR
+	\end{equation}
+	Using the ideal gas relation~\ref{eq:ideal_gas}, we have:
+	\begin{equation}
+		C_{p} = \frac{3}{2}nR + nR = \frac{5}{2}nR
+	\end{equation}
+\end{example}
+
+We can also consider \textbf{Virial Expansion} and the
+\textbf{Van de Waals} equation, which models real gas.
+
+\section{Non-ideal gases}%
+\label{sec:non_ideal_gases}
+
+\subsection{Virial Expansion}%
+\label{sub:virial_expansion}
+
+This is a general form for an equation of state of gas or fluid.
+For an ideal gas, $A = 1$ and all other
+coefficients are zero. Gases become ideal when
+$\rho \rightarrow 0$.
+
+\begin{equation}
+	\label{eq:virial_expansion}
+	\frac{p}{RT\rho}
+	=
+	A + B\rho + C\rho^2 + D\rho^3 + \hdots
+\end{equation}
+
+\subsection{Van de Waals equation}%
+\label{sub:van_de_waals_equation}
+
+This is a special case of the virial expansion, for
+$\rho \ll 1$, the we can ignore second order terms
+and above.
+
+\begin{equation}
+	\label{eq:van_de_waals}
+	\left(p + \frac{a}{V^2}\right)\left(V - b\right)
+	=
+	nRT
+\end{equation}
+
+%\bibliography{bibfile}
+
+\chapter{Lecture 3 (Week 13)}%
+\label{cha:lecture_3}
+
+\section{The Second Law}%
+\label{sec:the_second_law}
+
+\begin{definition}
+	There are several equivalent statements of the second law:
+	\begin{itemize}
+		\item \textbf{Lord Kelvin 1851:} Work can be converted to heat with 100\%
+		      efficiency but not the reverse.
+		\item \textbf{Clausius 1854:} Heat flows from hot to cold, and not
+		      spontaneously the other way around.
+	\end{itemize}
+\end{definition}
+
+Both of these statements are \textbf{equivalent}---to
+understand this we need to look at thermodynamic cycles,
+specifically the \textit{Carnot cycle}. This concept is used
+in engines. Since internal combustion engines are difficult to
+understand, we look at the \textit{external} combustion
+engines. One type is the \textit{Stirling} engine.
+
+Qualitatively, the source of heat is at the bottom (which can
+come from a hot plate). The difference between the hot plate and
+the cold plate runs the engine (cool video embedded in the
+lecture). Here's a link to diagrams \& animations:
+\href{http://animatedengines.com/ltdstirling.html}{Low Differential Stirling}.
+
+\section{The Carnot Cycle}%
+\label{sec:the_carnot_cycle}
+
+There are four stages in the cycle. This is a
+\textit{closed cycle}. Thus, the work done can be described by
+integrating both sides of~\ref{eq:work_pdV} to get
+
+\begin{equation}
+	\label{eq:work_pdV_integral_form}
+	W = \int p\dd{V}
+\end{equation}
+
+On the other hand, the total change $\Delta U = 0$
+after one complete cycle.
+
+Here are the steps in the Carnot cycle:
+\begin{enumerate}
+	\item \textbf{A to B:} Isothermal expansion at
+	      $T_H$. Volume increases
+	      as pressure decreases due to supplied heat
+	      $Q_H$.
+	\item \textbf{B to C:} Adiabatic expansion (gas cools to
+	      $T_L$) as
+	      pressure keeps decreasing and volume keeps increasing.
+	\item \textbf{C to D:} Isothermal compression at
+	      $T_L$. Heat leaves
+	      the system and the volume decreases while pressure increases.
+	\item \textbf{D to A:} Adiabatic compression (gas heats to
+	      $T_H$).
+	      Pressure increase as a result as temperature increases.
+\end{enumerate}
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.8\columnwidth]{carnot_cycle.svg}
+	\caption{Carnot cycle P-V plot}%
+	\label{fig:carnot_cycle}
+\end{figure}
+
+Physically, there must be a hot reservoir and a cold reservoir
+connected to our system, which is an enclosed piston connected
+to a flywheel. These two are connected to a switch each
+(\ref{fig:carnot_cycle_example}).
+
+Here's the physical interpretation:
+\begin{enumerate}
+	\item The cold switch is open, and heat is supplied to the system. The
+	      gas must expand along the isotherm, pushes the piston and drives
+	      the flywheel.
+
+	\item In stage 2, both switches are open, the system is thermally
+	      isolated. The flywheel continues to spin while the gas continues
+	      to expand.
+
+	\item In stage 3, the cold switch is now closed. Heat leaves the
+	      system and the gas gets compressed.
+
+	\item In stage 4, both switches are open, the system is thermally
+	      isolated. The piston is back to its original position after the
+	      flywheel compresses the gas.
+\end{enumerate}
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{carnot_engine.svg}
+	\caption{An example of what how the Carnot cycle might be implemented}%
+	\label{fig:carnot_cycle_example}
+\end{figure}
+
+\subsection{The Carnot relation}%
+\label{sub:the_carnot_relation}
+
+We can also analyse the Carnot cycle mathematically.
+
+Let's consider an isothermal expansion. An isothermal expansion
+(see~\ref{sec:constraints}) demands $\dd{T} = 0$,
+but $U = U(T)$ thus $\Delta U = 0$.
+Therefore, $\Delta Q = -\Delta W$ from~\ref{eq:first_law}.
+From~\ref{eq:work_pdV_integral_form}, we evaluate the integral
+using~\ref{eq:ideal_gas}.
+
+Now let's consider an adiabatic expansion. Recall from first
+year that we can write $PV^\gamma = \mathrm{const}$ and thus
+$TV^{\gamma - 1} = \mathrm{const}$. Since it is equal to a constant, the
+product $TV$ at each stages are equal.
+Remember that $\gamma = \frac{C_p}{C_V}$.
+
+\begin{definition}%
+	\label{eq:carnot_stages}
+	We have the following mathematical relations for each stages of
+	the Carnot cycle, with $\gamma = \frac{C_p}{C_V}$.
+	\begin{enumerate}
+		\item $Q_H = nRT_H\naturallogarithm\frac{V_B}{V_A}$
+		\item $T_H V_B^{\gamma - 1} = T_L V_C^{\gamma - 1}$
+		\item $-Q_L = nrT_L\naturallogarithm\frac{V_D}{V_C}$
+		\item $T_L V_D^{\gamma - 1} = T_H V_A^{\gamma - 1}$
+	\end{enumerate}
+	Use stages 2 and 4 from~\ref{eq:carnot_stages} to eliminate
+	$\frac{T_H}{T_L}$. We arrive at:
+	\begin{equation}
+		\label{eq:the_carnot_relation_intermediate}
+		\frac{V_C}{V_B}
+		=
+		\frac{V_D}{V_A}
+	\end{equation}
+	Finally, using stages 1 and 3 and~\ref{eq:the_carnot_relation_intermediate} which
+	we just found, we arrive at the \textit{Carnot relation}:
+	\begin{equation}
+		\frac{Q_H}{Q_L}
+		=
+		\frac{T_H\naturallogarithm\left(\frac{V_B}{V_A}\right)}{T_L\naturallogarithm\left(\frac{V_C}{V_A}\right)}
+		=
+		\frac{T_H}{T_L}
+	\end{equation}
+	Finally, we can derive the efficiency of the cycle, which is the
+	ratio between work done and heat available. The work done is the
+	difference between heat flowing in and heat flowing out. The
+	heat available is what is supplied.
+	\begin{equation}
+		\label{eq:carnot_efficiency}
+		\eta = \frac{Q_H - Q_L}{Q_H} = 1 - \frac{T_L}{T_H}
+	\end{equation}
+\end{definition}
+
+It could also be useful to consult simplified diagrams of Carnot
+engines and a reversed Carnot engine (a refrigerator).
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./carnot_simplified.svg}
+	\caption{(a) shows the Carnot engine where the engine performs work and
+		(b)
+		shows the reversed Carnot engine where we perform work on the
+		engine.}%
+	\label{fig:name}
+\end{figure}
+
+\subsection{The Carnot theorem}%
+\label{sub:the_carnot_theorem}
+
+The consequences of the Carnot engine are:
+
+\begin{theorem}
+	No engine operating between two reservoirs can be more efficient
+	than the Carnot engine.
+\end{theorem}
+
+Proof by contradiction will lead to this theorem. In essence:
+
+\begin{proof}
+	Suppose there is an engine \textbf{X}  such that
+	its efficiency exceeds that of the Carnot engine, so that
+	$\eta_x > \eta_c$. Connect engine \textbf{X}
+	to the Carnot engine in reverse, and expand out the inequality
+	to get \[
+		\frac{W}{Q^x_H} - \frac{W}{Q^C_H} > 0
+	\] From the first law, we find
+	\[
+		W \equiv Q^C_H - Q^C_L = Q^x_H - Q^x_L
+	\] We rearrange this into
+	\[
+		Q^C_H - Q^x_H = Q^C_L - Q^x_L
+	\] The LHS is $> 0$ as part
+	of our assumption, this means the RHS is also
+	$> 0$. However, the LHS is heat
+	\textit{dumped} from the hot reservoir, while the RHS is
+	heat \textit{removed} into the cold reservoir. If cold
+	reservoir is losing heat and hot reservoir is gaining heat. Then
+	energy is being transferred from cold to hot. This is a direct
+	contradiction with the Second Law (Clausius' statement). Thus,
+	we must abandon our initial assumption---there cannot be such an
+	engine \textbf{X}.
+\end{proof}
+
+This leads to the second theorem.
+
+\begin{theorem}
+	All reversible engines have exactly the Carnot efficiency.
+\end{theorem}
+
+It doesn't matter if we use an ideal gas or a non-ideal gas, if
+an engine is reversible, then the theorem holds.
+
+Proof by contradiction will show this holds.
+
+\begin{proof}
+	Suppose we now have an engine $R$ which is
+	less efficient than the Carnot engine. Connect the Carnot engine
+	in forward direction to engine $R$ in
+	reverse. Like the previous proof, we have \[
+		Q^C_H - Q^R_H = Q^C_L - Q^R_L
+	\]
+	Due to our assumption, both sides are negative. Once again, we
+	have heat which is extracted from the hot reservoir and dumping
+	it into the cold reservoir. This violates the second law, so we
+	must abandon our assumption.
+\end{proof}
+
+The Carnot efficiency is exactly 1 if and only if
+$T_L = 0$.
+
+\begin{equation}
+	\label{eq:carnot_efficiency_inequality}
+	\eta_{c}
+	=
+	1 - \frac{T_L}{T_H} < 1
+\end{equation}
+
+\section{Thermodynamic absolute temperature}%
+\label{sec:thermodynamic_absolute_temperature}
+
+Kelvin used the Carnot relation in~\ref{eq:carnot_efficiency_inequality} to
+define absolute temperature. This sets the
+\textbf{zero} of the temperature scale.
+
+Prior to 2019, the size of Kelvin was set by the triple point of
+water. This all changed to the new S.I.\@ system which is based
+on universal constants.
+
+We use an ideal gas and ideal gas laws as a primary thermometer.
+
+\chapter{Lecture 4 (Week 14)}%
+\label{cha:lecture_4}
+
+\section{Clausius' Theorem}%
+\label{sec:clausius_theorem}
+
+Results from a general analysis of the Carnot cycle. For each
+part of the cycle by index $i$, calculate
+\begin{equation}
+	\sum_{i}\frac{\Delta Q_i}{T_i} =
+	\frac{Q_H}{T_H} - \frac{Q_L}{T_L}
+\end{equation}
+
+For a Carnot cycle, the first term is equal to the second term,
+thus the whole sum is 0. If we look at the small addition of
+$Q$ then $\Delta Q \rightarrow \dbar Q$ then the
+sum becomes an integral. We have.
+
+\begin{equation}
+	\oint \frac{\dbar Q_{rev}}{T} = 0
+\end{equation}
+
+\begin{definition}
+	For a general cycle (either reversible or irreversible),
+	Clausius' theorem states
+
+	\begin{equation}
+		\label{eq:clausius_theorem}
+		\oint \frac{\dbar Q}{T} \leq 0
+	\end{equation}
+\end{definition}
+
+We can prove this theorem through a set up of a generalised
+cycle (multiple parts that are either reversible or
+irreversible), as shown in Figure~\ref{fig:clausius_theorem_engine}.
+
+Consider the following \textit{general} cycle:
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./clausius_theorem_engine.svg}
+	\caption{An engine with multiple sources of heat $\delta Q_i$.}%
+	\label{fig:clausius_theorem_engine}
+\end{figure}
+
+\begin{derivation}
+	Because this is a closed cycle, it follow the first law, where
+	$\Delta U = 0$, or $W_s = \sum_i \delta Q_i$ where
+	$W_s$ is the total work done by the system.
+
+	Assuming each reservoir is connected to the master reservoir at
+	the temperature $T_0$ via an individual Carnot
+	engine, we can form a schematic as shown in
+	Figure~\ref{fig:multiple_carnot_engines}.
+
+	For each of the engine, there is a bit of work done, and the
+	rest is heat that goes into our system. This shows that
+	\begin{equation}
+		\delta Q^0_i = \delta W_i + \delta Q_i
+	\end{equation}
+
+	If we sum over all the heat engines, we get
+	\begin{equation}
+		Q_0 = \sum_i \delta Q_i^0 = \sum_i \delta W_i + \sum_i \delta
+		Q_i
+	\end{equation}
+
+	We can group the first sum in $W_C$ for the
+	work done by the Carnot engines, and the second sum as
+	$W_S$ for the work done by the system, as
+	established at the start.
+	\begin{equation}
+		Q_0 = W_C + W_S
+	\end{equation}
+
+	Thus, the total heat that flows out from the master reservoir is
+	the sum of the work done by the Carnot engine and the work done
+	by the system.
+
+	Effectively, this is the perfect conversion of heat into work.
+	From the second law, we insist that
+	\begin{equation}
+		W_C + W_S \leq 0
+	\end{equation}
+	otherwise there would be a violation. This inequality comes from
+	the fact that the work that is coming out of the Carnot engine
+	must actually be negative, so that we are doing work
+	\textit{on} these engines to convert heat from the
+	master reservoir to work done by the system. If this quantity is
+	negative, we expect that $W_S \leq W_C$ where both sides
+	are positive, if this shows the magnitude of both terms, then it
+	makes sense that the work we are doing on the system must either
+	result in the same amount of work done by the system (perfect
+	efficiency), or less than that. If $W_S > W_C$, this
+	shows that the work we are doing on the system is resulting in
+	more work than what we are putting in, which is forbidden.
+
+	Therefore, $Q_0  = \sum_i \delta Q^0_i \leq 0$. Using the Carnot relation,
+	which is that the ratio of the heat is equal to the ratio of the
+	temperature, we get
+	\begin{equation}
+		T_0 \sum_i \frac{\delta Q_i}{T_C}  = \sum_i
+		\frac{\delta Q_i}{T_C}\leq 0
+	\end{equation}
+
+	If we take the limit as each $\delta Q_i$ gets
+	incredibly small or $i \rightarrow \infty$, the temperature of
+	the reservoir becomes the temperature of the system. We arrive
+	at
+	\begin{equation}
+		\oint \frac{dQ}{T} \leq 0
+	\end{equation}
+\end{derivation}
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./multiple_carnot_engines.svg}
+	\caption{A master reservoir connected to the system via multiple  Carnot
+		engines.}%
+	\label{fig:multiple_carnot_engines}
+\end{figure}
+
+We have proved that any valid system, reversible or
+irreversible, must obey this inequality.
+
+\section{Entropy}%
+\label{sec:entropy}
+
+\begin{definition}
+	For a reversible closed cycle, the LHS expression
+	in~\ref{eq:clausius_theorem} is exactly equal to 0, which
+	indicates that it is a state function. We write this state
+	function as entropy $S$
+
+	\begin{equation}
+		\begin{aligned}
+			\label{eq:entropy}
+			\dd{S}  & = \frac{\dbar Q_{\mathrm{rev}}}{T} \\
+			T\dd{S} & = \dbar Q_{\mathrm{rev}}
+		\end{aligned}
+	\end{equation}
+\end{definition}
+
+Like any state function, the difference of entry at two points
+is just the integral evaluated at those two points.
+
+This is the thermodynamic definition of entropy. Later, we will
+look at the statistical interpretation in terms of disorder.
+
+We can directly measure $S$ as a function of
+temperature if we keep V the same. Taking the partial derivative
+of $T$ on each side, we arrive at
+
+\begin{equation}
+	C_V = {\left(\pdv{Q}{T}\right)}_V =
+	T{\left(\pdv{S}{T}\right)}_V
+\end{equation}
+
+\begin{definition}
+	Entropy is expressed as a function of temperature as
+	\begin{equation}
+		\label{eq:entropy_from_temperature}
+		S(T) = \int_0^T\frac{C(T)}{T}\dd{T}
+	\end{equation}
+\end{definition}
+
+In other words, entropy is the area under a
+$(C/T)$-$T$ curve.
+
+Substitute the differential of entropy into the first law,
+expressed by equation~\ref{eq:first_law}, we can also write
+the first law for as
+
+\begin{equation}
+	\label{eq:first_law_entropy}
+	\dd{U} = T\dd{S} -
+	p\dd{V}
+\end{equation}
+
+This applies for irreversible changes as well as reversible
+processes. How can we justify this?
+
+For reversible changes,\, $\dbar W = -p\dd{V}$ and\,
+$\dbar Q = T \dd{S}$, while for irreversible changes\,
+$\dbar W \geq -p\dd{V}$ and\, $\dbar Q \leq T\dd{S}$. If we add
+the irreversible terms together it all balances out and we still
+get $\dd{U}$. Another way of looking at it is
+that~\ref{eq:first_law_entropy} is composed of only state
+function,s thus it must be valid for all changes, independent of
+path.
+
+\section{Irreversibility---entropy cannot decrease}%
+\label{sec:irreversibility}
+
+We can prove that entropy cannot decrease. Consider a cyclic
+process which has irreversible and reversible parts, as shown in
+Figure~\ref{fig:entropy_cannot_decrease}.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./entropy_cannot_decrease.svg}
+	\caption{A cyclic process that has irreversible process from A to B and
+		reversible process from B to A.}%
+	\label{fig:entropy_cannot_decrease}
+\end{figure}
+
+\begin{derivation}
+
+	From Clausius' theorem in Equation~\ref{eq:clausius_theorem},
+
+	\begin{equation}
+		\begin{aligned}
+			\int_A^B \frac{\dbar Q}{T} + \int_B^A
+			\frac{\dbar Q_{\mathrm{rev}}}{T}          & \leq 0        \\
+			\int_A^B \frac{\dbar Q_{\mathrm{rev}}}{T} & \geq \int_A^B
+			\frac{\dbar Q}{T}
+		\end{aligned}
+	\end{equation}
+
+	If we let A tend to B so the points become infinitesimally close
+	together, we have the differential form instead, substitute in
+	$\dd{S}$, we get that for an
+	\textit{isolated system}, where\, $\dbar Q = 0$
+
+	\begin{equation}
+		\label{eq:entropy_cannot_decrease}
+		\dd{S} \geq \frac{\dbar Q}{T} \equiv
+		\dd{S} \geq 0
+	\end{equation}
+
+	This means for an isolated system, entropy
+	\textbf{cannot} decrease.
+\end{derivation}
+
+\section{The thermodynamic arrow of time}%
+\label{sec:the_thermodynamic_arrow_of_time}
+
+Hence, the entropy of the universe must increase with time,
+since the universe is an isolated system. Increasing entropy is
+synonymous with increasing ``time''. We can consider this to be
+the thermodynamic arrow of time.
+
+Later, we will consider the statistical interpretation of
+entropy.
+
+\section{Joule expansion}%
+\label{sec:joule_expansion}
+
+Suppose we have two chambers that are thermally isolated. They
+are connected by a tube with a valve. Initially, all the gas is
+in the left chamber. When we suddenly open the valve, the change
+is \textit{irreversible}, so the pressure and volume are not
+well-defined during the expansion. This is called a
+\textit{free expansion} so the gas \textbf{does not do work on the surroundings.}
+
+We now ask: What is the change in entropy when the system
+reaches its final state (it is in internal equilibrium)?
+
+We don't know specifically the path, it is not well-defined.
+What we know, however, is the start and end points. Since
+entropy is a state function, we fortunately only need the start
+and end points. Effectively, we can use a well-defined path
+which would give us the same answer since we are dealing with
+path-independent functions.
+
+We choose a reversible isothermal path. The path are different
+but if pressure and volume are the same at the start and end
+points, it will be equivalent to the irreversible path.
+
+Since the path is isothermal, $U = U(T) = 0$ so from
+the first law and the ideal gas relations, we have
+\begin{equation}
+	\dd{S} = nR\frac{\dd{V}}{V}
+\end{equation}
+
+We can further integrate this to give us a simple result.
+
+\begin{definition}
+	In the \textbf{isothermal} case, the change in entropy is
+	given as
+	\begin{equation}
+		\label{eq:isothermal_entropy_change}
+		\Delta S = nR\naturallogarithm{\frac{V_1}{V_0}}
+	\end{equation}
+\end{definition}
+
+We only calculated this for a system---the change in the entropy
+of the universe is not necessarily the same for the reversible
+and irreversible expansion.
+
+\chapter{Lecture 5 (Week 14)}%
+\label{cha:lecture_5}
+
+\section{Thermodynamic Potentials}%
+\label{sec:thermodynamic_potentials}
+
+We can combine state functions to make another state function.
+There are infinitely many possible combinations but only a few
+are useful. Here are several examples:
+\begin{center}
+	\begin{tabular}{l l}
+		$U$               & Internal energy       \\
+		$F = U - TS$      & Helmholtz free energy \\
+		$G = U - TS + pV$ & Gibbs free energy     \\
+		$H = U +pV$       & Enthalpy              \\
+	\end{tabular}
+\end{center}
+
+These definitions are only correct where the work term\,
+$\dbar W = -p \dd{V}$. Also, we assume that it is a closed
+system with a fixed number of particles (gas cannot leave the
+system). We will now look at each of the following examples in
+turn.
+
+\section{Internal energy}%
+\label{sec:internal_energy}
+
+Looking at~\ref{eq:first_law_entropy}, we see that
+$U = U(S,V)$. We call $S$ and
+$V$ as the natural variables of
+$U$. Recall from
+Definition~\ref{def:exact_differentials}, we can find this for
+$U$ since it is a state function.
+
+Comparing the exact differential and the equation expressing the
+first law, we find that
+
+\begin{equation}
+	T = {\left(\pdv{U}{S}\right)}_V\,\,\text{and}\,\, p
+	= -{\left(\pdv{U}{V}\right)}_S
+\end{equation}
+
+\section{Helmholtz Free energy}%
+\label{sec:helmholtz_free_energy}
+
+Using the first law, we can expand the equation for the
+Helmholtz free energy. We find that
+\begin{equation}
+	\label{eq:helmholtz_free_energy}
+	F = F(V,T)\,\, \text{and}
+	\,\,\dd{F} = -p\dd{V} -
+	S\dd{T}
+\end{equation}
+where its natural variables are $V$ and
+$T$.
+
+Its exact differential leads to the results that
+\begin{equation}
+	p = -{\left(\pdv{F}{V}\right)}_T\,\, \text{and}
+	\,\, S = -{\left(\pdv{F}{T}\right)}_V
+\end{equation}
+This is particular useful because $V$ and
+$T$ are often common experiment conditions.
+The system will evolve to minimise F at constant
+$V$ and $T$. This means
+as the system evolves, it will do work on the environment in
+order to minimise $F$, so that
+$F$ is the maximum work you can get out of a
+system (hence ``free'' energy).
+
+\section{Gibbs Free energy}%
+\label{sec:gibbs_free_energy}
+
+Doing similar steps as before, we find that
+\begin{equation}
+	\label{eq:gibbs_free_energy}
+	G = G(p,T)\,\, \text{and} \,\,
+	\dd{G} = -S\dd{T} +
+	V\dd{p}
+\end{equation}
+Its exact differentials show that
+
+\begin{equation}
+	S = -{\left(\pdv{G}{T}\right)}_p\,\, \text{and}\,\,
+	V = {\left(\pdv{G}{p}\right)}_T
+\end{equation}
+
+Same with F, the system will evolve to minimise G. So G is the
+maximum work you can get out of the system with constant
+$p$, and $T$
+
+\section{Enthalpy}%
+\label{sec:enthalpy}
+
+Doing similar steps as before, we find that
+\begin{equation}
+	H = H(S,p)\,\, \text{and} \,\,
+	\dd{H} = T\dd{S} +
+	V\dd{p}
+\end{equation}
+Its exact differentials show that
+
+\begin{equation}
+	T = {\left(\pdv{H}{S}\right)}_p\,\, \text{and}\,\,
+	V = {\left(\pdv{H}{p}\right)}_S
+\end{equation}
+
+Note that constant $S$ is the same as
+constant $Q$, the cycle is adiabatic.
+Enthalpy as a quantity is useful because if you have an
+adiabatic change at constant pressure, $\Delta H$
+is the heat absorbed by the system at constant
+$p$ (e.g., a chemical reaction). At constant
+pressure, $\dd{H} = \dd{Q}$.
+
+\section{Maths of partial derivatives}%
+\label{sec:maths_of_partial_derivatives}
+
+Proofs aren't necessarily, but these following identities are
+extremely useful.
+
+\begin{definition}
+	Below are some partial derivative identities:
+	\begin{enumerate}
+		\item Chain rule (all terms must have the same constraints)
+		      \begin{equation}
+			      {\left(\pdv{z}{x}\right)}_y ={\left(\pdv{z}{y}\right)}_y {\left(\pdv{y}{x}\right)}_y
+		      \end{equation}
+		\item Reciprocal theorem
+		      \begin{equation}
+			      {\left(\pdv{z}{x}\right)}_y = \frac{1}{{\left(\pdv{x}{z}\right)}_y}
+		      \end{equation}
+		\item Reciprocity theorem or triple product rule
+		      \begin{equation}
+			      {\left(\pdv{x}{y}\right)}_z	     {\left(\pdv{y}{z}\right)}_x
+			      {\left(\pdv{z}{x}\right)}_y	      = -1
+		      \end{equation}
+		\item Convert an exact differential into a partial derivative into a
+		      partial one
+		      \begin{equation}
+			      \dd{S} =
+			      {\left(\pdv{S}{T}\right)}_V\dd{T} +
+			      {\left(\pdv{S}{V}\right)}_T\dd{V}
+			      \,\Rightarrow\,
+			      {\left(\pdv{S}{T}\right)}_p
+				      = {\left(\pdv{S}{T}\right)}_V +
+			      {\left(\pdv{S}{V}\right)}_T
+			      {\left(\pdv{V}{T}\right)}_p
+		      \end{equation}
+		\item Maxwell relations (exchange derivatives w.r.t.\ natural
+		      variables). See~\ref{sub:maxwell_relations}.
+	\end{enumerate}
+\end{definition}
+
+\subsection{Pseudo-proofs}%
+\label{sub:pseudo_proofs}
+
+These proofs are not presented explicitly. They are meant to
+help understand the identities in~\ref{sec:maths_of_partial_derivatives}.
+
+To prove the \textbf{reciprocal} and \textbf{reciprocity}
+theorems, take a function $f(x,y,z) = 0$, with
+$x = x(y,z)$, $y = y(x,z)$, and
+$z = (x,y)$. If we write $x$ and
+$z$ in differential forms, and substitute
+$\dd{x}$ into the expression for
+$\dd{z}$, we notice that we can equate the
+coefficients of $\dd{z}$, which shows the
+\textbf{reciprocal} theorem holds.
+
+Then if we look at the coefficients of $\dd{y}$,
+we can rearrange and use \textbf{reciprocal} theorem to show
+the \textbf{reciprocity} theorem.
+
+\subsection{Maxwell relations}%
+\label{sub:maxwell_relations}
+
+To demonstrate the Maxwell relations, let's use the Helmholtz
+relation, see Section~\ref{sec:helmholtz_free_energy} for the
+differential forms.
+
+If we take the derivatives again with respect to other natural
+variables,
+\begin{equation}
+	{\left(\pdv{S}{V}\right)}_T =
+	-{\left(\pdv{F}{V}{T}\right)}_{V,T}\,\, \text{and}
+	\,\,{\left(\pdv{p}{T}\right)}_V = {\left(\pdv{F}{T}{V}\right)}_{V,T}
+\end{equation}
+we can see that
+\begin{equation}
+	{\left(\pdv{S}{V}\right)}_T = {\left(\pdv{p}{T}\right)}_V
+\end{equation}
+
+This is a Maxwell relation. We don't have to memorise all the
+Maxwell equations, but we can easily derive them when needed.
+
+\chapter{Lecture 6 (Week 14)}%
+\label{cha:lecture_6}
+
+\section{Cooling gases and Joule-Thomson expansion}%
+\label{sec:cooling_gases_joule_thomson_expansion}
+
+There are several ways to cool gases. One way is to expand gas
+\textit{adiabatically} and make it do work on the environment.
+This is different from a Joule expansion, where the gas expands
+freely. A Joule expansion does not do work on the environment.
+We can either do this using a piston and a flywheel
+(Figure~\ref{fig:piston_flywheel}) or by using a turbine (turbo
+expander) (Figure~\ref{fig:turbine_cool_gas}).
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./piston_flywheel.svg}
+	\caption{We open the high pressure valve, gas comes in the chamber and moves the piston up (doing work on
+		the piston), the flywheel spins with friction to remove energy and once the
+		piston reaches the highest position, it moves down. The low pressure valve is opened and low pressure
+		gas is forced out by the lowering piston.}%
+	\label{fig:piston_flywheel}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./turbine_cool_gas.svg}
+	\caption{High pressure gas comes in, drives the turbine by doing work on it, heat is dissipated through friction, and then low pressure gas comes out.}%
+	\label{fig:turbine_cool_gas}
+\end{figure}
+
+Adiabatic expansion is quite inefficient at low temperature. A
+better alternative is the \textit{Joule-Thomson} or
+\textit{Joule-Kelvin} expansion (JT or JK process). See
+Figure~\ref{fig:joule_thomson_expansion}.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\linewidth]{./joule_thomson_expansion.svg}
+	\caption{High pressure gas comes in and goes the rough a porous plug
+		which removes a lot of energy through
+		friction, low pressure gas comes out of the other end and is pumped back
+		into the engine. The pressure difference is maintained with a
+		compressor. This principle of cooling is used in many devices
+		like refigerators, or helium liquefiers.}%
+	\label{fig:joule_thomson_expansion}
+\end{figure}
+
+We assume the JT process is adiabatic---high pressure gas comes
+through and expands to the other side without any heat exchange.
+
+\subsection{Conservation of enthalpy}%
+\label{sub:conservation_of_enthalpy}
+
+We might want to find the work done as gas moves through the
+plug in the centre.
+
+Imagine, for the sake of representation, there are piston on
+both sides of the engine. The left piston maintains pressure
+$p_1$ as it forces gas through the plug, while
+the right piston moves to the right at $p_1$
+as gas moves through plug. Force is $F = pA$,
+therefore:
+
+\begin{tabular}{l l}
+	The work done on gas to move distance $L_1$ in the left chamber  & $W = p_1 A L_1 = p_1 V_1$   \\
+	The work done on gas to move distance $L_2$ in the right chamber & $W = P_2 A L_2$ = $p_2 V_2$ \\
+\end{tabular}\\
+
+\begin{definition}
+	The net work done on the gas in a Joule-Thomson expansion is
+	\begin{equation}
+		\label{eq:joule_thomson_expansion_work}
+		\Delta W = p_1 V_1 - p_2 V_2
+	\end{equation}
+\end{definition}
+
+As the gas moves through the plug, there is a change in internal
+energy, $\Delta U = U_2 - U_1$. From the first law, for an
+adiabatic process (no heat transfer), $\Delta U = \Delta W$.
+We know $\Delta W$ from~\ref{eq:joule_thomson_expansion_work}, so
+\begin{equation}
+	p_1 V_1 + U_1 = p_2 V_2 + U_2
+\end{equation}
+
+This is the definition of \textit{enthalpy} which we
+mentioned in Section~\ref{sec:enthalpy}, which means
+$H_1 = H_2$. In other words, enthalpy is conserved
+in a JT expansion.
+
+\subsection{The Joule-Thomson coefficient}%
+\label{sub:the_joule_thomson_coefficient}
+
+We can quantify how much cooling takes place by defining a
+coefficient, called the Joule-Thomson coefficient as
+
+\begin{equation}
+	\label{eq:joule_thomson_coefficient_1}
+	\mu_{\mathrm{JT}}
+	=
+	{\left(\pdv{T}{p}\right)}_H
+\end{equation}
+
+Since the constant $H$ is difficult to use
+so we can derive an expression at constant pressure instead. We
+can use what we know from previous lectures
+and~\ref{sec:maths_of_partial_derivatives} to get to this.
+
+\begin{derivation}
+	From the reciprocity theorem, we can write
+	\begin{equation}
+		{\left(\pdv{T}{p}\right)}_H
+		{\left(\pdv{p}{H}\right)}_T
+		{\left(\pdv{H}{T}\right)}_P = -1
+	\end{equation}
+	Substitute this into our definition for the JT coefficient so
+	far to get
+	\begin{equation}
+		\mu_{\mathrm{JT}}
+		=
+		-\frac{1}{{\left(\pdv{p}{H}\right)}_T
+		{\left(\pdv{H}{T}\right)}_p}
+	\end{equation}
+	We then borrow our results from Section~\ref{sec:enthalpy}
+	the differential form of enthalpy, divide by
+	$\dd{T}$ at constant $p$ to get
+	\begin{equation}
+		{\left(\pdv{H}{T}\right)}_p =
+		T{\left(\pdv{S}{T}\right)}_p =
+			{\left(\pdv{Q}{T}\right)}_p = C_p
+	\end{equation}
+	We also divide by $\dd{p}$ at constant
+	$T$
+	\begin{equation}
+		{\left(\pdv{H}{p}\right)}_T =
+		T{\left(\pdv{S}{p}\right)}_T + V
+	\end{equation}
+	Substitute back into what we got from reciprocity to get
+	\begin{equation}
+		\mu_{\mathrm{JT}}
+		=
+		-\frac{1}{C_p}\left[T{\left(\pdv{S}{p}\right)}_T + V\right]
+	\end{equation}
+	We use a Maxwell relation to make this nicer
+	\begin{equation}
+		{\left(\pdv{S}{p}\right)}_T = -{\left(\pdv{V}{T}\right)}_p
+	\end{equation}
+\end{derivation}
+
+We can then use this for our final expression:
+\begin{definition}
+	The JT coefficient at constant pressure is
+	\begin{equation}
+		\label{eq:joule_thomson_coefficient}
+		\mu_{\mathrm{JT}}
+		=
+		\frac{1}{C_p}\left[T{\left(\pdv{V}{T}\right)}_p-V\right]
+	\end{equation}
+\end{definition}
+
+To get cooling we need $\mu_{\mathrm{JT}} > 0$. For an ideal
+gas, $\mu_{\mathrm{JT}} = 0$, so there's never any cooling. But
+for a real gas, this varies with temperature. We call the
+temperature below which you will get cooling via the JT process
+the \textbf{inversion temperature}.
+
+\begin{definition}
+	The inversion temperature $T_i$ for a JT
+	process is
+	\begin{equation}
+		{\left(\pdv{V}{T}\right)}_p = \frac{V}{T_i}
+	\end{equation}
+	Below this temperature, we can cool gas using the JT process,
+	beyond this temperature, we can use any adiabatic expansion to
+	get to $T_i$.
+\end{definition}
+
+There are JT coefficient curves at various temperatures for
+different gases.
+
+\subsection{Helium liquefier (not examined)}%
+\label{sub:helium_liquefier}
+
+From a gas storage, the gas travels through a compressor. Next,
+it goes through a heat exchanger, then through the Turbine 1,
+then through another heat exchanger and finally through Turbine
+2. It is then pushed back around the circuit once again, in
+order to cool down other incoming gases (thus it functions as
+the heat reservoir in the heat exchangers). It goes through this
+step until the final low-pressure gas that leaves Turbine 2
+cools from \si{300\kelvin} to \si{10\kelvin}.
+
+At the same time, the compressor also has another stream coming
+into the liquefier, but only going through the heat exchanger
+and not through the turbines (the first stream is used to
+maintain heat exchange for this stream), after it leaves this,
+it has the same temperature as the other stream, but maintains a
+high-pressure.
+
+After that this high-pressure gas enters the JT process to
+become liquefied.
+
+\chapter{Lecture 7 (Week 15)}%
+\label{cha:lecture_7}
+
+\section{Chemical potential}%
+\label{sec:chemical_potential}
+
+Consider 2 systems which can exchange heat and particles. When
+we add particles, we change the energy so we need to modify the
+first law. In a similar way to~\ref{cha:lecture_5}, we
+notice the natural variables when we write the expression in
+differential form.
+
+\begin{equation}
+	\label{eq:first_law_chemical_potential}
+	\dd{U} = T\dd{S} -
+	p\dd{V} + \mu\dd{N}
+\end{equation}
+
+If we find the exact differential of $U$, we
+notice the new natural variable $N$, gives
+us a coefficient, $\mu$. This is the chemical
+potential, it is given by
+\begin{equation}
+	\label{eq:chemical_potential}
+	\mu
+	=
+	{\left(\pdv{U}{N}\right)}_{S,V}
+\end{equation}
+
+We add this extra potential to all the other equations we have
+looked at for potentials and energies. Thus, we end up with the
+following equations.
+
+\begin{equation}
+	\mu
+	=
+	{\left(\pdv{U}{N}\right)}_{S,V} +
+	{\left(\pdv{F}{N}\right)}_{T,V} +
+	{\left(\pdv{G}{N}\right)}_{T,p}+
+	{\left(\pdv{H}{N}\right)}_{S,p}
+\end{equation}
+
+However, these equations are not all the same. While
+$V,S$ are extensive and scale with the size of
+the system, $p,T$ are intensive and do not
+scale.
+
+Thus, only $G$ scales with the size of the
+system, since its intensive variables are kept constant.
+
+\begin{definition}
+	For a homogeneous system, $G$ is proportional
+	to $N$, and we have the relation
+	\begin{equation}
+		\mu
+		=
+		\frac{G}{N}
+	\end{equation}
+\end{definition}
+
+Therefore, an alternative definition of the chemical potential
+is the \textit{Gibbs} free energy per particle for an
+homogeneous system.
+
+\subsection{Physical meaning of chemical potential}%
+\label{sub:physical_meaning_of_chemical_potential}
+
+Consider a box with a sliding partition which is porous and
+thermally conductive. The two sides can exchange heat and
+particles. Both partitions are isolated from the environment.
+See Figure~\ref{fig:chemical_potential_box}.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\linewidth]{./chemical_potential.svg}
+	\caption{A movable partition separating A and B}%
+	\label{fig:chemical_potential_box}
+\end{figure}
+
+We can establish a few relations:
+
+\begin{equation}
+	\begin{aligned}
+		\dd{V}_A & = -\dd{V}_B \\
+		\dd{N}_A & = -\dd{N}_B \\
+		\dd{U}_A & = -\dd{U}_B \\
+	\end{aligned}
+\end{equation}
+
+Since $U = U(S,V,N)$, $S = S(U,V,N)$, the
+exact differential of $S$ would be
+
+\begin{equation}
+	{\left(\pdv{S}{U}\right)}_{V,N}\dd{U} +
+	{\left(\pdv{S}{V}\right)}_{V,N}\dd{V} +
+	{\left(\pdv{S}{N}\right)}_{U,v}\dd{N}
+\end{equation}
+
+Rearrange the first law with the chemical potential for
+$dS$. We recognise that the total entropy the
+entropy of A plus the entropy of B. We can combine the relations
+derived above and get
+\begin{equation}
+	\dd{S} = \dd{S}_A +
+	\dd{S}_B =
+	\left(\frac{1}{T_A} - \frac{1}{T_B}\right)\dd{U}_A +
+	\left(\frac{P_A}{T_A} - \frac{P_B}{T_B}\right)\dd{V}_A
+	-\left(\frac{\mu_A}{T_A} - \frac{\mu_B}{T_B}\right)\dd{N}_A
+\end{equation}
+
+At equilibrium, the change in entropy $\dd{S}$ is
+0. This means we know at this state, $T_A = T_B$,
+$P_A = P_B$ and $\mu_A = \mu_B$. This is a
+simple case. We will now look at special cases.
+
+\subsection{Heat flow}%
+\label{sub:heat_flow}
+
+Now, the partitions are fixed, and the holes are closed. We get
+rid of the $\dd{V}$ and $\dd{N}$
+terms. In other words, we only have heat flow. Since the system
+evolves, and it is not in equilibrium $\dd{S} > 0$.
+Thus, if $T_B > T_A$ then $\dd{U}_A > 0$.
+All that means if partition B is hotter than partition A, then
+heat flows from B to A.
+
+\subsection{Particle flow}%
+\label{sub:particle_flow}
+
+If we fix the partition again, but let the holes open, then
+temperature will remain the same for both partition. So we are
+left with only the $\dd{N}$ term. Apply the same
+logic as the first case of heat flow, then we conclude that if
+chemical potential in B is higher than in A than the particles
+flow from B to A.
+
+\section{Gibbs-Duhem equation}%
+\label{sec:gibbs_duhem_equation}
+
+Using Equation~\ref{eq:chemical_potential} we can write
+\begin{equation}
+	\dd{G} = \mu \dd{N} +
+	N\dd{\mu}
+\end{equation}
+
+If we combine this with~\ref{eq:gibbs_free_energy}, we get the
+\textit{Gibbs-Duhem} equation.
+\begin{equation}
+	N\dd{\mu} = V\dd{p} -
+	S\dd{T}
+\end{equation}
+
+\begin{definition}
+	The Gibbs-Duhem equation in terms of intensive variables is
+	\begin{equation}
+		\label{eq:gibbs-duhem}
+		\dd{\mu} =
+		\hat{v}\dd{p} -
+		\hat{s}\dd{T}
+	\end{equation}
+	where $ \hat{v} = V/N $ and $ \hat{s} = S/N $, which
+	are specific volumes and specific entropy.
+\end{definition}
+
+\section{Clausis-Clapeyron equation}%
+\label{sec:clausis_clapeyron_equation}
+
+This equation is used to analyse the following situation.
+Consider a system where two phases of matter coexist. There is a
+first order discontinuous transition between the two phases with
+a latent heat. A common example would be a gas/liquid transition
+in $\mathrm{H}_2\mathrm{O}$. See Figure~\ref{fig:clausis-clapeyron}.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./clausis-clapeyron.svg}
+	\caption{A system with pressure and temperature on the phase coexisting
+		line. At any other $(p,T)$ that does not lie on
+		this line, there cannot be coexistence of the two phases.}%
+	\label{fig:clausis-clapeyron}
+\end{figure}
+
+Now, consider a single point on the line at fixed
+$(p,T)$. The total Gibbs energy is the sum of
+that in each phase.
+\begin{equation}
+	\dd{G} = \dd{G}_1 +
+	\dd{G}_2
+\end{equation}
+
+In equilibrium, $\dd{G} = 0$ so using the expression
+for chemical potential in~\ref{eq:chemical_potential}, we can
+establish that
+\begin{equation}
+	\dd{G} = \mu_1 \dd{N}_1 +
+	\mu_2 \dd{N}_2 = 0
+\end{equation}
+
+Because we have a closed system, $\dd{N}_1 = -\dd{N}_2$, thus,
+this proves that along the phase co-existence line
+$\mu_1 = \mu_2$. Now we can use the Gibbs-Duhem equation
+(~\ref{eq:gibbs_free_energy}), we have
+\begin{equation}
+	\begin{aligned}
+		\hat{v}_1\dd{p} - \hat{s}_1\dd{T} & = \hat{v}_2\dd{p} - \hat{s}_1 \dd{T}                      \\
+		\dv{p}{T}                         & = \frac{ \hat{s}_1 - \hat{s}_2 }{ \hat{v}_1 - \hat{v}_2 }
+	\end{aligned}
+\end{equation}
+
+So the slope $\dv{p}{T}$ is related to the
+difference in specific entropy and specific volumes of the two
+phases.
+
+We can also write the equation in terms of latent heat (the heat
+absorbed going from phase 1 to 2). Latent heat is expressed as
+\begin{equation}
+	\hat{l} = \frac{L}{N} =
+	\frac{\Delta Q}{N} = \frac{T}{N} \Delta S =
+	\frac{T}{N}( S_2 - S_1 ) = T( \hat{s}_2 -
+	\hat{s}_1 )
+\end{equation}
+
+Thus, our slope is now
+\begin{equation}
+\end{equation}
+
+\begin{definition}
+	Therefore, we can write the Clausis-Clapeyron equations in two
+	different ways:
+	\begin{equation}
+		\label{eq:clausis-clapeyron-equations}
+		\dv{p}{T} =
+		\begin{cases}
+			( \hat{s}_1 - \hat{s}_2 )/( \hat{v}_1 - \hat{v}_2 ) \\
+			{ \hat{l} }/{T ( \hat{v}_2 - \hat{v}_1 )}
+		\end{cases}
+	\end{equation}
+	The signs of L has to correspond to the change in volume.
+\end{definition}
+
+\section{Phase diagrams}%
+\label{sec:phase_diagrams}
+
+For most materials, the density of the solid phase is higher
+than the liquid phase. However, for $\mathrm{H}_2\mathrm{O}$, the
+opposite is true due to hydrogen bonding in ice.
+
+Relevantly, 2 phases exist along the $p\mathrm{-}T$
+line but 3 phases exist at the triple point, which is a single
+point of intersection between the different lines of coexisting
+phases.
+
+\begin{example}
+	\textbf{How can we melt ice with pressure?}
+	How much pressure do I need to liquefy ice at
+	\num{-5} \unit{\celsius}? Looking at the
+	phase diagram of water, we can draw a line from
+	\num{-5} \unit{\celsius} to the line of
+	coexistence (that's the critical point at which ice starts to
+	melt), and find what temperature this is. To do this, we first
+	must know the slope $\dv{p}{T}$.
+	\begin{center}
+		\includesvg[width=0.9\columnwidth]{./ice_melting.svg}%
+		\captionof{figure}{Phase diagram with a coexisting line between solid and liquid
+			phases.}
+	\end{center}
+
+	We know Clausis-Clapeyron equations from~\ref{eq:clausis-clapeyron-equations}
+	and we also know about some quantities about water,
+	$ \hat{l} = \SI{3.3e5}{\joule \per\kilogram}$. The specific volume
+	$ \hat{v} $, when using kilograms, is inversely
+	proportional to the density, so that
+	\begin{equation}
+		\Delta \hat{v}
+		=
+		\frac{1}{\rho_\mathrm{water}} - \frac{1}{\rho_\mathrm{ice}}
+	\end{equation}
+	We also know the corresponding densities at
+	\SI{0}{\celsius}. This gives us a value for
+	$\dv{p}{T}$. We need $\Delta p = \dv{p}{T} \Delta T$. The
+	answer is about \SI{68}{\mega\pascal}. This is equivalent to a
+	person who weights \SI{80}{\kilogram} wearing ice-skating
+	shoes of length \SI{20}{\centi\metre} with width
+	\SI{60}{\micro\metre}.
+\end{example}
+
+\chapter{Lecture 8 (Week 15)}%
+\label{cha:lecture_8}
+
+\section{The Third Law}%
+\label{sec:the_third_law}
+
+Walter Nernst (1906): \textit{At absolute zero all reactions take place with no change in
+	entropy}. In other words:
+\begin{equation}
+	\Delta G - \Delta H \rightarrow 0
+	\,\,\mathrm{as}\,\, T \rightarrow 0
+\end{equation}
+
+\begin{definition}
+	The third law is stated by Max Planck (1911) as:
+
+	\textit{Entropy of all systems in internal equilibrium tends to a
+		constant at absolute zero, and so may be taken at zero.}
+\end{definition}
+
+Although note that not everything is in \textit{internal}
+equilibrium, e.g., a glass. It is a disordered solid. It does
+not have a crystallise structure but rather a random
+arrangement. It would take a very long time to come into
+internal equilibrium (a meta-state).
+
+Remember that we can calculate entropy by integrating the
+specific heat, as stated in Equation~\ref{eq:entropy_from_temperature}.
+
+\subsection{Consequences of the third law}%
+\label{sub:consequences_of_the_third_law}
+
+\begin{enumerate}
+	\item Any system must have only one available state at
+	      $T = 0$, in other words, there must be no
+	      degenerate ground states. $S = 0$ at
+	      $T = 0$.
+	\item Heat capacity must go to zero at $T = 0$.
+	      $\naturallogarithm \rightarrow -\infty$ as $T \rightarrow 0$.
+	      \begin{equation}
+		      C = \dv{Q}{T} = T\dv{S}{T} =
+		      \dv{S}{\naturallogarithm{T}}
+	      \end{equation}
+	\item It is impossible to cool something to $T=0$ in
+	      a finite number of steps.
+\end{enumerate}
+
+From these consequences, we see that for an ideal gas where
+$C = \frac{3}{2}k_{B}N$. This is inconsistent with the third
+law. When we look later at Fermi gas, or a crystal lattice,
+these are all $T$-dependent. Thus, they are
+consistent with the third law.
+
+\begin{example}
+	Let's apply the third law for a magnetic system. Where
+	\begin{equation}
+		\dbar W = B\dd{m}
+	\end{equation}
+	Since $B$ replaced $p$
+	and $m$ replaced $V$, we
+	can use the relations in Section~\ref{sec:gibbs_free_energy} to
+	arrive at
+	\begin{equation}
+		S = {\left(\pdv{G}{T}\right)}_B\,\, \text{and}\,\,
+		m = - {\left(\pdv{G}{B}\right)}_T
+	\end{equation}
+
+	Taking the second derivative to get the Maxwell equation
+	\begin{equation}
+		{\left(\pdv{S}{B}\right)}_T
+			=
+			{\left(\pdv{m}{T}\right)}_B
+	\end{equation}
+
+	We can use Curie's Law which states that the susceptibility,
+	$\chi$ of a paramagnet is inversely
+	proportional to $T$, where
+	$\chi$ is
+	\begin{equation}
+		\chi = \frac{M}{\mu_0 B} = \frac{m}{\mu_0 vB}
+	\end{equation}
+
+	Equate the two and we get that
+	\begin{equation}
+		{\left(\pdv{S}{B}\right)}_T \equiv
+		\pdv{m}{T} \propto -\frac{1}{T^2}
+	\end{equation}
+
+	But at $T = 0$, $S = 0$ thus
+	Curie's Law must break down at absolute zero.
+
+	We can explore this by looking at magnetic cooling with a
+	paramagnetic solid. For a paramagnet, the magnetic field causes
+	spins to align with field, thus lowering entropy. The higher the
+	field, the more aligned the spins are.
+
+	If we start a low $B$ state, we magnetise it
+	isothermally (increase $B$) by connecting it
+	to a cold bath, this decreases the entropy. If we release the
+	switch and turn off the field, then the system cools down
+	adiabatically. We end up again at low $B$.
+	We essentially just cooled down the paramagnet we started with,
+	with $B$ unchanged. But both curves get
+	closer and closer together, so we need an infinite number of
+	steps to reach 0. See the curves below
+
+	\centering
+	\includesvg[width=0.8\columnwidth]{./paramagnet_cooling.svg}%
+	\label{fig:cooling_paramagnets} \captionof{figure}{$S\mathrm{-}T$ curves for low and high
+		$B$.}
+\end{example}
+
+\chapter{Lecture 9 (Week 15)}%
+\label{cha:lecture_9}
+
+\section{Introduction}%
+\label{sec:int}
+
+Now that we have covered Classical Thermal Physics, we will look
+at Statistical Mechanics
+
+Statistical mechanics involve statistical averages of properties
+of the system, such as energy. We are expected to work out the
+set of possible configurational states of the system, calculate
+the probability distribution of these states, and calculate the
+macroscopic thermodynamic properties $(p, S, U)$
+from the probability distribution.
+
+\section{Counting states}%
+\label{sec:counting_states}
+
+A microstate is the number of permutations. It is similar to
+asking for the number of ways of putting $n$
+balls into $r$ boxes (permutations). It
+concerns \textit{individual} arrangement. Whether the balls
+are identical or different, or that $r \neq n$,
+will affect our formula for calculating the answers.
+
+A macrostate is the number of balls and boxes. It is the overall
+picture of the system.
+
+\begin{example}
+	Electrons have spin which can either be up or down. If we have
+	$N = 4$ lattice sites, then this is our
+	macrostate. Let's say we have 4 electrons, two are up and two
+	are down, $N_u = 2$ and $N_d = 2$.
+	There are 6 distinguishable microstates. We get this through the
+	following formula.
+	\begin{equation}
+		\Omega = \frac{N!}{N_d! N_u!}
+	\end{equation}
+	There are $N$ electrons and
+	$N$ sites, that means there are
+	$N!$ ways of rearranging them. However, since
+	all the $N_u$ are identical and all the
+	$N_d$ are identical, we divide by
+	$N_u! N_d!$
+
+	Later, we find that $S = k_B \naturallogarithm{\Omega}$. So if we know
+	$\Omega$, we can find $S$.
+
+\end{example}
+
+\section{Stirling's formula}%
+\label{sec:stirling_s_formula}
+
+We often work with $\naturallogarithm{\Omega}$ so approximations are
+useful, note that the second one is better than the first one.
+
+\begin{definition}
+	Stirling's approximations for $\naturallogarithm{n}!$ are
+	\begin{equation}
+		\begin{aligned}
+			\naturallogarithm{n}! & \simeq n\naturallogarithm{n} - n,\,\,\,\, \gg 1                                          \\
+			\naturallogarithm{n}! & \simeq n\naturallogarithm{n} - n + \frac{1}{2}\naturallogarithm{2\pi n},\,\,\,\, n \gg 1
+		\end{aligned}
+	\end{equation}
+\end{definition}
+
+\section{Statistical Ensembles}%
+\label{sec:statistical_ensembles}
+
+\begin{definition}
+	An ensemble is a large number of virtual copies of a system
+	which are all the same but configured in random ways.
+
+	An ensemble average is then the average state of all these
+	virtual systems.
+
+	An statistical ensemble is then a probability distribution of
+	all possibles states of the system
+\end{definition}
+
+Averages are calculated by two following ways (we assume they
+give the \textit{same} answer)
+
+\begin{enumerate}
+	\item Take a \textbf{single} system and follow it over a long
+	      time, so that the system goes through all possible
+	      configurations.
+	\item Take a large number of identical (but randomly configured)
+	      systems and average over these at a single snapshot in time.
+	      This is called the ensemble average.
+\end{enumerate}
+
+\subsection{Types of Ensemble}%
+\label{sub:types_of_ensemble}
+
+Gibbs categorised three types of ensembles which refer to a
+system and how it interact with the surroundings. See
+Figure~\ref{fig:ensemble_types} for diagrams.
+
+\begin{enumerate}
+	\item \textbf{Micro-canonical ensemble:} This is an isolated system with fixed
+	      $U, V, N$. We can apply this ensemble to a whole
+	      gas as an isolated system.
+	\item \textbf{Canonical (standard) ensemble:} System is in contact with a thermal
+	      reservoir. $V, N, T$ fixed for the system. We can
+	      apply this ensemble if we consider each atom in the gas is a
+	      separate system, and the rest of the gas is the reservoir.
+	\item \textbf{Grand-canonical ensemble:} System can exchange heat and particles
+	      with the reservoir. $V, T, \mu$  are fixed for the
+	      system. We can apply this ensemble if a microstate of the
+	      configuration of the gas is a system. The rest of gas is
+	      reservoir.
+\end{enumerate}
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./ensembles.svg}
+	\caption{Different types of Ensembles}%
+	\label{fig:ensemble_types}
+\end{figure}
+
+\section{Principle of equal equilibrium probability}%
+\label{sec:principle_of_equal_equilibrium_probability}
+
+\begin{definition}
+	When a thermally isolated system comes into thermal equilibrium,
+	then the state probabilities of any set of mutually accessible
+	states become \textbf{equal}.
+
+	In a microcanonical ensemble, there is equal probability of any
+	state begin occupied.
+\end{definition}
+
+\section{Ergodic hypothesis}%
+\label{sec:ergodic_hypothesis}
+
+\begin{definition}
+	Given enough time the systems will explore all possible
+	microstates and will spend an equal amount of time in each of
+	them.
+
+	Implication of this is that in equilibrium an isolated system
+	will choose the macrostate with the most microstates. This is
+	the Second Law (to maximise entropy).
+\end{definition}
+
+\chapter{Lecture 10 (Week 15)}%
+\label{cha:lecture_10}
+
+\section{Energy and states}%
+\label{sec:energy_and_states}
+
+The problem for $x$ quanta and
+$N$ boxes is the same as asking how many
+ways you can arrange $x$ quanta and
+$N-1$ partitions in a line.
+
+The partitions separate the boxes, excluding the walls. Thus if
+there are $N$ boxes, there must be
+$N-1$ partitions.
+
+The total number of ways to arrange this would be
+$ \left(x+N-1\right)! $. Partitions are identical and so are
+quanta, thus we have to divide by $ \left(N-1\right)! x! $.
+
+Our final result is therefore
+
+\begin{definition}
+	To arrange $x$ quanta in
+	$N-1$ partitions or $N boxes$,
+	there would be
+	\begin{equation}
+		\Omega
+		=
+		\frac{\left(x+N-1\right)!}{x!\left(N-1\right)!}
+	\end{equation}
+	ways of doing this.
+\end{definition}
+
+The number of states is a very rapidly (slightly slower than
+exponential) increasing function of the total energy
+$x$ (if you plot a log plot versus
+$x$ it would appear almost linear).
+See~\ref{fig:energy_and_states}
+
+\section{Statistical Temperature}%
+\label{sec:statistical_temperature}
+
+Consider 2 systems \textbf{A} and
+\textbf{B} in thermal contact with each other but
+isolated from the surroundings, i.e.\ a Microcanonical ensemble.
+
+Find the conditions where the number of available states is
+maximum. This gives condition of thermal equilibrium.
+
+Total energy at any point is fixed because the system is
+thermally isolated.
+\begin{equation}
+	U_A + U_B = U_0 \Rightarrow \dv{U_A}{U_B} = -1
+\end{equation}
+
+The number of microstates is given by $\Omega(U_A)$ or
+$\Omega(U_B)$. The total number of states as a
+function of $U_A$ would be
+\begin{equation}
+	\Omega_{AB}
+	=
+	\Omega\left(U_A\right)\Omega\left(U_B\right)
+	=
+	\Omega\left(U_A\right)\Omega\left(U_0-U_A\right)
+\end{equation}
+Since $\Omega\left(U_0\right)$ is a very fast increasing
+function, the negative of that would be a fast decreasing
+function.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./energy_and_states.svg}
+	\caption{\textbf{(a)} shows the log plot of
+		$\Omega$ and
+		$x$, the total energy, \textbf{(b)} shows the number of states of two
+		microcanonical systems as a function of the energy of one.}%
+	\label{fig:energy_and_states}
+\end{figure}
+
+We can actually derive the mathematical relations for the
+maximum number of states, where the derivative of
+$\Omega_{AB}$ is zero. The steps are outlined briefly.
+
+\begin{derivation}
+	We start of with our definition for the total states and find
+	its derivative and rearrange a bit.
+	\begin{equation}
+		\begin{aligned}
+			\Omega_{AB}                          & = \Omega\left(U_A\right)\Omega\left(U_B\right)                                                               \\
+			\dv{\Omega_{AB}}{U_A}                & = \dv{\Omega_A}{U_A}\Omega_B + \dv{\Omega_B}{U_A}\Omega_A = 0                                                \\
+			\dv{\Omega_{AB}}{U_A}                & = \dv{\Omega_A}{U_A}\Omega_B - \dv{\Omega_B}{U_B}\Omega_A = 0,\,\,\, \mathrm{since}\,\,\, \dv{U_A}{U_B} = -1 \\
+			\frac{1}{\Omega_A}\dv{\Omega_A}{U_A} & = \frac{1}{\Omega_B}\dv{\Omega_B}{U_B}                                                                       \\
+		\end{aligned}
+	\end{equation}
+
+	This is equivalent to
+	\begin{equation}
+		\dv{\naturallogarithm{\Omega_A}}{U_A} = \dv{\naturallogarithm{\Omega_B}}{U_B}
+	\end{equation}
+	This is our condition for thermal equilibrium. Think of
+	Figure~\ref{fig:energy_and_states} (b), if the two derivatives are the
+	same then that's where the two curves meet.
+
+	Now, we can define the \textbf{statistical temperature} as
+	\begin{equation}
+		\label{eq:statistical_temperature}
+		\frac{1}{k_b T_A} = \dv{\naturallogarithm{\Omega_A}}{U_A}
+	\end{equation}
+	This is a bit of a leap in definition, but it is dimensionally
+	correct, and the Boltzmann constant $k_B$ is
+	included so that it agrees with the kelvin scale.
+\end{derivation}
+
+\section{Boltzmann entropy}%
+\label{sec:boltzmann_entropy}
+
+If we use the first law equation~\ref{eq:first_law_entropy}, we
+can write $T$ as
+\begin{equation}
+	\frac{1}{T} = {\left(\pdv{S}{U}\right)}_{V}
+\end{equation}
+
+If we compare this to Equation~\ref{eq:statistical_temperature}, we get
+the Boltzmann's equation for entropy.
+
+\begin{definition}
+	The Boltzmann's equation for entropy state that
+	\begin{equation}
+		\label{eq:boltzmann_entropy}
+		S = k_b \naturallogarithm{\Omega}
+	\end{equation}
+
+	A system will evolve to maximise $\Omega$. This
+	is consistent with the second law---the system will evolve to
+	maximise $S$.
+\end{definition}
+
+\chapter{Lecture 11 (Week 16)}%
+\label{cha:lecture_11}
+
+\section{Bolztmann distribution}%
+\label{sec:bolztmann_distribution}
+
+We note that random exchange lead to an exponential
+distribution. From the definition of entropy, we can confirm it
+does lead to a logarithmic distribution.
+
+Consider a small system \textbf{S}, with a single
+occupied state, in contact with a large reservoir
+\textbf{R}  but otherwise thermally isolated. This
+is a \textit{canonical ensemble}. See~\ref{sec:statistical_ensembles} for
+further definitions.
+
+We can say a few things about this system.
+\begin{itemize}
+	\item The total energy is $E_0$
+	\item The energy in \textbf{S} is $E_i$
+	\item The energy in \textbf{R} is $E_0 - E_i$
+	\item Assume $E_i \ll E_0$
+\end{itemize}
+
+What is the probability that the system has a particular energy
+$E_i$?
+
+We expect the probability to be proportional to the product of
+the number of states available to the small system (exactly one)
+and the number of states available to the reservoir (equals to
+$\Omega\left(E_0 - E_i\right)$). We can find this using Taylor
+expansion.
+
+\begin{derivation}
+	Expand $\naturallogarithm{\Omega\left(E_0 - E_i\right)}$
+	\begin{equation}
+		\naturallogarithm{\Omega\left(E_0 - E_i\right)}
+		=
+		\naturallogarithm{\Omega\left(E_0\right)} +
+		\dv{\naturallogarithm{\Omega\left(E_0\right)}}{E}\left(-E_i\right) +
+		\frac{1}{2}\dv[2]{\naturallogarithm{\Omega\left(E_0\right)}}{E}E_i^2
+	\end{equation}
+
+	From our definition of statistical temperature in
+	Equation~\ref{eq:statistical_temperature}, we can rewrite this into
+	\begin{equation}
+		\naturallogarithm{\Omega\left(E_0 - E_i\right)}
+		=
+		\naturallogarithm{\Omega\left(E_0\right)} -
+		\frac{E_i}{k_B T} -
+		\frac{1}{2k_B T^2}\dv{T}{E}E_i^2
+	\end{equation}
+
+	We can neglect the second order term if the reservoir is
+	sufficiently large. Then we can take the exponential of both
+	sides.
+	\begin{equation}
+		\Omega\left(E_0 - E_i\right)
+		=
+		\Omega\left(E_0\right)\exponential{\left(-\frac{E_i}{k_B T}\right)}
+	\end{equation}
+
+	Thus, the probability of of a given state being occupied can be
+	given as
+	\begin{equation}
+		P\left(E_i\right) \propto
+		\exponential\left(-\frac{E_i}{k_B T}\right)
+	\end{equation}
+	we call this the Boltzmann distribution function.
+\end{derivation}
+
+We also have to normalise this probability distribution function
+such that the sum of all probabilities is
+\num{1}. This gives us the normalisation
+constant $1/Z$. Where Z is called the
+\textit{partition function} and is given as
+\begin{equation}
+	Z = \sum_i \exponential{\left(-\frac{E_i}{k_B T}\right)}
+\end{equation}
+
+Note that this is the sum of \textit{all} states,
+not just all energy levels. Thus, if an energy level is
+degenerate (can have multiple states), we need to factor in the
+degeneracy factor $g_i$, so that the energy
+level is counted the correct number of times.
+
+\begin{definition}
+	For a canonical system, the Boltzmann Distribution is given as
+	\begin{equation}
+		\label{eq:boltzmann_canonical}
+		P\left(E_i\right) =
+		\frac{1}{Z}\exponential\left(-\frac{E_i}{k_B T}\right)
+	\end{equation}
+	where $Z$ is given as
+	\begin{equation}
+		Z = \sum_i g_i \exponential{\left(-\frac{E_i}{k_B T}\right)}
+	\end{equation}
+\end{definition}
+
+\begin{example}
+	Consider a system with two energy levels that are
+	non-degenerate. Then the partition function
+	$Z$ would be
+	\begin{equation}
+		Z = \sum_i e^{-\beta \epsilon_i} =
+		e^{-\beta \epsilon_1} + e^{-\beta \epsilon_2}
+	\end{equation}
+
+	Next, consider rotational energy levels of molecules. We have
+	calculated the quantum energy levels $E_J = \hbar^2 J \left(J + I\right)/2I$,
+	where $J$ is the angular momentum quantum
+	number and $I$ is the constant moment of
+	inertia. The levels are degenerate, for $J$
+	there are $2J + 1$ states. Then, the partition
+	function is
+	\begin{equation}
+		Z = \sum_{J=0}^\infty
+		\left(2J + I\right)\exponential\left(- \frac{J\beta \hbar^2}{2I}\left(J+1\right)\right)
+	\end{equation}
+\end{example}
+
+\section{Boltzmann-Gibbs Entropy}%
+\label{sec:boltzmann_gibbs_entropy}
+
+For an isolated system (a microcanonical ensemble), we have
+\begin{equation}
+	S = k_B \naturallogarithm{\Omega}
+\end{equation}
+The entropy can be viewed as a lack of information, i.e., the
+system can be in any of the $\Omega$ different
+microstates.
+
+The probability that the system is in any particular state is
+inversely proportional to $\Omega$.
+
+For the canonical ensemble, however, the probability is not the
+same for all states of the system. Instead, it is given by the
+Boltzmann factor in Equation~\ref{eq:boltzmann_canonical}.
+
+\begin{definition}
+	The general equation for Boltzmann-Gibbs entropy is
+	\begin{equation}
+		\label{eq:boltzmann_gibbs_entropy}
+		S  = -k_B \sum_i P_i \naturallogarithm{P_i}
+	\end{equation}
+	This applies for a canonical system. For a microcanonical
+	distribution, $S = k_B \naturallogarithm{\Omega}$.
+\end{definition}
+
+\chapter{Lecture 12 (Week 16)}%
+\label{cha:lecture_12}
+
+\section{The average of a distribution function}%
+\label{sec:the_average_of_a_distribution_function}
+
+\begin{definition}
+	For a discrete distribution, the average is given by
+	\begin{equation}
+		\left< X \right>
+		=
+		\sum_i P_i X_i
+	\end{equation}
+
+	For a continuous distribution, the average is given by
+	\begin{equation}
+		\left< x \right>
+		=
+		\int^\infty_{-\infty}
+		P\left(x\right)x\dd{x}
+	\end{equation}
+\end{definition}
+
+\section{Internal energy in terms of Z}%
+\label{sec:internal_energy_in_terms_of_z}
+
+The internal energy can be calculated as
+\begin{equation}
+	U = \sum_i P_i E_i = \frac{\sum_i E_i \exponential{\left(-\beta E_i\right)}}{\sum_i \exponential{\left(-\beta E_i\right)}}
+\end{equation}
+
+But we can express this in terms of the partition function as
+well.
+\begin{definition}
+	The internal energy is given as
+	\begin{equation}
+		\label{eq:internal_energy_partition}
+		U = -\frac{1}{Z} \dv{Z}{\beta} = -
+		\dv{\naturallogarithm{Z}}{\beta}
+	\end{equation}
+\end{definition}
+
+\section{Entropy in terms of Z}%
+\label{sec:entropy_in_terms_of_z}
+
+We start with the Boltzmann-Gibbs entropy expression, and with a
+bit of rearranging we can derive entropy in terms of the
+partition function as well.
+
+\begin{definition}
+	The entropy is given as
+	\begin{equation}
+		S = \frac{U}{T} + k_B \naturallogarithm{Z}
+	\end{equation}
+\end{definition}
+
+\section{Helmholtz Free energy in terms of Z}%
+\label{sec:helmholtz_free_energy_in_terms_of_z}
+
+\begin{definition}
+	The Helmholtz Free energy is given as
+	\begin{equation}
+		F = -k_B T \naturallogarithm{Z}
+	\end{equation}
+\end{definition}
+
+\section{Combining partition functions}%
+\label{sec:combining_partition_functions}
+
+A system may have two or more contributions to the energy
+(rotation, vibration, motion along $x,y,z$).
+Thus, we have to sum these contributions.
+\begin{equation}
+	Z = \sum_i \sum_j e^{- \beta \left( E^x_i + E^y_j \right)} = Z_x Z_y
+\end{equation}
+
+So, partition functions from independent contributions
+\textit{multiply}.
+
+But for the free energy, depends on the logarithm of
+$Z$, thus the contributions are
+\textit{additive}.
+\begin{equation}
+	F = F_x + F_y
+\end{equation}
+
+\section{Classical Equipartition theorem}%
+\label{sec:classical_equipartition_theorem}
+
+Each `degree of freedom' of a classical system adds
+$\frac{1}{2}k_b T$ to the total energy. Works in the
+classical limit as long as the degree of freedom adds an extra
+term to the energy which varies as the variable squared (like
+kinetic energy, elastic potential energy).
+
+We can derive this by computing some Gaussian integrals.
+
+With this, we find that the internal energy
+$U = \left<E\right>$ for one degree of freedom is
+\begin{equation}
+	\left<E\right>
+	=
+	\frac{k_B T}{2}
+\end{equation}
+
+\subsection{Gaussian Integrals (not examinable)}%
+\label{sub:gaussian_integrals_not_examinable_}
+
+\begin{definition}
+	Here are important identities for Gaussian integrals:
+	\begin{equation}
+		\int_{-\infty}^\infty e^{-\alpha x^2}
+		\dd{x}
+		=
+		\sqrt{\frac{\pi}{\alpha}}\hspace{2em}
+		\int_{0}^\infty xe^{-\alpha x^2}
+		\dd{x}
+		=
+		\frac{1}{2\alpha}
+	\end{equation}
+	Notice the limits on odd powers of $x$. For
+	further powers, take derivative w.r.t. $\alpha$
+	on both sides.
+\end{definition}
+
+\subsection{Does the equipartition theorem work in a quantum system?}%
+\label{sub:does_the_equipartition_theorem_work_in_a_quantum_system_}
+
+We can answer this question by considering an example.
+
+\begin{example}
+	Consider a mass $m$ on a spring where the
+	modes of oscillation are quantised by the boundary conditions.
+	I.e., only certain oscillation frequencies are allowed.
+
+	Recall the \textit{Hamiltonian}. Applying it to a spring
+	system, we have
+	\begin{equation}
+		\Hamiltonian = \frac{ \hat{p}^2 }{2m} + \frac{k}{2}
+		\hat{x}^2
+	\end{equation}
+
+	We recall our harmonic oscillators have energy levels
+	\begin{equation}
+		E_n = \left( n + \frac{1}{2}\right) \hbar \omega_0
+		\hspace{2em} \mathrm{with}
+		\hspace{.5em} \omega_0 = \sqrt{\frac{k}{m}}
+	\end{equation}
+
+	Our partition function would be
+	\begin{equation}
+		Z = \sum_{n=0}^\infty \exponential{\left[ -\beta \left( n +\frac{1}{2} \right) \hbar \omega_0 \right]} =
+		\frac{e^{-\beta \hbar \omega_0 / 2}}{1 - e^{-\beta \hbar \omega_0}}
+	\end{equation}
+
+	We can arrive at this result by treating the double sum as an
+	infinite geometric series $r^n$ where
+	$r = \exponential{\left(-\beta\hbar\omega_0\right)}$.  Then if we find the internal energy by
+	finding $\left<E\right>$, we find that it is
+	\begin{equation}
+		U = -\pdv{\naturallogarithm{Z}}{B} = \hbar^2 \omega_0
+		\left[\frac{1}{2} +
+		\frac{e^{-\beta \hbar \omega_0}}{1-e^{-\beta\hbar\omega_0}}
+		\right]
+	\end{equation}
+
+	Remember, we get to this result by computing the derivative of
+	$Z$ w.r.t. $\beta$.
+
+	The result we get is clearly quite different from the classic
+	result. But for high temperature limit, we can expand the
+	exponential in terms of its Taylor series and find that it
+	\textit{does} agree with the equipartition theorem for
+	2 degrees of freedom.
+\end{example}
+
+\chapter{Lecture 13 (Week 16)}%
+\label{cha:lecture_13}
+
+\section{Kinetic theory of an ideal gas}%
+\label{sec:kinetic_theory_of_an_ideal_gas}
+
+We apply the Boltzmann distribution to calculate the velocity
+distribution of a gas.
+
+\subsection{Assumptions of our model}%
+\label{sub:assumptions_of_our_model}
+
+\begin{itemize}
+	\item Only translational degrees of freedom---no rotations
+	\item Each molecule/atom has a unique velocity state
+	\item Allowed velocity states are uniformly distributed in velocity
+	      space
+\end{itemize}
+
+Consider a canonical ensemble. Each molecule is a (sub)system
+connected to the thermal bath which is physically all the other
+molecules in the gas.
+
+The probability of a given $x$-component of
+the velocity $v_x$
+\begin{equation}
+	P\left(v_x\right) \propto
+	\exponential\left(-\frac{\epsilon}{k_B T}\right) \propto
+	\exponential\left(-\frac{mv^2_x}{2 k_B T}\right)
+\end{equation}
+
+To work this out, we integrate the Boltzmann distribution with
+respect to all three translational components
+$v_{x,y,z}$ and set it to 1 since probability
+distribution functions are normalised.
+\begin{derivation}
+	\begin{equation}
+		P = A \iiint
+		e^{-\beta \epsilon}\dd{v_x}\dd{v_y}\dd{v_z}
+		= 1
+	\end{equation}
+	We have
+	\begin{equation}
+		\epsilon
+		=
+		\frac{m}{2} \left(v_x^2 + v_y^2 + v_z^2\right)
+	\end{equation}
+
+	Which gives us
+	\begin{equation}
+		P = A
+		\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}
+		e^{-\frac{\beta m v^2_x}{2}}e^{-\frac{\beta m v^2_y}{2}}e^{-\frac{\beta m v^2_z}{2}}\dd{v_x}\dd{v_y}\dd{v_z}
+		= 1
+	\end{equation}
+
+	We use Gaussian integral identities to get
+	\begin{equation}
+		P\left(v_x, v_y, v_z\right) =
+		{\left(\frac{m}{2\pi k_B T}\right)}^{\frac{3}{2}}\exponential\left(-\frac{\beta m}{2}\left(v_x + v_y + v_z\right)\right)
+	\end{equation}
+\end{derivation}
+
+\section{Speed distribution}%
+\label{sec:speed_distribution}
+
+For some application of the kinetic theory, we don't need the
+velocity distribution, but only the speed distribution.
+
+Now, we assume that the number of allowed velocity states is
+uniform in velocity space. Our integral now becomes an
+integration over all velocity space. In 2D, we consider a small
+element, a ring of a circle. In 3D, we want to integrate over a
+sphere, thus, we consider a small surface element (then we want
+to extent the radius of this sphere, which is our velocity
+$v$, to infinity).
+
+So, we have
+\begin{equation}
+	f(v)\dd{v} \propto v^2
+	\exponential\left(-\frac{mv^2}{2k_B T}\right)
+\end{equation}
+
+\begin{derivation}
+	To start, write out the integral as
+	\begin{equation}
+		f\left(v\right) = A \int_{0}^{\infty} v^2
+		\exponential{\left(-\beta \frac{mv^2}{2}\right)} = 1
+	\end{equation}
+
+	Then once again, using Gaussian integral identities, we arrive
+	at
+	\begin{equation}
+		f\left(v\right) = \frac{4}{\pi}{\left(\frac{\beta m}{2}\right)}^{\frac{3}{2}}v^2
+		\exponential{\left(-\frac{\beta mv^2}{2}\right)}
+	\end{equation}
+\end{derivation}
+
+\begin{definition}
+	The Maxwell-Boltzmann speed distribution curve is
+	\begin{equation}
+		f\left(v\right) = \frac{4}{\pi}{\left(\frac{\beta m}{2}\right)}^{\frac{3}{2}}v^2
+		\exponential{\left(-\frac{\beta mv^2}{2}\right)}
+	\end{equation}
+
+	See Figure~\ref{fig:maxwell_boltzmann_speed_distribution} for the shape of this
+	distribution. It is a slightly asymmetric curve. The lower
+	$T$ is, the less symmetrical it becomes. The
+	higher $T$ is, the lower the highest
+	probability peak. As expected, the average speed increases at
+	higher temperature.
+\end{definition}
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./maxwell_boltzmann_speed_distribution.svg}
+	\caption{The Maxwell-Boltzmann speed distribution curve for high and low
+		temperatures}%
+	\label{fig:maxwell_boltzmann_speed_distribution}
+\end{figure}
+
+Because this is a probability distribution, we can calculate the
+mean average. We are particularly interested in the
+root-mean-square speed. Here's how to derive it.
+
+\begin{derivation}
+	Begin with the standard integral for the mean-square, and apply
+	the Gaussian integral to immediately get the result.
+	\begin{equation}
+		\left<v^2\right>
+		=
+		\int^{\infty}_0 v^2
+		f\left(v\right)\dd{v} =
+		\frac{3k_B T}{m}
+	\end{equation}
+
+	We can then find the average kinetic energy, which is given as
+	\begin{equation}
+		\left<E\right>
+		=
+		\frac{1}{2}m\left<v^2\right>
+		=
+		\frac{3}{2}k_B T
+	\end{equation}
+
+	We expected this expression, since we have derived this in the
+	equipartition theorem for three degrees of freedom. See
+	Section~\ref{sec:classical_equipartition_theorem}.
+\end{derivation}
+
+\section{Pressure distribution}%
+\label{sec:pressure_distribution}
+
+We break this calculation down into several steps. First, we
+start with the definition of pressure as the force over the
+area.
+
+Next, when a particle hits the wall of the container, the change
+in momentum is double the incoming momentum.
+\begin{equation}
+	\Delta P_m = 2mv\cos{\theta}
+\end{equation}
+
+If we have $n$ atoms per unit volume moving
+at speed $v$ at angle
+$\theta$, then the number that hit a wall of area
+$A$ in time $\dd{t}$ is
+\begin{equation}
+	N_{\theta} = nv\cos{\theta}A\dd{t}
+\end{equation}
+
+We can rationalise this by thinking that if we take a snapshot
+of time $\dd{t}$, each atom is currently on the
+same angle towards the wall. But after that interval of time,
+they would have moved $v\dd{t}$ and hit the wall.
+So all the particles in that region hit the wall in that
+interval of time. This forms a parallelepiped of volume
+$v\dd{t}\cos{\theta}A$, and we can get the total atoms by
+multiplying it by the atom per unit volume
+$n$. See Figure~\ref{fig:pressure_distribution}.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./pressure_distribution.svg}
+	\caption{Consider a unit volume of particles that hit the wall in a short
+		time interval $\dd{t}$. It forms a parallelepiped.}%
+	\label{fig:pressure_distribution}
+\end{figure}
+
+Consider a collection of particles with $\left|v\right| = 1$,
+the velocity vectors will be on a sphere with the unit radius.
+The velocity vectors are all random, but it will be within this
+sphere.
+
+If we want to know how many are moving at the angle
+$\theta$, then we need to consider a ring on the
+sphere between the angle $\theta$. In essence, we
+want to consider a fraction of atoms travelling at an angle
+$\theta \rightarrow \theta +\dd{\theta}$. All the atoms which travel at that
+angle is in the ring, thus this would be the area of the ring
+divide by the area of the whole sphere
+\begin{equation}
+	\frac{2\pi\sin{\theta}\dd{\theta}}{4\pi}
+	=
+	\frac{1}{2}\sin{\theta}\dd{\theta}
+\end{equation}
+
+Putting it all together, we have the following derivation
+
+\begin{derivation}
+	We integrate over the velocity function in that ring
+	\begin{equation}
+		P = \frac{\dv{p}{t}}{A} =
+		\int_0^\infty\int_0^{\frac{\pi}{2}}2\frac{1}{2}
+		f\left(v\right) mv\cos{\theta}
+		nv\cos{\theta} A
+		\dd{t}\sin{\theta}
+		\frac{1}{A \dd{t}}
+		\dd{\theta}\dd{v}
+	\end{equation}
+
+	If we use the substitution $y = \cos{\theta}$, and use a
+	Gaussian integral identity, we get the following
+	\begin{equation}
+		P = \frac{4}{\sqrt{\pi}} {\left(\frac{\beta m}{2}\right)}^{\frac{3}{2}} \frac{nm}{3}
+		\frac{3\sqrt{\pi}}{8} {\left(\frac{\beta m}{2}\right)}^{-\frac{5}{2}}
+	\end{equation}
+
+	Simplifying the answer gives us
+	\begin{equation}
+		P = nk_B T
+	\end{equation}
+
+	Where $n = N/V$ and $N = N_a n$. We
+	notice that we get the ideal gas law from this.
+\end{derivation}
+
+\chapter{Lecture 14 (Week 17)}%
+\label{cha:lecture_14}
+
+\section{Statistical mechanics of ideal gas}%
+\label{sec:statistical_mechanics_of_ideal_gas}
+
+The basic idea is to:
+\begin{itemize}
+	\item Calculate the allowed energy modes of the system,
+	      $E_i$
+	\item We calculate the partition function $Z$.
+	\item Finally, we can calculate the thermodynamic properties from the
+	      partition function. These were derived
+	      in~\ref{cha:lecture_12}. We recall them as:
+	      \begin{equation}
+		      F = -k_B T \naturallogarithm{Z}
+	      \end{equation}
+	      \begin{equation}
+		      p = -{\left(\pdv{F}{V}\right)}_{T}
+	      \end{equation}
+	      \begin{equation}
+		      S = -{\left(\pdv{F}{T}\right)}_{V}
+	      \end{equation}
+\end{itemize}
+
+\section{Calculate the energy modes}%
+\label{sec:calculate_the_energy_modes}
+
+First, we treat the gas quantum mechanically. Consider a
+particle in a box of side $L$, with volume
+$ = L^3 $. We solve the Schrödinger equation for
+the system.
+\begin{equation}
+	\label{eq:schrodingers_equation}
+	-\frac{\hbar^2}{2m} \laplacian \Psi =
+	i\hbar \pdv{\Psi}{t}
+\end{equation}
+
+The solutions of these are plane waves
+\begin{equation}
+	\Psi
+	=
+	\Psi_0 \exponential\left[i\left(\vec{k} \vdot \vec{r} - wt\right)\right]
+\end{equation}
+
+If we apply the momentum operator to the solution, we can find
+that it is
+\begin{equation}
+	\hat{p}\Psi
+	=
+	p\Psi \hspace{1em} p = \hbar k
+\end{equation}
+
+Finally, the energy is
+\begin{equation}
+	E = \frac{1}{2}mv^2 = \frac{p^2}{2m} =
+	\frac{\hbar^2 k^2}{2m}
+\end{equation}
+
+Now, we impose the \textit{periodic} boundary conditions.
+Recall that the quantisation of $k$ and
+$E$ comes from the periodic boundary
+conditions.
+\begin{equation}
+	\exponential\left(i k_x \left(x+L\right)\right) =
+	\exponential\left(ik_x\right)
+\end{equation}
+
+Thus, the allowed values are $k_x = n_x 2\pi / L$. Extending
+this to 3D, we get
+\begin{equation}
+	\Psi\left(x,y,z\right)
+	\propto
+	\exponential\left(i k_x x + k_y y + k_z z\right)
+	\hspace{1em}
+	\mathrm{where}
+	\hspace{1em}
+	-\infty < n_{x,y,z} < \infty
+\end{equation}
+
+\section{Density of states}%
+\label{sec:density_of_states}
+
+The allowed states are on a uniform grid in
+$k$-space (`frequency' space). In 2D, the
+number of states per unit area of $k$-space
+is $ = {\left( L/2\pi\right) }^2 $ and in 3D, the number of states is
+$ = { \left( L/2\pi\right) }^3$.
+
+This is called the \textit{density of states}
+$g\left(k\right)$. If we write $k = \abs{ \vec{k}}$,
+then we have in 3D the number of states between
+$k$ and $k + \dd{k}$ presented as
+a sphere (with $k$ as the radius). Since we
+are considering a small element, we consider a shell with
+surface area $4\pi k^2$ (for
+$k$ from 0 to $\infty$).
+Then, the general density of states is
+\begin{equation}
+	g\left(k\right)\dd{k} = 4\pi k^2
+	\dd{k} \frac{V}{{\left(2\pi\right)}^3}
+\end{equation}
+
+\section{Calculate the partition function of a single atom}%
+\label{sec:calculate_the_partition_function_of_a_single_atom}
+
+We performed the intermediate step of finding
+$g\left(k\right)$ so that we can find
+$Z$. Since we have the density of states, we
+can sum the energy levels, this becomes a integral of states
+over all volume.
+\begin{equation}
+	\sum_i \rightarrow \int^\infty_0 g\left(k\right)
+	\dd{k}
+\end{equation}
+
+\begin{derivation}
+	Let's derive the expression for $Z_1$
+	\begin{equation}
+		Z_1 = \sum_{k_x,k_y,k_z} \exp\left(-\beta \hbar k^2 / 2m\right) =
+		\int_0^\infty g\left(k\right)
+		\exp\left(-\beta \hbar k^2 / 2m\right) \dd{k}
+	\end{equation}
+
+	We get the following integral
+	\begin{equation}
+		\frac{4\pi V}{{\left(2\pi\right)}^3} \int_0^\infty k^2
+		e^{-\alpha k^2} \dd{k}
+		\hspace{1em} \mathrm{with}
+		\hspace{1em} \alpha = \frac{\beta \hbar^2}{2m}
+	\end{equation}
+
+	Using a standard Gaussian integral, we get
+	\begin{equation}
+		\label{eq:partition_function}
+		Z_1 = \frac{V}{\lambda^3} \hspace{1em}
+		\mathrm{with} \hspace{1em} \lambda =
+		\frac{h}{\sqrt{2\pi m k_B T}}
+	\end{equation}
+	where $\lambda$ is the thermal de Broglie
+	wavelength.
+
+	The classic atom thermal energy $E = \frac{3}{2}k_B	T = \frac{p^2}{2m}$,
+	$ p = \sqrt{3 m k_B T} $ and thus $ \lambda = h / \sqrt{3m k_B T} $.
+	Between the two, there is only a factor of
+	$\sqrt{2\pi/3}$ difference.
+\end{derivation}
+
+\section{Thermal de Broglie wavelength}%
+\label{sec:thermal_de_broglie_wavelength}
+
+This is the characteristic size of system where quantum effects
+become important. For example, if we put an electron in a box,
+since the de Broglie wavelength depends on the mass and
+temperature. If we set the mass as the mass of an electron, then
+a box with a side of $\lambda_{\mathrm{th}} =
+	\SI{1}{\metre}$ would have
+$T = \SI{ 5e-15 }{\kelvin}$. This has not been achieved
+experimentally. If, instead we have a box of side
+$\lambda_{\mathrm{th}} =
+	\SI{3e-4}{\metre}$ would have $T = \SI{ 6e4 }{\kelvin}$. This
+is about the distance between 2 atoms in a solid. Thus,
+electrons in a solid are always in the quantum regime.
+
+\chapter{Lecture 15 (Week 17)}%
+\label{cha:lecture_15}
+
+\section{Partition function of an ideal gas}%
+\label{sec:partition_function_of_an_ideal_gas}
+
+The partition function for a single atom is
+$Z_1$, but a real gas has got
+$N$ atoms. We then 2 cases.
+
+\textbf{Case 1:} The atoms are distinguishable (each one
+different colour). Then, we would have a system (each being an
+atom), connected to a reservoir (the other atoms). Each atom is
+in a different configuration, then we would have to take into
+account all the permutations as one atom can take the
+configuration of the other. The probability of a particular
+macrostate of gas is $\propto \exponential{\left( -\beta E_{i1} + -\beta E_{i2} + -\beta E_{i3} + \hdots \right)}$, and thus
+\begin{equation}
+	Z_{N,D} = \left( \sum_{i1} e^{-\beta E_{i1}}\right) \time\left( \sum_{i2} e^{-\beta E_{i2}}\right)
+	\times \left( \sum_{i3} e^{-\beta E_{i3}}\right) \hdots
+\end{equation}
+
+But each sum is the same and equal to $Z_1$,
+thus
+\begin{equation}
+	Z_{N, D} = Z^N_1
+\end{equation}
+
+However, a real gas does not have distinguishable atoms.
+Recalling from Section~\ref{cha:lecture_10}, if all the
+atoms are indistinguishable, then we have over-counted our
+states by $N!$. However, this is only
+approximately true because we have neglected the possibility
+that two atoms have exactly the same energy levels. This would
+be like putting two particles in the same box in the example
+below.
+
+\textbf{Case 2:} If the atoms are indistinguishable,
+then we have to divide by $N!$
+\begin{equation}
+	N_{N,I} \simeq \frac{Z_1^N}{N!} \equiv Z_G
+\end{equation}
+
+This is approximately true as long as we can neglect any atoms
+which, in this approximation, would have the same quantum
+numbers. This is OK as long as the number of possible states is
+\textit{much larger} than the number of atoms. This
+corresponds the regime where the linear size of the system
+$\gg \lambda_{\mathrm{th}}$.
+
+So the expression of $Z$ works in the
+classical regime, since the size of the system satisfies the
+condition above.
+\begin{equation}
+	Z_G = {\frac{V}{\lambda^3_\mathrm{th}}}^N / N! =
+	{V {\left(m k_B T / 2\pi \hbar^2\right)}^{3/2} }^N / N!
+\end{equation}
+
+\section{Pressure of an ideal gas}%
+\label{sec:pressure_of_an_ideal_gas}
+
+If we recall the definitions for pressure and entropy in terms
+of $Z$ and $F$, then we
+can derive this for a whole system of an ideal gas. While the
+expressions are similar to what we have derived before, we can
+get a particular equation for entropy for a monoatomic ideal gas
+
+\begin{definition}
+	The Sackur-Tetrode equation for entropy of a monoatomic ideal
+	gas is
+	\begin{equation}
+		S = N k_B \left[ \left(\naturallogarithm{\frac{V}{\lambda^3 N}}\right) + \frac{5}{2} \right]
+	\end{equation}
+\end{definition}
+
+\section{Gibbs Paradox}%
+\label{sec:gibbs_paradox}
+
+We can use the equation for entropy we just quoted to discuss
+this paradox. Consider two boxes separated with a partition.
+Each box has $N$ particles of either type
+$A$ or $B$ and both have
+volume $V$. Now, we remove the partition.
+What happens?
+
+\textbf{Case 1:} If the atoms $A$
+and $B$ are indistinguishable. Then before,
+the total entropy is
+
+\begin{equation}
+	S = 2 \times N k_B \left[
+		\left(\naturallogarithm{\frac{V}{\lambda^3 N}}\right) + \frac{5}{2}\right].
+\end{equation}
+
+After we remove the partition, the volume is
+$2 V$S, and the total number of particles is
+$2 N$. Thus, we have the same entropy as
+before. The change in entropy is 0.
+
+\textbf{Case 2:} The atoms $A$ and
+$B$ are distinguishable. Before, we have
+
+\begin{equation}
+	S = 2 \times N k_B \left[
+		\left(\naturallogarithm{\frac{V}{\lambda^3 N}}\right) + \frac{5}{2}\right].
+\end{equation}
+
+After we remove the partition, there would be
+$N$ atoms of each type in a volume of
+$2V$. Since this is an ideal gas, the atoms
+of different types don't interact. Each set of atom types move
+freely in a volume of $2V$. Thus, the entropy
+is
+\begin{equation}
+	S = 2 \times N k_B \left[
+		\left(\naturallogarithm{\frac{2V}{\lambda^3 N}}\right) + \frac{5}{2}\right].
+\end{equation}
+
+Therefore, the total change in entropy is
+$\Delta S = 2 N k_B \naturallogarithm{2}$.
+
+The paradox is that if the particles have some property
+$X$ which we can't measure, but someone else
+could? So they appear to be identical but are in fact not. Would
+the entropy change when suddenly we are able to measure the
+difference?
+
+The answer, from the two cases, is \textit{yes}.
+Entropy depends on our knowledge of the system. There is a
+connection between entropy and connection. The way to interpret
+the extra entropy is to note that after mixing
+$A$ and $B$, to restore
+the system to its original state, we would need to do work on
+the system equal to at least $T\Delta S$.
+
+\chapter{Lecture 16 (Week 17)}%
+\label{cha:lecture_16}
+
+\section{Grand canonical ensemble}%
+\label{sec:grand_canonical_ensemble}
+
+The grand canonical ensemble is when we can exchange heat
+\textit{and} particles with a reservoir.
+
+There are two equivalent ways to describe a system. First, we
+consider each atom separately as a subsystem. Each atom has a
+set of energy levels. Otherwise, we can consider the whole gas
+as the system. Each energy level of the system is the sum of
+some particular combination of the energy levels of each atom.
+There are multiple particles in the system. In principle each
+level could be multiply occupied. This is the grand canonical
+ensemble.
+
+When we dealt with ideal gas in the canonical ensemble, we had
+to deal with identical configurations and had to ignore the
+issues with degeneracy. This is not feasible in quantum regime,
+due to \textit{Pauli's exclusion principle}.
+
+\section{Gibb's distribution}%
+\label{sec:gibb_s_distribution}
+
+Similar to how we derived the Boltzmann's distribution, we have
+a system and a reservoir, except now it can exchange energy and
+particles. Both reservoir and system are isolated, which means
+there is a total energy and a total number of particles.
+
+Our strategy: We assume the system has only one state to find
+the number of states available to the reservoir. Then, we Taylor
+expand the state number as a function of energy and number of
+particles. The probability is proportional to the number of
+states, which we then equate as an exponential.
+
+\begin{derivation}
+	\begin{equation}
+		\naturallogarithm \Omega \left( U_0 - E_i, N_0 - N_i\right)
+		=
+		\naturallogarithm\Omega\left( U_0, N_0\right) - E_i
+		{\left(\pdv{\naturallogarithm\Omega}{U}\right)}_{N,V} - N_i
+		{\left(\pdv{\naturallogarithm\Omega}{N}\right)}_{U,V}
+	\end{equation}
+
+	Now, we use the first law with the chemical potential in
+	Equation~\ref{eq:first_law_chemical_potential}. We then write its exact
+	differential. We get
+	\begin{equation}
+		\frac{1}{T} = {\left(\pdv{S}{U}\right)}_{V,
+		N}\hspace{1em} \frac{\mu}{T} =
+		-{\left(\pdv{S}{N}\right)}_{U,V}
+	\end{equation}
+	Using $S = k_B \naturallogarithm\Omega$, we now have
+	\begin{equation}
+		\naturallogarithm\Omega =
+		\naturallogarithm\Omega\left(U_0, N_0\right) -
+		\frac{E_i}{k_B T} + \frac{N_i \mu}{k_B T}
+	\end{equation}
+	Taking the exponential of both sides yields
+	\begin{equation}
+		P\left(N_i, E_i\right) \propto \exponential\left( \beta
+		\left(\mu N_i - E_i \right) \right)
+	\end{equation}
+	where the normalisation constant is $1/Z_G$,
+	where $Z_G$ is the Grand Partition function
+	\begin{equation}
+		Z_G = \sum_i \exponential\left[ \beta \left( \mu N_i - E_i \right) \right]
+	\end{equation}
+\end{derivation}
+
+We can now use the grand partition function to work out
+$U$, the average energy of the system. These
+quantities turn out to be
+\begin{equation}
+	\left< N \right>
+	=
+	\sum_i N_i P_i = k_B T {\left(\pdv{\naturallogarithm Z_G}{\mu}\right)}_{\beta}
+\end{equation}
+and
+\begin{equation}
+	U = \sum_i E_i P_i = - {\left(\pdv{\naturallogarithm Z_G}{\beta}\right)}_{\mu} + \mu
+	\left<N\right>
+\end{equation}
+
+\chapter{Lecture 17 (Week 17)}%
+\label{cha:lecture_17}
+
+\section{Statistics of quantum particles}%
+\label{sec:statistics_of_quantum_particles}
+
+Two types of quantum particles are fermions and bosons.
+
+\subsection{Fermions}%
+\label{sub:fermions}
+
+Fermions are any particles with half integer spin,
+$S = 1/2, 3/2$ etc.\ in units of
+$\hbar$. An example would be an electron. A
+composite fermion consist of multiple particles, and the entity
+as a whole has a half integer spin. For example, a carbon
+nucleus.
+
+The total wavefunction for a fermion system must be
+antisymmetric with respect to particle exchange. Mathematically,
+this means
+\begin{equation}
+	\Psi\lefT(a,b\right)
+	=
+	-\Psi\left(b,a\right)
+\end{equation}
+if the space and spin coordinates of two identical particles are
+interchanged, then the total wave function must changes spin.
+
+This property implies that each fermion must have a unique
+quantum number (e.g., $k_x$,
+$k_y$, $k_z$, spin). We can
+only have one fermion in any single quantum state.
+
+For example, $A\left(x,y\right) = -A\left(y,x\right)$.\ If
+$y=x$ then this is only true if
+$A = 0$. In general, $A\left(x,x\right) \neq -A\left(x,x\right)$.
+This property is called the \textit{Pauli exclusion principle}.
+
+\subsection{Bosons}%
+\label{sub:bosons}
+
+Bosons are particles with integer spin $S = 0, 1, 2$.
+An example would be a photon with spin $ S = \pm 1 $.
+This corresponds to left or right hand polarisation. Phonon are
+quantised lattice vibration in a solid
+($S = 0$).
+
+For a system of Bose particles the total wavefunction must be
+symmetric with respect to particle exchange.
+\begin{equation}
+	\Psi\left(a,b\right) =
+	\Psi\left(b,a\right)
+\end{equation}
+
+So there are no restrictions on the number of bosons in a single
+quantum state. Both fermion and boson were terms coined by Paul
+Dirac.
+
+\section{Distribution functions of particles}%
+\label{sec:distribution_functions_of_particles}
+
+Distribution function describes the mean occupancy of a
+particular state. For a fermion system, the state can either be
+occupied or not, but on average (ensemble average), there will
+be some mean occupancy somewhere between 0 and 1. Similarly for
+bosons, each state will have some mean occupancy.
+
+\subsection{Fermi-Dirac distribution function}%
+\label{sub:fermi_dirac_distribution_function}
+
+Consider a very simple system which has just one state, with
+energy $\epsilon$, connected to a heat and particle
+reservoir (a grand canonical ensemble). Here, we use Gibb's
+distribution derived in Section~\ref{cha:lecture_16}. There
+can either be 0 or 1 particle in the state.
+\begin{equation}
+	Z_G = \sum_i e^{\beta \left(\mu N_i - E_i\right)}
+\end{equation}
+
+The two possibilities are $N_0 = 0\hspace{1em} E_0 = 0$ and
+$N_1 = 1 \hspace{1em} E_1 = \epsilon$. Thus
+\begin{equation}
+	Z_G = 1 + e^{\beta\left( \mu - \epsilon\right)}.
+\end{equation}
+
+We can find the mean occupancy from the grand partition function
+\begin{equation}
+	\left<N\right>
+	=
+	k_B T {\left(\pdv{Z_G}{\mu}\right)}_{\beta}.
+\end{equation}
+
+\begin{definition}
+	The Fermi-Dirac distribution function for fermions is
+	\begin{equation}
+		\label{eq:fermi_dirac_distribution_function}
+		\left<N\right>
+		= \frac{1}{\exponential\left(\beta [\epsilon - \mu]\right) + 1}.
+	\end{equation}
+\end{definition}
+
+\subsection{Bose-Einstein distribution function}%
+\label{sub:bose_einstein_distribution_function}
+
+Consider the same system as the fermions, but now there is no
+restriction on the number of particles allowed in the state.
+Now, the possible states of the systems are
+\begin{equation}
+	\begin{aligned}
+		N_0 = 0 & \hspace{1em} E_0 = 0         \\
+		N_i = 1 & \hspace{1em} E_1 = \epsilon  \\
+		        & \vdots                       \\
+		N_i =n  & \hspace{1em} E_i = n\epsilon
+	\end{aligned}
+\end{equation}
+
+We find the mean occupancy using the same equation.
+\begin{definition}
+	The Bose-Einstein distribution function for bosons is
+	\begin{equation}
+		\label{eq:bose_einstein_distribution_function}
+		\left<N\right>
+		=
+		\frac{1}{\exponential{\left( \beta[\epsilon - \mu] - 1\right)}}
+	\end{equation}
+\end{definition}
+
+These distribution functions tells the mean occupancy of some
+state with energy $E$ in terms of the
+chemical potential.
+
+\subsection{General distribution function}%
+\label{sub:general_distribution_function}
+
+In general, for systems with many different energy states, we
+need to generalise these results.
+
+\begin{definition}
+	The mean occupancy for a general system with an energy level
+	$\epsilon_i$ and particles is
+	\begin{equation}
+		\left<N_i\right>
+		=
+		\frac{1}{\exponential{\left( \beta[\epsilon_i - \mu] \pm 1\right)}}
+	\end{equation}
+	where it is $+$ for fermions and
+	$-$ for bosons.
+
+	For the Fermi-Dirac relation, $\left<N\right> = f\left(\epsilon\right)$ varies
+	between 0 and 1, and it is 0.5 at $\epsilon =\mu$. The
+	width in energy of the step is $\sim k_B T$.
+
+	For the Bose-Einstein relation, $\left<N\right> = b\left(\epsilon\right)$ varies
+	between 0 and $\infty$. $\epison > \mu$
+	because $b\left(\epsilon\right) \rightarrow \infty$ at $\epsilon = \mu$.
+
+	See Figure~\ref{fig:mean_occupancy}.
+\end{definition}
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./mean_occupancy.svg}
+	\caption{The graph on the left shows the Fermi-Dirac mean occupancy while
+		the one the right shows the Bose-Einstein mean occupancy.}%
+	\label{fig:mean_occupancy}
+\end{figure}
+
+\section{Classical limit}%
+\label{sec:classical_limit}
+
+At low occupancy $\left<N\right> \ll 1$, the Fermi-Dirac,
+Bose-Einstein and Boltzmann distribution functions (with a
+energy zero shifted to $\mu$) all become
+equal. This is because in this limit there is very little chance
+of multiple occupancy so the quantum nature of the particles is
+irrelevant.
+
+If we plot $\left<N\right>$ against
+$\beta\left(\epsilon - \mu\right)$, we see all functions tend
+asymptotically towards each other (the Fermi-Dirac and
+Bose-Einstein becomes similar to the Boltzmann's distribution
+with 0 shifted to $\mu$). See
+Figure~\ref{fig:classical_limit}.
+
+Note that if we shift the energy in the Boltzmann distribution,
+we are basically multiplying the original distribution with a
+constant. It is equivalent to setting the total number of
+particles in the system.
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./classical_limit.svg}
+	\caption{Plot to illustrate the classical limit of the Fermi-Dirac and
+		Bose-Einstein mean mean occupancy}%
+	\label{fig:classical_limit}
+\end{figure}
+
+\end{document}
+% vim: fen fdm=syntax
