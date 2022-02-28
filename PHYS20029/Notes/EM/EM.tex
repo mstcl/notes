@@ -10,6 +10,7 @@
 \usepackage{svg}
 \usepackage{amssymb,amsmath,physics,bm,bbold}
 \usepackage{enumerate}
+\usepackage{siunitx}
 
 %--------------------------------------------------------------------
 % Hyper ref
@@ -2566,10 +2567,10 @@ $\pdv{\rho}{t} = 0$
 		\label{eq:the_biot_savart_law}
 		\bm{B}\left(\bm{r}\right)
 		=
-		\frac{\mu_0}{4\pi}\int\frac{\bm{I}\cross\bm{r^{\prime\prime}}	}{r^{\prime\prime 2}}
+		\frac{\mu_0}{4\pi}\int\frac{\bm{I}\cross\bm{\hat{r}^{\prime\prime}}	}{r^{\prime\prime 2}}
 		\dd{l^\prime}
 		=
-		\frac{\mu_0 I}{4\pi}\int\frac{\dd{\bm{l}}\cross \bm{r^{\prime\prime}}}{r^{\prime\prime 2}}
+		\frac{\mu_0 I}{4\pi}\int\frac{\dd{\bm{l}}\cross\bm{\hat{r}^{\prime\prime}}}{r^{\prime\prime 2}}
 	\end{equation}
 
 	Where $\mu_0$ is the permeability of free space.
@@ -3580,8 +3581,8 @@ to take $\bm{M}\propto\bm{H}$ and to write
 	\chi_{m}\bm{H}
 \end{equation}
 where $\chi_m$ is the magnetic susceptibility, a
-dimensionless quantity typically around \num{10e-4}
-to \num{10e-6} for most materials. Materials that
+dimensionless quantity typically around \SI{10e{-4}}{}
+to \SI{10e{-6}}{} for most materials. Materials that
 obey this equation are known as linear magnetic materials or
 media.
 
@@ -3659,7 +3660,291 @@ We take note of the following qualitative points:
 	\end{itemize}
 \end{definition}
 
-%\bibliography{bibfile}
+\chapter{Electrodynamics}%
+\label{cha:electrodynamics}
+
+\section{Introduction to electrodynamics}%
+\label{sec:introduction_to_electrodynamics}
+
+In the course so far we have restricted ourselves to the
+discussion of static fields both in free space and in matter. In
+doing so we haven't discussed how charge distributions or
+current densities were produced in the first place, or how they
+would change if the system was allowed to evolve in time.
+
+For example, if we connect two points at different potential
+together, a current will start to flow. These currents will
+produce magnetic fields and so the electric and magnetic fields
+will evolve in time. In this section we will start to discuss
+what happens in this case. At the end of the section we will
+reach our final goal---Maxwell's equations. These are the
+fundamental starting point of our understanding of
+electromagnetism and in particular the recognition that in
+dynamical systems electric and magnetic fields are fundamentally
+connected to the transmission of energy as electromagnetic
+waves.
+
+\section{Ohm's law}%
+\label{sec:ohm_s_law}
+
+In our discussion to date we recognise that in the presence of
+of an electric field free charges will start to move such that a
+current is produced. However, in real materials, as they start
+to move, they will be slowed down by collisions with other atoms
+in the materials. That is, there is a resistance to the flow of
+current. I believe you will all be familiar with this form of
+Ohm's law; $V = I R$, that is applied for
+potential differences and wires.
+
+Let's see how this may arise.
+
+In our current terminology we would expect the current density
+in a material to be proportional to the force per unit charge
+(provided we are in a region of linear response).
+
+\textbf{Note:} There are some materials where this is
+not the case---in particular semiconductors.
+
+Hence, we expect that
+\begin{equation}
+	\bm{J} = \sigma\bm{f}
+\end{equation}
+where $\bm{f}$ is the force per unit charge and
+$\sigma$ is known as the conductivity of the
+material. The reciprocal of the conductivity is known as the
+resistivity, $\rho = 1/\sigma$.
+
+Commonly, most metals will have conductivities
+$\sigma > \SI{1e5}{\per\ohm\per\metre}$ and insulators conductivities have
+$\sigma \ll \SI{1}{\per\ohm\per\metre}$ (even for insulators there is still the
+possibility for tiny amounts of current to flow). Semiconductors
+typically have conductivities in the intermediate range.
+
+A precise definition is not easy but the temperature dependence
+of $\sigma$ is often taken as an indicator---it
+typically increases for semiconductors but decreases with
+temperature for metals and even this is not a golden rule.
+
+We usually take the driving force for this current to be
+electromagnetic in origin (it doesn't have to be, for example
+forces due to temperature differences are the origins of the
+Seebeck, Peltier, and Thomson effects for thermoelectric
+materials), so
+\begin{equation}
+	\bm{J} = \sigma\left(\bm{E} + \bm{v}\cross\bm{B}\right)
+\end{equation}
+
+In the majority of cases the charge velocity is small so that
+the effect is dominated by the electric field term (magnetic
+effects are small).
+
+\begin{definition}
+	The Ohm's law written in terms of the current density and
+	electric field.
+	\begin{equation}
+		\bm{J} = \sigma\bm{E}
+	\end{equation}
+\end{definition}
+
+\textbf{Note:} this means in reality, a normal metal
+can never be a true equipotential when a current is flowing
+through it. There is always a small potential difference. This
+is why we get an enormous current if we short circuit a battery.
+
+For many practical purposes, when we have steady currents and a
+uniform conductivity, we can write,
+\begin{equation}
+	\divergence{\bm{E}}
+	=
+	\frac{1}{\sigma}\left(\divergence{\bm{J}}\right) = 0
+\end{equation}
+this helps a lot as it means the charge density in the material
+remains as zero (even if a current flows) and any unbalanced
+charge resides at the surface. Hence, even if we have an `ohmic'
+material, it is still possible to use Laplace's equations to
+calculate the potential, even in the presence of a steady
+current in the material.
+
+\section{The electromotive force}%
+\label{sec:the_electromotive_force}
+
+In Section~\ref{sec:ohm_s_law}, we expressed the idea that
+a current is induced by a force $\bm{f}$ per unit
+charge exerted on the charge carriers. We then expressed this
+force in terms of the electric field $\bm{E}$.
+
+Hence, we see that the effect of an electric field is to produce
+a current. In a wire, the effect of these currents is that the
+charges move such that the field becomes zero (any build up of
+charge in the wire would produce a field such that the carriers
+would move to cancel it out).
+
+So what happens when we drive a current through a circuit, for
+example, with a battery?
+
+In this case, in order to maintain the current, we expect an
+additional, steady force from the battery. Hence, we might write
+that the force on the carriers is,
+\begin{equation}
+	\bm{f} = \bm{f}_s +
+	\bm{E}
+\end{equation}
+where $\bm{E}$ is from any static fields in the
+circuit and $\bm{f}_s$ comes from the source, in
+this case the battery.
+
+$\bm{E}$ would continually adjust itself to zero
+if any imbalance in charge built up. We could consider other
+sources of $\bm{f}_s$. We could consider other
+sources of $\bm{f}_s$, for example photocells,
+thermoelectric generators, piezo electricity. The origin of
+$\bm{f}_s$, the net force around the circuit,
+including the internal components of the battery, may be written
+as,
+\begin{equation}
+	\epsilon = \oint
+	\bm{f}\vdot\dd{l} = \oint
+	\bm{f}_s\vdot\dd{l}.
+\end{equation}
+$\epsilon$ is known as the electromotive force, the
+\textit{emf}, and is the net force per unit charge
+when integrating around the circuit. Its origin is chemical
+(batteries), thermal (thermoelectrics), etc.\ and it is needed
+to sustain the current (batteries would eventually be
+exhausted).
+
+For an idea source, e.g., a battery without internal resistance,
+the net force on the charges when there is no connecting wire
+($\sigma = \infty$) is zero so we expect
+$\bm{E} = -\bm{f}_s$. Hence, the \textit{potential difference}
+across the battery is
+\begin{equation}
+	V =
+	-\int_{a}^{b}\bm{E}\vdot\dd{\bm{l}}
+	=
+	\int_{a}^{b}\bm{f}_s\vdot\dd{\bm{l}}
+	= \oint\bm{f}_{s}\vdot\dd{\bm{l}} =
+	\epsilon
+\end{equation}
+
+In other words, the battery is the source of the steady voltage
+that produces the field that drives the current around the
+circuit. In electronics, you'd call the emf the open circuit
+voltage of the battery and you'd associate an internal
+resistance with it. $\bm{f}_s$ is zero outside the
+battery.
+
+\section{Motional emf}%
+\label{sec:motional_emf}
+
+In Section~\ref{sec:the_electromotive_force}, we introduced the concept
+of the electromotive force (emf) and confined our discussion to
+constant sources such as batteries. However, we are all aware of
+generators and dynamos consisting of coils and magnets. How do
+these work?
+
+Consider the shaded square as a region of uniform magnetic field
+going into the page. $R$ is the resistor on
+`load' on the circuit. As the wire is pulled out, a Lorentz
+force is generated on the charge carriers in the wires.
+
+Hence, the charges in the segment $ab$ feel a
+magnetic force whose component is $qvB$ along
+the wire. There is therefore an emf generated the current loop
+$ab$, it is
+\begin{equation}
+	\label{eq:intermediary_motional_ef}
+	\epsilon =
+	\oint\bm{f}_{\mathrm{mag}}\vdot\dd{\bm{l}}
+	=
+	vBh
+\end{equation}
+where we note the integral corresponds to a `snapshot' in time.
+We might ask how this happens as magnetic forces do no work. The
+answer is we have to appeal to the same arguments we used in
+Section~\ref{sec:the_work_done_by_magnetic_fields}. A careful analysis, as in that
+case, demonstrates that the work is done pulling the wire
+through the field, the magnetic force is the mechanism by which
+this work done in pulling is translated into the emf.
+
+The emf is often described in terms of the change in the
+magnetic flux, $\Phi$, where
+\begin{equation}
+	\Phi = \int\bm{B}\vdot\dd{\bm{a}}
+\end{equation}
+
+So, in our loop at this instance we have
+\begin{equation}
+	\Phi_{\mathrm{loop}}
+	=
+	Bhx
+\end{equation}
+
+As we move the loop we get,
+\begin{equation}
+	\dv{\Phi}{t} = Bh\dv{x}{t} = -Bhv
+\end{equation}
+
+We relate this to Equation~\ref{eq:intermediary_motional_ef}.
+
+\begin{definition}
+	The \textit{motional emf} is defined as
+	\begin{equation}
+		\label{eq:motional_emf}
+		\epsilon = -\dv{\Phi}{t}
+	\end{equation}
+	and it applies for any shape of loop.
+\end{definition}
+
+\section{Faraday's law}%
+\label{sec:faraday_s_law}
+
+Faraday carried out three experiments on current loops:
+
+\begin{itemize}
+	\item He pulled a wire loop out of a magnetic field as we explained in
+	      Section~\ref{sec:motional_emf}.
+	\item He kept the wire loop fixed and pulled the magnetic field away.
+	\item He kept the loop and field fixed but changed the strength of the
+	      field.
+\end{itemize}
+
+In each case, he observed an emf. From this, he concluded the
+profound result: \textit{A changing magnetic field induces an electric field}.
+
+If we combine our derivation of the emf in terms of the flux
+change and the electric field $\bm{E}$ in our
+circuit, we get to Equation~\ref{eq:motional_emf}. So,
+\begin{equation}
+	\label{eq:faradays_law_integral}
+	\oint\bm{E}\vdot\dd{\bm{l}}
+	=
+	-\int\pdv{\bm{B}}{t}\vdot\dd{\bm{a}}
+\end{equation}
+where the line and surface integrals are around the complete
+circuit and the area it encloses.
+
+The above is \textit{Faraday's law} in integral so finally we
+use Stokes' Law to obtain
+\begin{definition}
+	Faraday's law in differential form, one of Maxwell's equation is
+	\begin{equation}
+		\label{eq:faradays_law_differential}
+		\curl{\bm{E}} = -\pdv{\bm{B}}{t}
+	\end{equation}
+\end{definition}
+
+\section{Lenz's law}%
+\label{sec:lenz_s_law}
+
+The emf that is induced by the changing magnetic field is such
+that it induces a current that `tries' to cancel the effect of
+the flux change. Another statement might be that `Nature abhors
+a change in flux'.
+
+The main use of Lenz's law is that it tells you the direction of
+the current that is being induced.
+
 \end{document}
 
 % vim: fen fdm=syntax
