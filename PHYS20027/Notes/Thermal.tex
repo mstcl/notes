@@ -548,8 +548,8 @@ lecture). Here's a link to diagrams \& animations:
 \label{sec:the_carnot_cycle}
 
 There are four stages in the cycle. This is a
-\textit{closed cycle}. Thus, the work done can be described by
-integrating both sides of~\ref{eq:work_pdV} to get
+\textit{closed cycle}. Thus, the work done can be described
+by integrating both sides of~\ref{eq:work_pdV} to get
 
 \begin{equation}
 	\label{eq:work_pdV_integral_form}
@@ -621,9 +621,9 @@ We can also analyse the Carnot cycle mathematically.
 Let's consider an isothermal expansion. An isothermal expansion
 (see~\ref{sec:constraints}) demands $\dd{T} = 0$,
 but $U = U(T)$ thus $\Delta U = 0$.
-Therefore, $\Delta Q = -\Delta W$ from~\ref{eq:first_law}.
-From~\ref{eq:work_pdV_integral_form}, we evaluate the integral
-using~\ref{eq:ideal_gas}.
+Therefore, $\Delta Q = -\Delta W$
+from~\ref{eq:first_law}. From~\ref{eq:work_pdV_integral_form}, we
+evaluate the integral using~\ref{eq:ideal_gas}.
 
 Now let's consider an adiabatic expansion. Recall from first
 year that we can write $PV^\gamma = \mathrm{const}$ and thus
@@ -934,8 +934,8 @@ In other words, entropy is the area under a
 $(C/T)$-$T$ curve.
 
 Substitute the differential of entropy into the first law,
-expressed by equation~\ref{eq:first_law}, we can also write
-the first law for as
+expressed by equation~\ref{eq:first_law}, we can also
+write the first law for as
 
 \begin{equation}
 	\label{eq:first_law_entropy}
@@ -1214,19 +1214,19 @@ extremely useful.
 These proofs are not presented explicitly. They are meant to
 help understand the identities in~\ref{sec:maths_of_partial_derivatives}.
 
-To prove the \textbf{reciprocal} and \textbf{reciprocity}
-theorems, take a function $f(x,y,z) = 0$, with
-$x = x(y,z)$, $y = y(x,z)$, and
-$z = (x,y)$. If we write $x$ and
-$z$ in differential forms, and substitute
-$\dd{x}$ into the expression for
-$\dd{z}$, we notice that we can equate the
-coefficients of $\dd{z}$, which shows the
-\textbf{reciprocal} theorem holds.
+To prove the \textbf{reciprocal} and
+\textbf{reciprocity} theorems, take a function
+$f(x,y,z) = 0$, with $x = x(y,z)$,
+$y = y(x,z)$, and $z = (x,y)$. If we
+write $x$ and $z$ in
+differential forms, and substitute $\dd{x}$ into
+the expression for $\dd{z}$, we notice that we
+can equate the coefficients of $\dd{z}$, which
+shows the \textbf{reciprocal} theorem holds.
 
 Then if we look at the coefficients of $\dd{y}$,
-we can rearrange and use \textbf{reciprocal} theorem to show
-the \textbf{reciprocity} theorem.
+we can rearrange and use \textbf{reciprocal} theorem to
+show the \textbf{reciprocity} theorem.
 
 \subsection{Maxwell relations}%
 \label{sub:maxwell_relations}
@@ -1294,7 +1294,7 @@ Figure~\ref{fig:joule_thomson_expansion}.
 		friction, low pressure gas comes out of the other end and is pumped back
 		into the engine. The pressure difference is maintained with a
 		compressor. This principle of cooling is used in many devices
-		like refigerators, or helium liquefiers.}%
+		like refrigerators, or helium liquefiers.}%
 	\label{fig:joule_thomson_expansion}
 \end{figure}
 
@@ -1330,7 +1330,8 @@ therefore:
 As the gas moves through the plug, there is a change in internal
 energy, $\Delta U = U_2 - U_1$. From the first law, for an
 adiabatic process (no heat transfer), $\Delta U = \Delta W$.
-We know $\Delta W$ from~\ref{eq:joule_thomson_expansion_work}, so
+We know $\Delta W$ from~\ref{eq:joule_thomson_expansion_work},
+so
 \begin{equation}
 	p_1 V_1 + U_1 = p_2 V_2 + U_2
 \end{equation}
@@ -1911,7 +1912,7 @@ useful, note that the second one is better than the first one.
 	Stirling's approximations for $\naturallogarithm{n}!$ are
 	\begin{equation}
 		\begin{aligned}
-			\naturallogarithm{n}! & \simeq n\naturallogarithm{n} - n,\,\,\,\, n \gg 1                                          \\
+			\naturallogarithm{n}! & \simeq n\naturallogarithm{n} - n,\,\,\,\, n \gg 1                                        \\
 			\naturallogarithm{n}! & \simeq n\naturallogarithm{n} - n + \frac{1}{2}\naturallogarithm{2\pi n},\,\,\,\, n \gg 1
 		\end{aligned}
 	\end{equation}
@@ -2020,8 +2021,8 @@ Our final result is therefore
 
 \begin{definition}
 	To arrange $x$ quanta in
-	$N-1$ partitions or $N$ boxes,
-	there would be
+	$N-1$ partitions or $N$
+	boxes, there would be
 	\begin{equation}
 		\Omega
 		=
@@ -2068,7 +2069,7 @@ function.
 
 \begin{figure}[htpb]
 	\centering
-	\includesvg[width=0.9\columnwidth]{./energy_and_states.svg}
+	\includesvg[width=0.9\columnwidth]{./energy_and_states.svn}
 	\caption{\textbf{(a)} shows the log plot of
 		$\Omega$ and
 		$x$, the total energy, \textbf{(b)} shows the number of states of two
@@ -2137,7 +2138,7 @@ the Boltzmann's equation for entropy.
 \chapter{Lecture 11 (Week 16)}%
 \label{cha:lecture_11}
 
-\section{Bolztmann distribution}%
+\section{Boltzmann distribution}%
 \label{sec:bolztmann_distribution}
 
 We note that random exchange lead to an exponential
@@ -2783,7 +2784,14 @@ The allowed states are on a uniform grid in
 $k$-space (`frequency' space). In 2D, the
 number of states per unit area of $k$-space
 is $ = {\left( L/2\pi\right) }^2 $ and in 3D, the number of states is
-$ = { \left( L/2\pi\right) }^3$.
+$ = { \left( L/2\pi\right) }^3$. See Figure~\ref{fig:frequency_space}
+
+\begin{figure}[htpb]
+	\centering
+	\includesvg[width=0.9\columnwidth]{./frequency_space.svg}
+	\caption{The frequency space in 2D}%
+	\label{fig:frequency_space}
+\end{figure}
 
 This is called the \textit{density of states}
 $g\left(k\right)$. If we write $k = \abs{ \vec{k}}$,
@@ -2805,7 +2813,7 @@ Then, the general density of states is
 We performed the intermediate step of finding
 $g\left(k\right)$ so that we can find
 $Z$. Since we have the density of states, we
-can sum the energy levels, this becomes a integral of states
+can sum the energy levels, this becomes an integral of states
 over all volume.
 \begin{equation}
 	\sum_i \rightarrow \int^\infty_0 g\left(k\right)
@@ -3118,7 +3126,7 @@ only have one fermion in any single quantum state.
 For example, $A\left(x,y\right) = -A\left(y,x\right)$.\ If
 $y=x$ then this is only true if
 $A = 0$. In general, $A\left(x,x\right) \neq -A\left(x,x\right)$.
-This property is called the \textit{Pauli exclusion principle}.
+This property is called the \textit{Pauli's exclusion principle}.
 
 \subsection{Bosons}%
 \label{sub:bosons}
@@ -3278,6 +3286,690 @@ particles in the system.
 		Bose-Einstein mean mean occupancy}%
 	\label{fig:classical_limit}
 \end{figure}
+
+\chapter{Lecture 18 (Week 18)}%
+\label{cha:lecture_18}
+
+\section{Fermi-gas}%
+\label{sec:fermi_gas}
+
+A Fermi-gas is gas of \textit{non-interacting} fermions confined
+to a specific volume. Examples of system that this approximately
+describes
+\begin{itemize}
+	\item Conduction electrons in a simple metal (behaves as if they are
+	      neutral particles moving around in metal)
+	\item Neutrons in a neutron star (collapsed core of a giant star which
+	      consists of mostly just neutrons; these have intense magnetic
+	      fields)
+	\item Electrons in a white dwarf (a star at the final stage of stellar
+	      evolution)
+\end{itemize}
+
+As it is non-interacting we can use the energy-momentum
+relationship for free particles
+\begin{equation}
+	\epsilon = \frac{p^2}{2m} = \frac{\hbar^2 k^2}{2m}
+\end{equation}
+
+Because the gas is confined to a finite volume its
+$k$-states are quantised (as for a classical
+ideal gas). The difference is that now we can only put 1 fermion
+in a single state. Electrons have 2 spin states,
+$m_s = \pm 1/2$, so we can put one of each spin state in
+a single $k$-state.
+
+At $T = 0$, all states are filled for
+$\epsilon < \mu$. The maximum filled energy at
+$T = 0$ is called the \textit{Fermi energy}
+$\epsilon_F$.
+\begin{equation}
+	\mu\left(T = 0\right)\equiv\epsilon_F
+\end{equation}
+with the maximum momentum $p=\hbar^2 {k_F}^{2}$.
+
+At $T = 0$ we can calculate
+$\mu$, the chemical potential, by first
+summing up the mean occupancy of the state.
+\begin{equation}
+	\sum_i \left<N_i\right> = N
+\end{equation}
+where $N$ is the total number of electrons
+in the gas.
+
+As the states are very close together in energy we can convert
+the sum to an integral.
+\begin{equation}
+	\sum_i^\infty\rightarrow\int_0^\infty
+	D\left(\epsilon\right)\dd{\epsilon} = \int_0^\infty
+	D\left(k\right)\dd{k}
+\end{equation}
+this quantity $D\left(\epsilon\right)$ is called the energy
+density of states. We covered this in
+Section~\ref{sec:density_of_states}.
+
+\textbf{Note:} we can perform this integral over the
+energy or over $k=\absolutevalue{\vec{k}}$.
+
+\begin{derivation}
+	In our axes of $k$-states, each occupancy
+	must be quantised with gap $2\pi/L$. See
+	Figure~\ref{fig:frequency_space}.
+
+	Per unit volume of $k$-space, the number of
+	$k$-states is $V/{\left(2\pi\right)}^3$, with
+	2 electrons, $\uparrow$ and $\downarrow$
+	in each state.
+
+	The steps we take are exactly like those from
+	Section~\ref{sec:density_of_states}, we quote the result that
+	\begin{equation}
+		g\left(k\right)\dd{k} =
+		\frac{Vk^2}{2pi^2}
+	\end{equation}
+
+	We can express the DOS in terms of $\epsilon$ and
+	$\epsilon + \dd{\epsilon}$ with $2\dd{k} = \dd{\epsilon}$
+	\begin{equation}
+		2g\left(k\right)\dd{k} =
+		g\left(\epsilon\right)\dd{\epsilon}
+	\end{equation}
+
+	After some rearranging, this gives
+	\begin{equation}
+		g\left(\epsilon\right) =
+		\frac{V}{2pi^2}{\frac{2m}{\hbar^2}}^{\frac{3}{2}}\sqrt{\epsilon}
+	\end{equation}
+\end{derivation}
+
+With this, we can work out $N$
+\begin{equation}
+	N = \int^\infty_0 f\left(\epsilon\right)D\left(\epsilon\right)
+\end{equation}
+where $f\left(\epsilon\right)$ is the Fermi-Dirac function as
+seen in Section~\ref{sub:fermi_dirac_distribution_function}. We know at
+$T = 0$, $f\left(\epsilon\right) = 1$ for
+$\epsilon < \epsilon_{F}$, otherwise 0. (See
+Figure~\ref{fig:mean_occupancy}). Thus, we only need to
+integrate $D\left(\epsilon\right)$ between 0 and
+$\epsilon_{F}$. $D\left(\epsilon\right) = g\left(\epsilon\right)$ as we derived.
+
+\begin{definition}
+	The Fermi energy is the maximum filled energy for a Fermi-gas at
+	$T = 0$ and it is given as
+	\begin{equation}
+		\label{eq:fermi_energy}
+		\epsilon_{F}
+		=
+		\frac{h^2}{2m}{\left(\frac{3\pi^2 N}{V}\right)}^{\frac{2}{3}}
+	\end{equation}
+\end{definition}
+
+We can also get the same result if we note that at
+$T = 0$, all states are confined within a
+frequency space sphere of radius $k_f$.
+
+Thus the total number of states $N$ is the
+total volume multiplied by the state per unit volume of
+frequency space
+\begin{equation}
+	\label{eq:fermi_gas_number_of_states}
+	N = \frac{4}{3\pi}\frac{2V}{{\left(2\pi\right)}^3}k^3_F =
+	\frac{Vk^3_F}{3\pi^2}.
+\end{equation}
+
+Rearrange $k$ for $\epsilon$
+and we get the same result.
+
+\section{Fermi temperature}%
+\label{sec:fermi_temperature}
+
+\begin{definition}
+	This is a temperature equivalent to the Fermi energy (it is not
+	a physical temperature)
+	\begin{equation}
+		T_F = \frac{\epsilon_F}{k_B}
+	\end{equation}
+\end{definition}
+
+\chapter{Lecture 19 (Week 18)}%
+\label{cha:lecture_19}
+
+\section{Thermodynamic properties of Fermi gas}%
+\label{sec:thermodynamic_properties_of_fermi_gas}
+
+At $T = 0$, we found from
+Section~\ref{sec:fermi_gas} the expression for
+$N$, which is
+Equation~\ref{eq:fermi_gas_number_of_states}.
+
+Now, we can also write an expression for
+$U$, the internal energy of the Fermi gas.
+This is written as
+\begin{equation}
+	U = \int^\infty_0\epsilon
+	D\left(\epsilon\right)f\left(\epsilon\right)\dd{\epsilon}
+	= \frac{2^{\frac{3}{2}}V}{5\pi^2\hbar^3}{\epsilon_F}^{\frac{5}{2}},
+\end{equation}
+where we are effectively taking the energy
+$\epsilon$ of each state, multiplied it by the
+density of states $D\left(\epsilon\right)$, multiplied by the
+Fermi energy $f\left(\epsilon\right)$, and integrate over all
+space. This is essentially the energy of each state multiplied
+by the probability it is occupied.
+
+To get the pressure $p$, we can eliminate
+$\epsilon$ from the expression for
+$U$ using
+\begin{equation}
+	p = -{\left(\pdv{U}{V}\right)}_{S,N}.
+\end{equation}
+
+What we do now is express $\epsilon_F$ in terms of
+$N$. Then substitute this into
+$U$. Then, we can finally do the partial
+derivative, keeping $S$ and
+$N$ constant. We get
+\begin{equation}
+	p = \frac{2}{3}\frac{U}{V}.
+\end{equation}
+
+\begin{derivation}
+	Let
+	\begin{equation}
+		a =
+		\frac{V}{2\pi^2}{\left(\frac{2m}{\hbar^2}\right)}^{\frac{3}{2}}\hspace{1em}\textrm{so that}\hspace{1em}D\left(\epsilon\right)
+		= a\epsilon_F^{\frac{1}{2}}.
+	\end{equation}
+
+	Then at $T = 0$
+	\begin{equation}
+		N =
+		\frac{2}{3}a\epsilon_F^{\frac{3}{2}}\hspace{1em}\textrm{and}\hspace{1em}
+		U = a\epsilon_F^{\frac{5}{2}}
+	\end{equation}
+
+	From the first law, we rearrange to get the pressure, which is
+	the relationship we quoted above. Replace
+	$\epsilon_F$ in $U$ using
+	$N$. This gives
+	\begin{equation}
+		U =
+		\frac{2}{5}a{\left(\frac{3}{2}\frac{N}{a}\right)}^{\frac{5}{3}}
+		= \frac{2}{5}{\left(\frac{3}{2}N\right)}^{\frac{5}{3}}a^{-\frac{2}{3}}
+	\end{equation}
+	Expressing $p$ using the chain rule
+	\begin{equation}
+		p = -\dv{U}{a}\dv{a}{V}
+	\end{equation}
+
+	This finally gives us
+	\begin{equation}
+		p = \frac{2}{3}\frac{U}{V}.
+	\end{equation}
+
+	Compare this to a classical gas (monoatomic):
+	\begin{equation}
+		U =
+		\frac{3}{2}nRT\hspace{1em}\textr{and}\hspace{1em}P=\frac{nRT}{V},
+	\end{equation}
+	which would gives us the same answer.
+\end{derivation}
+
+This expression is exactly the same for a classical ideal gas,
+but for an ideal gas $p$ and
+$U$ depend on $T$. Here,
+the pressure is at $T = 0$. This is called
+\textit{degeneracy pressure} because it results from the fermionic
+properties of the particles (the Pauli's exclusion principle).
+If we go back to the example of the white dwarf, it is this
+pressure that keeps the star from collapsing further. This
+similarly applies to the neutron star.
+
+Solving equation for $N$ at finite
+$T$ (not at $T = 0$) gives
+an expression for the temperature dependence of the chemical
+potential. We find that the chemical potential has a very week
+temperature dependence because $T \ll T_F$, where
+$T_F$ is the Fermi temperature defined in
+Section~\ref{sec:fermi_temperature}.
+\begin{definition}
+	The equation for the chemical potential as a function of
+	temperature is
+	\begin{equation}
+		\mu\left(T\right)
+		\simto
+		\epsilon_F\left(1 - \frac{\pi^2}{12}{\left(\frac{T}{T_F}\right)}^2\right).
+	\end{equation}
+
+	For gases at room temperature and below, we can assume that the
+	chemical potential is equal Fermi energy (it has no temperature
+	dependence)
+\end{definition}
+
+\section{Specific heat}%
+\label{sec:specific_heat}
+
+We are also interested in the heat capacity, which is the
+derivative of the total energy with respect to temperature. At
+$T = 0$, this is a step function. At finite
+temperature, we see some broadening of the step function. This
+width in broadening is $k_B T$. See
+Figure~\ref{fig:mean_occupancy}. As temperature increases the
+occupancy of the states above $\epsilon_F$ increases
+and those below $\epsilon_F$ decreases. The end
+result is a transfer of electrons from below
+$\epsilon_F$ to above $\epsilon_F$. This
+results in a net increase in internal energy. Essentially, we
+promoted some of the states to go beyond the Fermi energy. We
+are interested in the change in this energy, and then take the
+derivative of that to get the heat capacity.
+
+Recall that
+\begin{equation}
+	\label{eq:density_of_states_wrt_number_of_states}
+	D\left(\epsilon\right) = \dv{N}{\epsilon}
+\end{equation}
+and the number of states in the energy range
+$\delta\N = D\left(\epsilon\right)\delta\epsilon$. Since $\delta\epsilon = k-B T$, we know
+$\delta N$, and since $\delta U = \delta N\delta\epsilon$, we
+get
+\begin{equation}
+	\delta U
+	=
+	D\left(\epsilon\right){\left(k_B T\right)}^2
+\end{equation}
+
+Finally, we can find $C_V$, which is
+\begin{equation}
+	C_V = \dv{U}{T} = 2D\left(\epsilon\right)k_B^2 T
+\end{equation}
+
+\textbf{Note:} we are working with the assumption that
+$\epsilon_F \ll k_B T$, therefore, $D\left(\epsilon\right)$ in
+this range $k_B T$ is small enough to appear
+constant, i.e.\ $D\left(\epsilon\right) = D\left(\epsilon_F\right)$. This is an
+approximation.
+
+We could also carry out the calculation more precisely.
+
+\begin{definition}
+	The heat capacity of a Fermi-gas is
+	\begin{equation}
+		C_V = \frac{\pi^2}{3}k_B^2 D\left(\epsilon\right) T.
+	\end{equation}
+\end{definition}
+
+The different coefficient comes from if we calculate
+$U$ through evaluating the integral. The
+main point is that $C_V$ is linearly dependent
+on the temperature and tends to zero at $T = 0$,
+in accordance with the Third Law (See
+Section~\ref{sub:consequences_of_the_third_law} and specifically number 2).
+What's more, it also depends on the density of state at the
+Fermi energy. Thus, a metal with a higher density of state would
+have a higher heat capacity.
+
+\textbf{Note:} we can also derive this in terms of the
+partition function, but it is more involved and complicated.
+
+\section{Fermi gas in one and two dimensions}%
+\label{sec:fermi_gas_in_one_and_two_dimensions}
+
+Sometimes, electrons are trapped in a single layer. For example,
+graphene is a very thin and flat sheet where the electrons live
+on a 2D sheet. The thickness of the sheet is thin enough it can
+be approximated to be sufficiently thin for 2D. Another example
+is high temperature superconductors which involve a layer in a
+compound in which electrons can move freely in one plane, but
+not in the other plane. To some extent, we can view these to be
+confined in a 2D plane. Another example is a 2D electron gas,
+which are electrons confined to the region between two pieces of
+semiconductors. At the interface between these two materials, we
+can have a layer of trapped electrons.
+
+The case of 1D also exists, we just have to limit one more
+dimension through elimination from approximation.
+
+The key point is that the number of
+$k$-states per unit \textit{area}
+of $k$-space is now
+\begin{equation}
+	\frac{L^2}{{\left(2\pi\right)}^2}
+	=
+	\frac{A}{{\left(2\pi\right)}^2}
+\end{equation}
+
+The calculation is carried out as before, but our density of
+states will also change into a circle instead of a sphere.
+Unlike the case in 3D, the DOS in 2D does
+\textit{not} depend on energy, but only
+$m$, the mass of the electron. This is
+expressed as
+\begin{equation}
+	D\left(\epsilon\right) = \frac{Am}{\pi\hbar^2}.
+\end{equation}
+
+\chapter{Lecture 20 (Week 18)}%
+\label{cha:lecture_20}%
+
+Consider a Bose-Einstein gas of massless bosons, with energy
+\begin{equation}
+	\epsilon
+	=
+	\hbar\omega
+	=
+	\hbar ck
+\end{equation}
+where $c$ is the speed of light.
+
+The Bose-Einstein distribution function differs slightly from
+the Fermi-Dirac function. Refer to
+equations~\ref{eq:fermi_dirac_distribution_function} and~\ref{eq:bose_einstein_distribution_function}
+for the respective equations.
+
+For photons, the chemical potential is $\mu = 0$.
+This gives the special Planck distribution.
+\begin{equation}
+	\label{eq:plancks_distribution_function}%
+	p\left(\epsilon\right) = \frac{1}{e^{\beta\epsilon} - 1}
+\end{equation}
+
+We might ask, why is the chemical potential zero for a photon?
+This is because photons can be created or destroyed (with
+arbitrarily low energy) so the number (photon number) in a
+closed box of fixed energy is not fixed. So the free energy
+cannot depend on $N$. We know that
+$\mu$ can be written in as the partial
+derivative of the Helmholtz free energy with respect to
+$N$, keeping $V,T$
+constant, thus, by definition, it is 0.
+\begin{equation}
+	\mu = {\left(pdv{F}{N}\right)}_{V,T} = 0
+\end{equation}
+
+\subsection{Density of states of Bose gas}%
+\label{sub:density_of_states_of_bose_gas}%
+
+We will now derive the density of states of a Bose gas.
+
+\begin{derivation}
+	As usual, we start in our frequency space. If the photons are in
+	a box of side $L$, with the number of
+	$k$-states per unit volume of
+	$k$-space is $L^3/{\left(2\pi\right)}^3 = V/{\left(2\pi\right)}^3$.
+
+	For photons, there are 2 polarisation of photons,
+	$\pm 1$. Thus, for each
+	$k$-state, we would have two photons, making
+	the number of photons per unit volume $2V/{\left(2\pi\right)}^3$.
+
+	We also notice that $D\left(\epsilon\right)\dd{\epsilon} =
+		D\left(k\right)\dd{k}$.
+
+	We care about the dispersion relation, which is the derivative
+	of $k$ with respect to
+	$\epsilon$, which is $\hbar c$. For
+	bosons, it is linear, while for fermions, it is a square
+	relation.
+
+	Thus, the density of state for $\epsilon\rightarrow\dd{\epsilon}$ is
+	\begin{equation}
+		D\left(\epsilon\right) =
+		4\pik^2\dv{k}{\epsilon}\frac{2V}{{2\pi}^3}.
+	\end{equation}
+
+	Replace $k$ with $\epsilon$ to
+	get
+	\begin{equation}
+		\label{eq:density_of_states_photon_gas}
+		D\left(\epsilon\right) =
+		\frac{V}{\pi^2}\frac{\epsilon^2}{{\hbar c}^3}
+	\end{equation}
+\end{derivation}
+
+\subsection{Internal energy of photon gas}%
+\label{sub:internal_energy_of_photon_gas}%
+
+We also know that the internal energy is expressed as
+\begin{equation}
+	U = \int_0^\infty\epsilon
+	p\left(\epsilon\right)D\left(\epsilon\right)\dd{\epsilon}
+\end{equation}
+
+Since we already calculated the DOS, we can substitute that and
+$p\left(\epsilon\right)$ and evaluate the integral. We will also
+need the standard integral
+\begin{equation}
+	\int^\infty_0\frac{x^3}{e^x-1}\dd{x}
+	=
+	\frac{\pi^4}{15}.
+\end{equation}
+
+With the substitution $x = \beta\epsilon$, we get
+\begin{equation}
+	\label{eq:photon_gas_intermediate_derivation}
+	U = \frac{V}{\pi^2{\left(\hbar c\right)}^3}
+	\int^\infty_0\frac{\epsilon^3\dd{\epsilon}}{e^{\beta\epsilon} - 1} =
+	\frac{V}{\pi^2{\left(\hbar c\right)}^3\beta}\int_0^\infty\frac{x^3\dd{x}}{e^x-1}
+	= \frac{V{\left(k_B T\right)}^4\pi^2}{15{\left(\hbar c\right)}^3}
+\end{equation}
+
+\begin{definition}
+	The internal energy of a photon gas $U$ is
+	\begin{equation}
+		U = \frac{V\pi^2}{15{\left(\hbar c\right)}^3}{\left(k_B T\right)}^4.
+	\end{equation}
+\end{definition}
+
+\subsection{Stefan-Boltzmann Law (not examinable)}%
+\label{sub:stefan_boltzmann_law_not_examinable_}
+
+An example of why we would want to find this quantity is the
+radiating power, or the \textit{Stefan-Boltzmann Law}. Here, we need
+to relate the energy density to the number of photons hitting a
+surface per unit time. This is similar to our analysis of the
+kinetic theory of an ideal gas.
+
+Consider $n$ photons per unit volume,
+travelling with a speed $c$. In a time
+$\delta{t}$ the photons hitting area
+$A$ will sweep out a volume (that of a
+parallelepiped).
+\begin{equation}
+	V_\mathrm{photon} = c\delta tA\cos{\theta}.
+\end{equation}
+
+If we have a unit area and a unit time, $V_\mathrm{photon} = nc\cos{\theta}$,
+then the total number of photons hitting per unit time is
+$nc\cos{\theta}$.
+
+But not all the photons in this volume is travelling at the
+angle $\theta$. Thus, we want to know the
+fraction of photons travelling at angle $\theta\rightarrow\theta + \dd{\theta}$.
+Think of the photon gas as a unit sphere, then the number of
+photons travelling at an angle $\theta\rightarrow\theta + \dd{\theta}$ lies
+within a thin ring with width $\dd{\theta}$, this ring
+has a radius $\sin{\theta}$ and thus a volume of
+\begin{equation} V_\mathrm{ring} =
+	2\pi\sin{\theta}\dd{\theta}.
+\end{equation}
+
+Thus, the fraction of photons would be
+\begin{equation}
+	\frac{V_\mathrm{ring}}{V_\mathrm{sphere}}
+	=
+	\frac{2\pi\sin{\theta}\dd{\theta}}{4\pi}
+	=
+	\frac{\sin{\theta}\dd{\theta}}{2}.
+\end{equation}
+
+Finally, we want the total number of photons hitting the surface
+at this angle as we integrate around the whole ring of width
+$\dd{\theta}$, this gives us the result
+\begin{equation}
+	\int^{\frac{\pi}{2}}_0\frac{nc\cos{\theta}\sin{\theta}\dd{\theta}}{2}
+	=
+	\frac{nc}{4}.
+\end{equation}
+
+Each photon is carrying a radiating power per unit area
+$ P_{\mathrm{photon}} =
+	\frac{c}{4}\times\textrm{energy density}$.
+
+This energy density is $U$, which we
+calculated in Section~\ref{sub:internal_energy_of_photon_gas}. Putting this
+into our result and we get
+\begin{equation}
+	P_\mathrm{\photon} = \frac{c\pi^2k_B^4T^4}{60{\left(\hbar c\right)}^3} = \sigma T^4
+\end{equation}
+where $\sigma$ is the Stefan-Boltzmann constant.
+
+\section{Spectral density}%
+\label{sec:spectral_density}
+
+Our integral for the total energy can be written as
+$U/V$. Take the integral from
+Equation~\ref{eq:photon_gas_intermediate_derivation}, we call this the spectral
+energy density
+\begin{equation}
+	\frac{U}{V} =
+	\frac{1}{\pi^2{\left(\hbar c\right)}^3}.
+\end{equation}
+
+We can also write this in terms of frequency, where
+$\epsilon = \hbar\omega$, giving us
+\begin{equation}
+	\frac{U}{V}
+	=
+	\frac{\hbar}{\pi^2 c^3}\int^\infty_0
+	\frac{\omega^3\dd{\omega}}{e^{\beta\hbar\omega} - 1}
+	=
+	\int^\infty_0 u_\omega\dd{\omega}
+\end{equation}
+where $u_\omega$ is known as the spectral density.
+
+\begin{definition}
+	The spectral density of a Bose-gas is
+	\begin{equation}
+		\label{eq:spectral_density}
+		u_{\omega}
+		=
+		\frac{\hbar}{\pi^2 c^3}\frac{\omega^3}{\left(e^{\beta\hbar\omega} - 1\right)}
+	\end{equation}
+\end{definition}
+
+If we plot $u_{\omega}$ as a function of
+$\omega$, we get a curve known as
+\textit{Wien's displacement law}, where the maximum roughly occurs at
+$\hbar\omega\simeq 3k_B T$.
+
+This is one of the early triumphs of quantum mechanics, and it
+solves what was known as the ultraviolet catastrophe.
+
+To see where this crisis comes from using the classical
+equipartition theorem---in a normal oscillator, there is an
+equal amount of potential energy and kinetic energy. Because
+there are two degrees of freedom, we get an energy of
+$k_B T$ per mode (See
+Section~\ref{sec:classical_equipartition_theorem}). Therefore, the total energy
+$\dd{U}/\dd{\epsilon}$ is proportional to
+$\epsilon^2$ (See Equation~\ref{eq:density_of_states_photon_gas}).
+If we integrate for $U$ to infinity, we get
+unbounded infinite energy. This is fixed by introducing the Bose
+factor which reduces the spectral density at high frequency.
+
+We can derive Wien's displacement law below
+\begin{derivation}
+	We start by differentiating the spectral density from
+	Equation~\ref{eq:spectral_density} with respect to
+	$\omega$
+	\begin{equation}
+		\dv{}{\omega}\left[\frac{\omega^3}{e_{\beta\hbar\omega} - 1}\right]
+		=
+		\left[\frac{3\omega^2}{e_{\beta\hbar\omega} - 1} - \frac{\omega^3\beta\hbar}{denom}\right].
+	\end{equation}
+	We want to find where the peak is, therefore we set this equal
+	to 0. Some algebraic manipulation, alongside the assumption that
+	$e^{\beta\hbar\omega} \gg 1$ gives us
+	\begin{equation}
+		3 \simeq \omega\beta\hbar
+	\end{equation}
+	where $\beta = 1/k_B T$. Rearranging this gives us Wien's
+	displacement law as quoted above.
+\end{derivation}
+
+We can also derive thermodynamic properties of photon gas using
+the spectral density. We start with the entropy.
+\begin{derivation}
+	From the first law, we can write
+	\begin{equation}
+		{\left(\pdv{U}{T}\right)}_{V}
+		=
+		T{\left(\pdv{S}{T}\right)}_{V}
+		=
+		C_V
+	\end{equation}
+	Thus,
+	\begin{equation}
+		\int^T_0\frac{1}{T}{\left(\pdv{U}{T}\right)}_{V}\dd{T}.
+	\end{equation}
+
+	Now, we differentiate $U$ with respect to
+	$T$ to get
+	\begin{equation}
+		\dv{U}{T} = \frac{16}{c}V\sigma T^3
+	\end{equation}
+
+	Put this integral in and evaluate to get
+	\begin{equation}
+		\label{eq:entropy_of_photon_gas}
+		S = \frac{16}{3}\frac{V\sigma}{c}T^3 =
+		\frac{4}{3}\frac{U}{T}
+	\end{equation}
+\end{derivation}
+
+We can also derive the pressure
+\begin{derivation}
+	Start with the first law and rearrange to get
+	\begin{equation}
+		p = T\pdv{S}{V} - \pdv{U}{V}
+	\end{equation}
+	So
+	\begin{equation}
+		\dv[]{U}{V} = \frac{U}{V}
+	\end{equation}
+	Take the expression for entropy from
+	Equation~\ref{eq:entropy_of_photon_gas}, substitute it in and simplify
+	to get
+	\begin{equation}
+		\label{eq:pressure_of_photon_gas}
+		p =\frac{1}{3}\frac{U}{V}.
+	\end{equation}
+	This means the pressure is a third of the spectral density for a
+	photon gas. Recall that for an ideal Fermi gas, the pressure is
+	$2/3$ of the energy density. The difference
+	comes from the fact that these photons are relativistic---they
+	travel at the speed $c$.
+\end{derivation}
+
+\subsection{Bose-Einstein gas with massive particles (non-examinable)}%
+\label{sub:bose_einstein_gas_with_massive_particles}
+
+If we have bosons with mass (so not photons or phonons), then
+$\mu\neq 0$. In fact, it will be negative.
+Previously, when calculating $N$ or
+$U$, we replaced the sum with the integral.
+But bosons can have a large number of particles in a single
+state. According to the third law, at $T = 0$
+all particles will be in the ground state. Thus, if we replace
+the sum with the integral, this gives us a very bad
+approximation if most of the particles are in a single state.
+
+When occupancy of the lowest state becomes large compare to the
+occupancy of all the other states, there is a phase transition.
+
+This is known as the Bose-Einstein condensation.
 
 \end{document}
 % vim: fen fdm=syntax
