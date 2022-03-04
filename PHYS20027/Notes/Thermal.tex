@@ -2194,14 +2194,14 @@ expansion.
 	\begin{equation}
 		\Omega\left(E_0 - E_i\right)
 		=
-		\Omega\left(E_0\right)\exponential{\left(-\frac{E_i}{k_B T}\right)}
+		\Omega\left(E_0\right) e^{-\frac{E_i}{k_B T}}
 	\end{equation}
 
 	Thus, the probability of of a given state being occupied can be
 	given as
 	\begin{equation}
 		P\left(E_i\right) \propto
-		\exponential\left(-\frac{E_i}{k_B T}\right)
+        e^{-\frac{E_i}{k_B T}}
 	\end{equation}
 	we call this the Boltzmann distribution function.
 \end{derivation}
@@ -2212,7 +2212,7 @@ such that the sum of all probabilities is
 constant $1/Z$. Where Z is called the
 \textit{partition function} and is given as
 \begin{equation}
-	Z = \sum_i \exponential{\left(-\frac{E_i}{k_B T}\right)}
+	Z = \sum_i e^{-\frac{E_i}{k_B T}}
 \end{equation}
 
 Note that this is the sum of \textit{all} states,
@@ -2226,11 +2226,11 @@ level is counted the correct number of times.
 	\begin{equation}
 		\label{eq:boltzmann_canonical}
 		P\left(E_i\right) =
-		\frac{1}{Z}\exponential\left(-\frac{E_i}{k_B T}\right)
+        \frac{1}{Z}e^{-\frac{E_i}{k_B T}}
 	\end{equation}
 	where $Z$ is given as
 	\begin{equation}
-		Z = \sum_i g_i \exponential{\left(-\frac{E_i}{k_B T}\right)}
+		Z = \sum_i g_i e^{-\frac{E_i}{k_B T}}
 	\end{equation}
 \end{definition}
 
@@ -2252,7 +2252,7 @@ level is counted the correct number of times.
 	function is
 	\begin{equation}
 		Z = \sum_{J=0}^\infty
-		\left(2J + I\right)\exponential\left(- \frac{J\beta \hbar^2}{2I}\left(J+1\right)\right)
+        \left(2J + I\right)e^{- \frac{J\beta \hbar^2}{2I}\left(J+1\right)}
 	\end{equation}
 \end{example}
 
@@ -2312,7 +2312,7 @@ Boltzmann factor in Equation~\ref{eq:boltzmann_canonical}.
 
 The internal energy can be calculated as
 \begin{equation}
-	U = \sum_i P_i E_i = \frac{\sum_i E_i \exponential{\left(-\beta E_i\right)}}{\sum_i \exponential{\left(-\beta E_i\right)}}
+	U = \sum_i P_i E_i = \frac{\sum_i E_i e^{-\beta E_i}}{\sum_i e^{-\beta E_i}}
 \end{equation}
 
 But we can express this in terms of the partition function as
@@ -2435,8 +2435,8 @@ We can answer this question by considering an example.
 
 	Our partition function would be
 	\begin{equation}
-		Z = \sum_{n=0}^\infty \exponential{\left[ -\beta \left( n +\frac{1}{2} \right) \hbar \omega_0 \right]} =
-		\frac{e^{-\beta \hbar \omega_0 / 2}}{1 - e^{-\beta \hbar \omega_0}}
+		Z = \sum_{n=0}^\infty e^{-\beta\left(n + \frac{1}{2} \right)\hbar\omega_0} =
+		\frac{e^{-\beta\hbar\omega_0/2}}{1 - e^{-\beta\hbar\omega_0}}
 	\end{equation}
 
 	We can arrive at this result by treating the double sum as an
@@ -2444,9 +2444,9 @@ We can answer this question by considering an example.
 	$r = \exponential{\left(-\beta\hbar\omega_0\right)}$.  Then if we find the internal energy by
 	finding $\left<E\right>$, we find that it is
 	\begin{equation}
-		U = -\pdv{\naturallogarithm{Z}}{B} = \hbar^2 \omega_0
+        U = -\pdv{\naturallogarithm{Z}}{B} = \hbar^{2}\omega_0
 		\left[\frac{1}{2} +
-		\frac{e^{-\beta \hbar \omega_0}}{1-e^{-\beta\hbar\omega_0}}
+		\frac{e^{-\beta\hbar\omega_0}}{1-e^{-\beta\hbar\omega_0}}
 		\right]
 	\end{equation}
 
@@ -2487,8 +2487,8 @@ The probability of a given $x$-component of
 the velocity $v_x$
 \begin{equation}
 	P\left(v_x\right) \propto
-	\exponential\left(-\frac{\epsilon}{k_B T}\right) \propto
-	\exponential\left(-\frac{mv^2_x}{2 k_B T}\right)
+    e^{-\frac{\epsilon}{k_B T}}\propto
+    e^{-\frac{mv^2_x}{2 k_B T}}
 \end{equation}
 
 To work this out, we integrate the Boltzmann distribution with
@@ -2519,7 +2519,7 @@ distribution functions are normalised.
 	We use Gaussian integral identities to get
 	\begin{equation}
 		P\left(v_x, v_y, v_z\right) =
-		{\left(\frac{m}{2\pi k_B T}\right)}^{\frac{3}{2}}\exponential\left(-\frac{\beta m}{2}\left(v_x + v_y + v_z\right)\right)
+        {\left(\frac{m}{2\pi k_B T}\right)}^{\frac{3}{2}}e^{-\frac{\beta m}{2}\left(v_x + v_y + v_z\right)}
 	\end{equation}
 \end{derivation}
 
@@ -2540,21 +2540,21 @@ $v$, to infinity).
 So, we have
 \begin{equation}
 	f(v)\dd{v} \propto v^2
-	\exponential\left(-\frac{mv^2}{2k_B T}\right)
+    e^{-\frac{mv^2}{2k_B T}}
 \end{equation}
 
 \begin{derivation}
 	To start, write out the integral as
 	\begin{equation}
 		f\left(v\right) = A \int_{0}^{\infty} v^2
-		\exponential{\left(-\beta \frac{mv^2}{2}\right)} = 1
+		e^{-\beta \frac{mv^2}{2}} = 1
 	\end{equation}
 
 	Then once again, using Gaussian integral identities, we arrive
 	at
 	\begin{equation}
 		f\left(v\right) = \frac{4}{\pi}{\left(\frac{\beta m}{2}\right)}^{\frac{3}{2}}v^2
-		\exponential{\left(-\frac{\beta mv^2}{2}\right)}
+		e^{-\frac{\beta mv^2}{2}}
 	\end{equation}
 \end{derivation}
 
@@ -2562,7 +2562,7 @@ So, we have
 	The Maxwell-Boltzmann speed distribution curve is
 	\begin{equation}
 		f\left(v\right) = \frac{4}{\pi}{\left(\frac{\beta m}{2}\right)}^{\frac{3}{2}}v^2
-		\exponential{\left(-\frac{\beta mv^2}{2}\right)}
+		e^{-\frac{\beta mv^2}{2}}
 	\end{equation}
 
 	See Figure~\ref{fig:maxwell_boltzmann_speed_distribution} for the shape of this
@@ -2731,15 +2731,15 @@ $ = L^3 $. We solve the Schrödinger equation for
 the system.
 \begin{equation}
 	\label{eq:schrodingers_equation}
-	-\frac{\hbar^2}{2m} \laplacian \Psi =
-	i\hbar \pdv{\Psi}{t}
+	-\frac{\hbar^2}{2m}\laplacian\Psi =
+	i\hbar\pdv{\Psi}{t}
 \end{equation}
 
 The solutions of these are plane waves
 \begin{equation}
 	\Psi
 	=
-	\Psi_0 \exponential\left[i\left(\vec{k} \vdot \vec{r} - wt\right)\right]
+    \Psi_{0}e^{i\left(\vec{k}\vdot\vec{r} - wt\right)}
 \end{equation}
 
 If we apply the momentum operator to the solution, we can find
@@ -2761,8 +2761,8 @@ Recall that the quantisation of $k$ and
 $E$ comes from the periodic boundary
 conditions.
 \begin{equation}
-	\exponential\left(i k_x \left(x+L\right)\right) =
-	\exponential\left(ik_x\right)
+    e^{i k_x \left(x+L\right)} =
+    e^{ik_x}
 \end{equation}
 
 Thus, the allowed values are $k_x = n_x 2\pi / L$. Extending
@@ -2770,7 +2770,7 @@ this to 3D, we get
 \begin{equation}
 	\Psi\left(x,y,z\right)
 	\propto
-	\exponential\left(i k_x x + k_y y + k_z z\right)
+    e^{i k_x x + k_y y + k_z z}
 	\hspace{1em}
 	\mathrm{where}
 	\hspace{1em}
@@ -2830,7 +2830,9 @@ over all volume.
 
 	We get the following integral
 	\begin{equation}
-		\frac{4\pi V}{{\left(2\pi\right)}^3} \int_0^\infty k^2
+		Z_1
+        =
+        \frac{4\pi V}{{\left(2\pi\right)}^3} \int_0^\infty k^2
 		e^{-\alpha k^2} \dd{k}
 		\hspace{1em} \mathrm{with}
 		\hspace{1em} \alpha = \frac{\beta \hbar^2}{2m}
@@ -2884,10 +2886,9 @@ atom), connected to a reservoir (the other atoms). Each atom is
 in a different configuration, then we would have to take into
 account all the permutations as one atom can take the
 configuration of the other. The probability of a particular
-macrostate of gas is $\propto \exponential{\left( -\beta E_{i1} + -\beta E_{i2} + -\beta E_{i3} + \hdots \right)}$, and thus
+macrostate of gas is $\propto\exponential{\left(-\beta E_{i1} + -\beta E_{i2} + -\beta E_{i3} + \hdots\right)}$, and thus
 \begin{equation}
-	Z_{N,D} = \left( \sum_{i1} e^{-\beta E_{i1}}\right) \time\left( \sum_{i2} e^{-\beta E_{i2}}\right)
-	\times \left( \sum_{i3} e^{-\beta E_{i3}}\right) \hdots
+	Z_{N,D} = \left(\sum_{i1}e^{-\beta E_{i1}}\right) \time\left(\sum_{i2}e^{-\beta E_{i2}}\right)\times\left(\sum_{i3}e^{-\beta E_{i3}}\right) \hdots
 \end{equation}
 
 But each sum is the same and equal to $Z_1$,
@@ -3065,13 +3066,13 @@ states, which we then equate as an exponential.
 	\end{equation}
 	Taking the exponential of both sides yields
 	\begin{equation}
-		P\left(N_i, E_i\right) \propto \exponential\left( \beta
-		\left(\mu N_i - E_i \right) \right)
+        P\left(N_i, E_i\right)\propto e^{\beta
+		\left(\mu N_i - E_i\right)}
 	\end{equation}
 	where the normalisation constant is $1/Z_G$,
 	where $Z_G$ is the Grand Partition function
 	\begin{equation}
-		Z_G = \sum_i \exponential\left[ \beta \left( \mu N_i - E_i \right) \right]
+        Z_G = \sum_i e^{\beta\left(\mu N_i - E_i \right)}
 	\end{equation}
 \end{derivation}
 
@@ -3187,7 +3188,7 @@ We can find the mean occupancy from the grand partition function
 	\begin{equation}
 		\label{eq:fermi_dirac_distribution_function}
 		\left<N\right>
-		= \frac{1}{\exponential\left(\beta [\epsilon - \mu]\right) + 1}.
+        = \frac{1}{e^{\beta\left(\epsilon - \mu\right)} + 1}.
 	\end{equation}
 \end{definition}
 
@@ -3213,7 +3214,7 @@ We find the mean occupancy using the same equation.
 		\label{eq:bose_einstein_distribution_function}
 		\left<N\right>
 		=
-		\frac{1}{\exponential{\left( \beta[\epsilon - \mu] - 1\right)}}
+		\frac{1}{e^{\beta\left(\epsilon - \mu\right)} - 1}
 	\end{equation}
 \end{definition}
 
@@ -3233,7 +3234,7 @@ need to generalise these results.
 	\begin{equation}
 		\left<N_i\right>
 		=
-		\frac{1}{\exponential{\left( \beta[\epsilon_i - \mu] \pm 1\right)}}
+        \frac{1}{e^{\beta\left(\epsilon_i - \mu\right)}\pm 1}
 	\end{equation}
 	where it is $+$ for fermions and
 	$-$ for bosons.
@@ -3538,6 +3539,7 @@ Section~\ref{sec:fermi_temperature}.
 	temperature is
 	\begin{equation}
 		\mu\left(T\right)
+        =
 		\simto
 		\epsilon_F\left(1 - \frac{\pi^2}{12}{\left(\frac{T}{T_F}\right)}^2\right).
 	\end{equation}
@@ -3685,7 +3687,7 @@ derivative of the Helmholtz free energy with respect to
 $N$, keeping $V,T$
 constant, thus, by definition, it is 0.
 \begin{equation}
-	\mu = {\left(pdv{F}{N}\right)}_{V,T} = 0
+	\mu = {\left(\pdv{F}{N}\right)}_{V,T} = 0
 \end{equation}
 
 \subsection{Density of states of Bose gas}%
@@ -3885,9 +3887,9 @@ We can derive Wien's displacement law below
 	Equation~\ref{eq:spectral_density} with respect to
 	$\omega$
 	\begin{equation}
-		\dv{}{\omega}\left[\frac{\omega^3}{e_{\beta\hbar\omega} - 1}\right]
+		\dv{}{\omega}\left[\frac{\omega^3}{e^{\beta\hbar\omega} - 1}\right]
 		=
-		\left[\frac{3\omega^2}{e_{\beta\hbar\omega} - 1} - \frac{\omega^3\beta\hbar}{denom}\right].
+		\left[\frac{3\omega^2}{e^{\beta\hbar\omega} - 1} - \frac{\omega^3\beta\hbar}{{e^{\beta\hbar\omega} - 1}^2}\right].
 	\end{equation}
 	We want to find where the peak is, therefore we set this equal
 	to 0. Some algebraic manipulation, alongside the assumption that
@@ -3912,7 +3914,7 @@ the spectral density. We start with the entropy.
 	\end{equation}
 	Thus,
 	\begin{equation}
-		\int^T_0\frac{1}{T}{\left(\pdv{U}{T}\right)}_{V}\dd{T}.
+		S = \int^T_0\frac{1}{T}{\left(\pdv{U}{T}\right)}_{V}\dd{T}.
 	\end{equation}
 
 	Now, we differentiate $U$ with respect to
