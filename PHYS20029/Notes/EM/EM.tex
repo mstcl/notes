@@ -409,7 +409,7 @@ from~\ref{theorem:divergence}, we find that
 	with respect to $\tau$
 	\begin{equation}
 		\label{eq:maxwell_gauss_law_differential}
-		\curl{\bm{E}} = \frac{\rho(\bm{r})}{\epsilon_{0}}
+		\divergence{\bm{E}} = \frac{\rho(\bm{r})}{\epsilon_{0}}
 	\end{equation}
 	This is the first of Maxwell's equation.
 \end{definition}
@@ -1708,11 +1708,11 @@ potential.
 	\begin{equation}
 		V\left(r\right) = \frac{1}{4\pi\epsilon_{0}}
 		\left[\oint\limits_S\frac{\sigma_b}{r}\dd{a^\prime} +
-			\int\limits_V\frac{\rho_b}{r}\dd{\tau^\prime}\right]
+			\int\limits_V\frac{\rho_\textrm{bound}}{r}\dd{\tau^\prime}\right]
 	\end{equation}
 	where $\sigma_b\equiv\bm{P}\vdot
 		\hat{\bm{n}}$ is the `bound' surface charge and
-	$\rho_b\equiv - \divergence{\bm{P}}$ is the `bound' charge density.
+	$\rho_\textrm{bound}\equiv - \divergence{\bm{P}}$ is the `bound' charge density.
 \end{definition}
 
 If we imagine an object that has aligned dipoles, then there
@@ -1727,20 +1727,21 @@ $\divergence{\bm{P}}\neq0$.
 \label{sec:the_electric_field_displacement_d}
 
 Consider the charge density within a material as due to the
-bound charges, $\rho_b$, that we described in
+bound charges, $\rho_\textrm{bound}$, that we described in
 Section~\ref{sec:the_field_from_a_polarised_object}, and that due to anything else
-(like free electrons), $\rho_f$.
+(like free electrons), $\rho_\textrm{free}$.
 
 Now, Gauss' law applied to both charge densities (the total
-charge density) $\rho = \rho_b + \rho_f$ gives
+charge density) $\rho = \rho_\textrm{bound} +
+	\rho_\textrm{free}$ gives
 \begin{equation}
 	\epsilon_{0}\divergence{\bm{E}}
 	=
 	\rho
 	=
-	\rho_b + \rho_f
+	\rho_\textrm{bound} + \rho_\textrm{free}
 	=
-	-\divergence{\bm{P}} + \rho_f
+	-\divergence{\bm{P}} + \rho_\textrm{free}
 \end{equation}
 where $\bm{E}$ is the \textit{total electric field}
 from both dipoles and free charges.
@@ -1749,7 +1750,7 @@ If we rearrange the left-most and right-most side, we get
 \begin{equation}
 	\divergence{\left(\epsilon_{0}\bm{E} + \bm{P}\right)}
 	=
-	\rho_f
+	\rho_\textrm{free}
 \end{equation}
 
 Let us define a new quantity $\bm{D}$.
@@ -1770,7 +1771,7 @@ field.
 	Gauss' law for the $\bm{D}$ field in both forms
 	are
 	\begin{equation}
-		\divergence{\bm{D}} = \rho_f
+		\divergence{\bm{D}} = \rho_\textrm{free}
 	\end{equation}
 	and
 	\begin{equation}
@@ -1793,7 +1794,7 @@ field.
 	$a$. Find the electric displacement.
 
 	We write out the divergence relationship between
-	$\bm{D}$ and $\rho_f$. Then we use
+	$\bm{D}$ and $\rho_\textrm{free}$. Then we use
 	Gauss' Law, and consider a smaller cylinder of radius
 	$s$ and length $L$ inside
 	our insulated wire as our Gaussian surface, ignoring the fields
@@ -2229,6 +2230,7 @@ direction of the current.
 	In the presence of an electric field $\bm{E}$,
 	the total charge becomes
 	\begin{equation}
+		\label{eq:the_lorentz_force_law}
 		\bm{F_{\mathrm{total}}}
 		=
 		Q\left(\bm{E} + \bm{v}\cross\bm{B}\right)
@@ -2524,6 +2526,7 @@ continuity equation.
 \begin{definition}
 	The continuity equation is
 	\begin{equation}
+		\label{eq:continuity_equation}
 		\divergence{J} = -\pdv{\rho}{t}
 	\end{equation}
 
@@ -3263,8 +3266,9 @@ that
 Rearranging this expression, we get
 \begin{equation}
 	\begin{aligned}
-		ev^\prime B & = \frac{m_e}{R}\left(v^{\prime 2} - v^2\right)\left(v^{\prime}+v\right) \\
-		            & = \frac{m_e}{R}\Delta{v}\left(v^{\prime} + v\right).
+        ev^{\prime} B &= \frac{m_e}{R}\left(v^{\prime 2} - v^{2}\right)\\
+        &= \frac{m_e}{R}\left(v^\prime - v\right)\left(v^{\prime} + v\right)\\
+		            &= \frac{m_e}{R}\Delta{v}\left(v^{\prime} + v\right).
 	\end{aligned}
 \end{equation}
 
@@ -3407,11 +3411,13 @@ can compare the expressions for both here.
 
 \begin{center}
 	\begin{tabular}{c  c}
-		\textbf{Volume}                 & \textbf{Surface}                     \\
+		\textbf{Volume}                              & \textbf{Surface}         \\
 		\toprule
-		$\rho_b = -\divergence{\bm{P}}$ & $\sigma_b = \bm{P}\vdot\bm{\hat{n}}$ \\
-		$\bm{J}_b = \curl{\bm{M}}$      & $\bm{K}_b =
-		\bm{M}\cross\bm{\hat{n}}$                                              \\
+		$\rho_\textrm{bound} = -\divergence{\bm{P}}$ & $\sigma_\textrm{bound} =
+		\bm{P}\vdot\bm{\hat{n}}$                                                \\
+		$\bm{J}_\textrm{bound} =
+		\curl{\bm{M}}$                               & $\bm{K}_\textrm{bound} =
+		\bm{M}\cross\bm{\hat{n}}$                                               \\
 	\end{tabular}
 \end{center}
 
@@ -3541,6 +3547,34 @@ Provided that $-\divergence{\bm{M}} = 0$, which is usually the case
 of high symmetry, we can use Ampère's Law. Otherwise, we need to
 work directly with the magnetisation.
 
+\begin{example}
+	A long copper rod of radius $R$ carries a
+	uniformly distributed free current $I$. Find
+	$\bm{H}$ inside and outside the rod.
+
+	We approach this by taking an Ampèrian loop of radius
+	$s \leq R$. The line integral of this circular loop
+	is $2\pi s$. Inside the rod, at a distance
+	$s$ we get a free current
+	$I_\textrm{free}$ as an area ratio of the total current
+	$I$. The direction is parallel to the path,
+	which is around the axis the current is aligned to, giving us
+	\begin{equation}
+		\bm{H}\left(2\pi s\right)  =
+		I\frac{\pi s^2}{pi R^2\pi}\bm{\hat{\phi}}
+	\end{equation}
+    meaning
+    \begin{equation}
+       \bm{H} = \frac{Is}{2\pi R^2} \bm{\hat{\phi}}.
+    \end{equation}
+    
+    Outside the wire, we repeat the same thing but with $s \leq R$, and get a total current enclosed as $I$, giving us
+    \begin{equation}
+       \bm{H} = \frac{I}{2\pi s}\bm{\hat{\phi}}
+    \end{equation}
+    If $\bm{M}$ is 0, i.e.\ we are in empty space, then the magnetic field is the same as $\bm{H}$. This only applies to $s \geq R$.
+\end{example}
+
 \section{Boundary conditions for the auxiliary field}%
 \label{sec:boundary_conditions_for_the_auxiliary_field}
 
@@ -3603,15 +3637,30 @@ Equation~\ref{eq:auxiliary_field_h} into
 	material, and $\mu_r$ as the relative
 	permeability.
 	\begin{equation}
+        \label{eq:linear_medium_permeability_susceptibility}
 		\bm{B}
 		=
-		\mu_{0}\left(1+\chi_m\bm{H}\right)
+		\mu_{0}\left(1+\chi_m\right)\bm{H}
 		=
 		\mu\bm{H}
 		\hspace{1em}\mathrm{with}\hspace{1em}
 		\mu\equiv\mu_{0}\left(1 + \chi_m\right)
 	\end{equation}
 \end{definition}
+
+\begin{example}
+    An infinite solenoid (with $n$ turns per unit length and current $I$) is filled with a linear material with susceptibility $\chi_m$. Find the magnetic field inside the solenoid.
+
+    Using Ampère's law for $\bm{H}$, we see it is proportional to $n$ turns per unit length.
+    \begin{equation}
+       \bm{H} = nI\bm{\hat{z}}.
+    \end{equation}
+    Inside the coil, we use Equation~\ref{eq:linear_medium_permeability_susceptibility} and see that
+    \begin{equation}
+        \bm{B} = \mu_{0}\left(1 + \chi_m\right)nI\bm{\hat{z}}.
+    \end{equation}
+    If the material is paramagnetic then we get an alignment of the dipoles in the field (it is enhanced), so $\chi_m > 0$. If it's diamagnetic, the field is somewhat reduced, because bound surface current is in the same direction as $I$, so $\chi_m < 0$.
+\end{example}
 
 \section{Ferromagnetism}%
 \label{sec:ferromagnetism}
@@ -3705,7 +3754,7 @@ in a material to be proportional to the force per unit charge
 \textbf{Note:} There are some materials where this is
 not the case---in particular semiconductors.
 
-Hence, we expect that
+Hence, we expect that the electric current density is
 \begin{equation}
 	\bm{J} = \sigma\bm{f}
 \end{equation}
@@ -3739,8 +3788,9 @@ the effect is dominated by the electric field term (magnetic
 effects are small).
 
 \begin{definition}
-	The Ohm's law written in terms of the current density and
-	electric field.
+	The Ohm's law written in terms of the current density
+	$\sigma$ and electric field
+	$\bm{E}$.
 	\begin{equation}
 		\bm{J} = \sigma\bm{E}
 	\end{equation}
@@ -3764,6 +3814,10 @@ charge resides at the surface. Hence, even if we have an `ohmic'
 material, it is still possible to use Laplace's equations to
 calculate the potential, even in the presence of a steady
 current in the material.
+
+\begin{example}
+    The video examples went through two examples, found in Griffiths' Examples 7.2 and 7.3.
+\end{example}
 
 \section{The electromotive force}%
 \label{sec:the_electromotive_force}
@@ -3836,6 +3890,7 @@ battery.
 
 \section{Motional emf}%
 \label{sec:motional_emf}
+% TODO: add figure
 
 In Section~\ref{sec:the_electromotive_force}, we introduced the concept
 of the electromotive force (emf) and confined our discussion to
@@ -3896,6 +3951,10 @@ We relate this to Equation~\ref{eq:intermediary_motional_ef}.
 	and it applies for any shape of loop.
 \end{definition}
 
+\begin{example}
+    The example is in Griffiths 7.4.
+\end{example}
+
 \section{Faraday's law}%
 \label{sec:faraday_s_law}
 
@@ -3934,6 +3993,10 @@ use Stokes' Law to obtain
 	\end{equation}
 \end{definition}
 
+\begin{example}
+    The example is in Griffiths 7.5.
+\end{example}
+
 \section{Lenz's law}%
 \label{sec:lenz_s_law}
 
@@ -3944,6 +4007,533 @@ a change in flux'.
 
 The main use of Lenz's law is that it tells you the direction of
 the current that is being induced.
+
+\section{Induced electric fields}%
+\label{sec:induced_electric_fields}
+
+If we consider the equations for the electric field in regions
+away from free charges in the case of a varying magnetic field,
+we have
+\begin{equation}
+	\divergence{\bm{E}}
+	=
+	0 \hspace{1.5em} \curl{\bm{E}}=
+	-\pdv{\bm{B}}{T}
+\end{equation}
+
+This is analogous to the case of magnetism
+\begin{equation}
+	\divergence{\bm{B}} = 0
+	\hspace{1.5em}
+	\curl{\bm{B}} =
+	\mu_{0}\bm{J}
+\end{equation}
+In essence, the changing magnetic field generates the
+$\bm{E}$ field in exactly the same way as the
+current generates the $\bm{B}$ fields.
+
+This gives us a direct analogue to the Biot-Savart law
+\begin{equation}
+	\bm{E} =
+	-
+	\frac{1}{4\pi}\int\left(\pdv{\bm{B}}{t}\right)\times\bm{\hat{r}^{\prime\prime}}\frac{1}{r^{\prime\prime 2}}\dd{\tau}.
+\end{equation}
+\begin{definition}
+	The induced electric field due to magnetic field is given as
+	\begin{equation}
+		\label{eq:electric_induced_by_magnetic}%
+		\bm{E} =
+		-\frac{1}{4\pi}\pdv{}{t}\int\frac{\bm{B}\times\bm{\hat{r}^{\prime\prime}}}{r^{\prime\prime 2}}\dd{\tau}.
+	\end{equation}
+\end{definition}
+We can also get the integral form to Faraday's law, as seen in Equation~\ref{eq:faradays_law_integral}. 
+
+\begin{example}
+    The examples are in Griffiths 7.7 and 7.8
+\end{example}
+
+\section{Mutual inductance}%
+\label{sec:mutual_inductance}
+
+We have seen with Faraday's law that a time changing magnetic
+field will produce an electric field in a wire loop. What
+happens if this time a varying field is produced by a time
+varying current in a coil?
+
+We would rightly conclude that by changing the current in wire
+loop we would induce an electric field and hence a current in
+neighbouring coils in which the flux is linked. This is the
+simplest description of inductance.
+
+Some, but not all flux lines from the field produced by one loop
+would pass through the another loop due to geometrical
+differences. But using Biot-Savart law
+(Equation~\ref{eq:the_biot_savart_law}), we can see that the field
+from loop 1 passing through loop 2 is proportional to
+$I_1$. Thus, the flux is
+\begin{equation}
+	\Phi_2 =
+	\int\bm{B}_1\vdot\dd{\bm{a}}
+\end{equation}
+We may write
+\begin{equation}
+	\Phi_2 = M_{21}I_1
+\end{equation}
+where $M_{21}$ is known as the mutual inductance
+of the two coils. Right now, this is just some constant of
+proportionality but we can work backwards and calculate it.
+
+\begin{derivation}
+	Start by by recalling $\bm{B} = \curl{\bm{A}}$. We then calculate
+	the flux of $\bm{B}_1$ through area of loop 2,
+	$\bm{a}_2$
+	\begin{equation}
+		\Phi_2
+		= \int\bm{B}_1\vdot\dd{\bm{a}_2}
+		= \int\left(\curl{\bm{A}}\right)\vdot\dd{\bm{a}_2}
+		= \oint\bm{A}_1\vdot\dd{\bm{l}_2}.
+	\end{equation}
+
+	From~\ref{eq:magnetic_vector_potential_integral}, we can write
+	\begin{equation}
+		\Phi_2
+		=
+		\frac{\mu_{0}I_1}{4\pi}\oint\left(\oint\frac{\dd{\bm{l}_1}}{r^{\prime\prime}}\right)\vdot\dd{\bm{l}_2}
+	\end{equation}
+	Finally, this gives us
+	\begin{equation}
+		\label{eq:mutual_inductance_neumann}%
+		M_{21} =
+		\frac{\mu_{0}}{4\pi}\oint\oint\frac{d\bm{l}_1\vdot\bm{l}_2}{r^{\prime\prime}}
+	\end{equation}
+	We call this the \textit{Neumann} formula.
+\end{derivation}
+
+This is difficult to apply for analytical calculations but
+several things may be noted.
+\begin{itemize}
+	\item $M_{21}$ only depends on the geometrical shapes
+	      and positions of the loops.
+	\item $M_{21} = M_{12}$ since the Neumann formula is the same
+	      regardless of what loop is carrying the current.
+\end{itemize}
+
+\begin{example}
+    The example is in Griffiths 7.10.
+\end{example}
+
+\section{Self-inductance}%
+\label{sec:self_inductance}
+
+From Faraday's law we would expect the varying field in the
+first loop to produce an emf in the second loop, i.e.
+\begin{equation}
+	\epsilon_2 = - \dv{\Phi_2}{t}.
+\end{equation}
+
+We can note also that by Lenz's law, the changing current in the
+first loop also causes an emf in the first loop itself. With the
+previous arguments, we can write
+\begin{equation}
+	\Phi_1 = LI_1.
+\end{equation}
+where $L$ is known as the
+\textit{self inductance} on the coil. Hence, we get a `back
+emf'.
+\begin{definition}
+	The `back emf' in the case of self-inductance is
+	\begin{equation}
+		\label{eq:back_emf}%
+		\epsilon = -L\dv{I}{t}.
+	\end{equation}
+\end{definition}
+The unit of inductance is the \textit{Henry}. The
+larger the inductance, the more difficult it is to change the
+current in a circuit.
+
+If we try to change the current, there is a `back emf' that
+resists the change.
+
+This has practical problems. If we have a high inductance coil
+(for example in a relay), in which a large current is flowing, a
+large emf will be induced if we suddenly try to switch the
+current off. If we do so we may get a large spark on the switch.
+This can be quite damaging. Large, uncontrolled back emfs may
+also damage electronic circuits which is why you often find
+`protection' diodes across relay coils.
+
+\begin{example}
+    The example is in Griffiths 7.12.
+\end{example}
+
+\section{Energy in magnetic fields}%
+\label{sec:energy_in_magnetic_fields}
+
+The observation of strong spark from a back emf suggests that
+there is energy stored in the coil somehow. Let's imagine how we
+get the current to flow in the first place.
+
+We need an emf to start driving a current around a coil, but as
+we have seen this will be opposed according to Lenz's law. We
+can write the work done to change the current as.
+\begin{equation}
+	\label{eq:work_done_to_change_current}%
+	\dv{W}{T}
+	=
+	-\epsilon I
+	=
+	LI\dv{I}{t}.
+\end{equation}
+
+If we start from zero current, this means the energy stored in
+the coil is
+\begin{equation}
+	\label{eq:energy_in_coil}%
+	W = \frac{1}{2}LI^2.
+\end{equation}
+
+We can go further and prove the general result in terms of the
+magnetic field created by the coil.
+\begin{definition}
+	The energy stored in a magnetic field is given as
+	\begin{equation}
+		\label{eq:general_work_done_in_coil}%
+		W = \frac{1}{2\mu_{0}}\int\limits_{\textrm{all space}}
+		B^2\dd{\tau}.
+	\end{equation}
+\end{definition}
+
+You might compare this with the result for the energy we found
+stored in an electric field in Section~\ref{sec:the_energy_of_a_continuous_charge_distribution}.
+As in the case of electrostatics, we can look at this energy as
+the energy stored in the current charge distribution in the
+system.
+
+\begin{example}
+    The example is in Griffiths 7.13.
+\end{example}
+
+\section{Towards Maxwell's equations in free space}%
+\label{sec:towards_maxwell_s_equations_in_free_space}
+
+Let's recap what we have so far and see whether they are
+\textit{complete} and \textit{consistent}.
+\begin{equation}
+	\begin{aligned}
+		 & \divergence{\bm{E}} = \frac{\rho}{\epsilon_{0}} \\
+		 & \divergence{\bm{B}} = 0                         \\
+		 & \curl{\bm{E}} = -\pdv{\bm{B}}{t}                \\
+		 & \curl{\bm{B}} = \mu_{0}\bm{J}
+	\end{aligned}
+\end{equation}
+
+The equations are a mathematical summary of the results found by
+careful experimentation in the mid nineteenth century. However,
+when expressed in this way we might ask why there's no time
+dependence of the $\bm{E}$ in these equations in
+a similar way to the $\bm{B}$ field. More
+importantly, Maxwell, who was looking at the equations
+theoretically, recognised there is an inconsistency. Let's look
+at the expressions for the curl of $\bm{E}$ and
+$\bm{B}$ fields. The divergence of the curl of
+$\bm{E}$ is
+\begin{equation}
+	\label{eq:divergence_curl_of_e}%
+	\divergence{\left(\curl{\bm{E}}\right)}
+	=
+	\divergence{\left(-\pdv{\bm{B}}{t}\right)}
+	=
+	-\pdv{}{t}\left(\divergence{\bm{B}}\right).
+\end{equation}
+
+But the divergence of a curl is zero, so this is equal to zero
+\begin{equation}
+	-\pdv{}{t}\left(\divergence{\bm{B}}\right) = 0.
+\end{equation}
+This result is consistent with the divergence of the
+$\bm{B}$ field.
+
+How about the divergence of the curl of $\bm{B}$?
+\begin{equation}
+	\divergence{\left(\curl{\bm{B}}\right)} =
+	\mu_{0}\left(\divergence{\bm{J}}\right)
+\end{equation}
+
+Since the left-hand side must be zero, but we have found nothing
+to say that $\divergence{\bm{J}} = 0$ necessarily. So there is
+something missing?
+
+\section{Maxwell's equations---what's missing?}%
+\label{sec:maxwell_s_equations_what_s_missing_}
+
+% TODO: add figure
+
+Another way to see an inconsistency is to consider Ampère's law
+for a current flowing in a circuit with a capacitor. We can work
+out the $\bm{B}$ field using an Ampèrian loop
+that intersects a wire, but what happens when we take a loop
+through the centre of the capacitor (the gap between two
+plates)? There is no current there so the
+$\bm{B}$ field is zero. But surely Ampère's law
+does not depend on the path taken?
+
+\section{Maxwell's equations---finally!}%
+\label{sec:maxwell_s_equations_finally_}
+
+Let's take a more careful look at $\divergence{\bm{J}}$ and
+recall the continuity equation from
+Section~\ref{sec:the_continuity_equation} and
+equation~\ref{eq:continuity_equation}.
+\begin{equation}
+	\divergence{\bm{J}} = -\pdv{\rho}{t}
+	=
+	-\pdv{}{t}\left(\epsilon_{0}\divergence{\bm{E}}\right)
+	=
+	-\divergence{\left(\epsilon_{0}\pdv{\bm{E}}{t}\right)}.
+\end{equation}
+
+We took the time partial derivative into the divergence
+operator, and we have used the results for the divergence of
+$\bm{E}$ in terms of the charge density
+(Equation~\ref{eq:maxwell_gauss_law_differential}). This suggests that there is
+a `current' associated with the time varying
+$\bm{E}$ field. We can use this to resolve our
+anomaly (we take away this extra term to make sure both sides
+are 0). This gives us \textit{Ampère–Maxwell law}.
+
+\begin{definition}
+	Ampère–Maxwell law in differential form is
+	\begin{equation}
+		\label{eq:ampere_maxwell_differential}%
+		\curl{\bm{B}}
+		=
+		\mu_{0}\bm{J} +
+		\mu_{0}\epsilon_{0}\pdv{\bm{E}}{t}.
+	\end{equation}
+\end{definition}
+
+We note that this hasn't broken any of our rules we discovered
+for magnetostatics. The effect of the time varying electric
+field is difficult to show experimentally (as normal
+$\bm{J}$ currents tend to swamp any effect from
+the time differential of $\bm{E}$). But it is
+nevertheless real.
+
+So, we see there is a symmetry here with Faraday's Law in that a
+time varying electric field induces a magnetic field, not just
+from moving charges. The final confirmation of this result was
+Hertz's experiments on electromagnetic waves. The extra term
+that fixes Maxwell's equations is called the
+\textit{displacement current}.
+\begin{definition}
+	The displacement current is given as
+	\begin{equation}
+		\label{eq:displacement_current}%
+		\bm{J}_d
+		\equiv
+		\epsilon_{0}\pdv{\bm{E}}{t}.
+	\end{equation}
+\end{definition}
+
+We can now modify Ampère's law in integral form
+\begin{definition}
+	\begin{equation}
+		\label{eq:ampere_maxwell_law_integral}%
+		\oint\bm{B}\vdot\dd{\bm{l}}
+		=
+		\mu_{0}I_{\textrm{enc}} +
+		\mu_{0}\epsilon_{0}\int\left(\pdv{\bm{E}}{t}\right)\vdot\dd{\bm{a}}.
+	\end{equation}
+\end{definition}
+
+This solves the problem we had when we place our Ampèrian loop
+in the space between the capacitor plates. Finally, we can
+rewrite the Maxwell's equation as.
+\begin{definition}
+	Maxwell's equations are given as
+	\begin{equation}
+		\begin{aligned}
+			 & \divergence{\bm{E}} = \frac{\rho}{\epsilon_{0}}                     \\
+			 & \divergence{\bm{B}} = 0                                             \\
+			 & \curl{\bm{E}} = -\pdv{\bm{B}}{t}                                    \\
+			 & \curl{\bm{B}} = \mu_{0}\bm{J} + \mu_{0}\epsilon_{0}\pdv{\bm{E}}{t}.
+		\end{aligned}
+	\end{equation}
+\end{definition}
+
+Along with Lorentz force law
+(Equation~\ref{eq:the_lorentz_force_law}), these encompass all we need
+to know about electromagnetic fields. This includes all that can
+be deduced from them including the existence of electromagnetic
+waves and their properties.
+
+\section{Maxwell's equation in matter}%
+\label{sec:maxwell_s_equation_in_matter}
+
+Maxwell's equations as expressed in
+Section~\ref{sec:maxwell_s_equations_finally_} are complete and correct.
+However, we can extend them to cover the fields in matter.
+
+In our discussion of dielectrics and diamagnetic or paramagnetic
+materials, we discussed `bound' charges and currents and recall
+that
+\begin{equation}
+	\rho_\textrm{bound} = -\divergence{\bm{P}}
+\end{equation}
+and
+\begin{equation}
+	\bm{J}_\textrm{bound} =
+	\curl{\bm{M}}
+\end{equation}
+
+Now, imagine the polarisation building up with time. The build
+up of the surface charge densities on a dielectric would
+`appear' as a movement of charge from one side of the material
+to the other, even if no actual current flows. It only appears
+as the dipoles are `aligning'.
+
+This appears as a net polarisation current, and we get the
+result as described in Section~\ref{sec:the_electric_field_displacement_d}.
+
+In terms of the \textit{current density}, however, we find that
+it is the sum of \textit{three} parts, not
+\textit{two} like when we consider charge densities
+(only free and bound charges). Recall from
+Section~\ref{sec:bound_currents}, we can write the current
+density as
+\begin{equation}
+	\label{eq:current_density_polarisation}%
+	\bm{J} =
+	\bm{J}_\textrm{free} +
+	\bm{J}_\textrm{bound} +
+	\bm{J}_\textrm{polarisation} =
+	\bm{J}_\textrm{free} +
+	\curl{\bm{M}} + \pdv{\bm{P}}{t}
+\end{equation}
+where we obtained the result for bound currents in our treatment
+of magnetostatics. Applying Ampère-Maxwell's law, now, we get
+\begin{equation}
+	\label{eq:ampere_maxwell_polarisation}%
+	\curl{\bm{B}} =
+	\mu_{0}\left(\bm{J}_\textrm{free} + \curl{\bm{M}} \pdv{\bm{P}}{t}\right) +
+	\mu_{0}\epsilon_{0}\pdv{\bm{E}}{t}.
+\end{equation}
+
+If we use our definition of the auxiliary field
+$\bm{H}$ from Equation~\ref{eq:auxiliary_field_h}
+we get
+\begin{equation}
+	\label{eq:auxiliary_field_polarisation_maxwell}%
+	\curl{\bm{H}} =
+	\bm{J}_\textrm{free} +
+	\pdv{\bm{D}}{t}.
+\end{equation}
+
+\begin{definition}
+	Thus, this gives us a set of equations, which we can call
+	Maxwell's equations in matter.
+	\begin{equation}
+		\label{eq:maxwells_equation_in_matter}%
+		\begin{aligned}
+			 & \divergence{\bm{D}} = \rho_\textrm{free}                \\
+			 & \divergence{\bm{B}} = 0                                 \\
+			 & \curl{\bm{E}} = -\pdv{\bm{B}}{t}                        \\
+			 & \curl{\bm{H}} = \bm{J}_\textrm{free} + \pdv{\bm{D}}{t}.
+		\end{aligned}
+	\end{equation}
+\end{definition}
+
+\textbf{Note:} With these equations, we have assumed
+linear response, the set of constitutive equations where
+\begin{equation}
+	\label{eq:linear_response_equations}%
+	\begin{aligned}
+		\bm{P} & = \epsilon_{0}\chi_e\bm{E} \\
+		\bm{M} & = \chi_m\bm{H}             \\
+		\bm{D} & = \epsilon_{0}\bm{E}       \\
+		\bm{H} & = \frac{\bm{B}}{\mu}.
+	\end{aligned}
+\end{equation}
+
+\section{Boundary condition for electrodynamics}%
+\label{sec:boundary_condition_for_electrodynamics}
+
+In general, we may find discontinuities at the boundaries
+between materials and these play a fundamental part in
+reflection and refraction of waves for example. We can derive
+these conditions as we did for electrostatics, but we need to
+just quote them here.
+
+\begin{definition}
+	The boundary conditions for electrodynamic quantities are
+	\begin{equation}
+		\label{eq:boundary_conditions_electrodynamics}%
+		\begin{aligned}
+			\bm{D}^\perp_1 - \bm{D}^\perp_2     & = \rho_\textrm{free}                     \\
+			\bm{B}^\perp_1 - \bm{B}^\perp_2     & = 0                                      \\
+			\bm{E}^\perp_1 - \bm{E}^\parallel_2 & = 0                                      \\
+			\bm{H}^\perp_1 - \bm{H}^\parallel_2 & = \bm{K}_\textrm{free}\cross\bm{\hat{n}}
+		\end{aligned}
+	\end{equation}
+\end{definition}
+
+\textbf{Note:} In the absence of any free charges or
+currents at the surface, all four expressions become equal to
+zero.
+
+\section{Summary}%
+\label{sec:summary}
+
+In this section, we have obtained the consistent set of
+equations, Maxwell's equations, that summarise along with the
+force law, all we need to know about electricity and magnetism!
+They are the starting point for much of the development in the
+theory of electromagnetic waves.
+
+From here, we might consider the electric and magnetic fields in
+a vacuum, i.e.\ where $\rho = 0$ and
+$\bm{J} = 0$. Consider first the curl of the
+$\curl{\bm{E}}$ as
+\begin{equation}
+	\curl{\left(\curl{\bm{E}}\right)} = \laplacian{\bm{E}}
+	=
+	-\curl{\left(\pdv{\bm{B}}{t}\right)}
+	=
+	-\pdv{}{t}\left(\curl{\bm{B}}\right)
+	=
+	-\mu_{0}\epsilon_{0}\pdv[2]{\bm{E}}{t}.
+\end{equation}
+
+We have derived the wave equation
+\begin{equation}
+	\label{eq:the_wave_equation}%
+	\bm{E} =
+	\mu_{0}\epsilon_{0}\pdv[2]{\bm{E}}{t}.
+\end{equation}
+
+Consider next the curl of $\curl{\bm{B}}$ as
+\begin{equation}
+	\curl{\left(\curl{\bm{B}}\right)} = -\laplacian{\bm{B}}
+	= \curl{\left(\mu_{0}\epsilon_{0}\pdv{\bm{E}}{t}\right)}
+	=
+	\mu_{0}\epsilon_{0}\pdv{}{t}\left(\curl{\bm{E}}\right)
+	=
+	-\mu_{0}\epsilon_{0}\pdv[2]{\bm{B}}{t}.
+\end{equation}
+
+We have another wave equation
+\begin{equation}
+	\laplacian{\bm{B}} =
+	\mu_{0}\epsilon_{0}\pdv[2]{\bm{B}}{t}.
+\end{equation}
+
+We see that for both this and Equation~\ref{eq:the_wave_equation},
+we can solve the wave equation and find a constant, which we
+call the speed of light
+\begin{equation}
+	\label{eq:speed_of_light_constant}%
+	c = \frac{1}{\sqrt{\mu_{0}\epsilon_{0}}}.
+\end{equation}
 
 \end{document}
 
